@@ -2277,12 +2277,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: var(--link-hover);
   }
 
-  d-contents {
-    position: sticky;
-    top: 20px;
-    align-self: start;
-  }
-
   d-appendix {
     --heading-size: 1.1rem;
     --heading-color: #b8bcd8;
@@ -2668,7 +2662,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     white-space : pre-wrap !important;
   }
 
-
   table {
     border-collapse: collapse;
     background: var(--bg-secondary);
@@ -2844,7 +2837,35 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   h1 { font-size: 2.5rem; }
   h2 { font-size: 2rem; }
   h3 { font-size: 1.5rem; }
-  h4 { font-size: 1.25rem; }</style>
+  h4 { font-size: 1.25rem; }
+
+  /* Responsive typography for mobile */
+  @media (max-width: 768px) {
+    html {
+      --title-size: 2rem;
+      --body-size: 1rem;
+    }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    
+    d-title h1 {
+      font-size: 2rem;
+    }
+    
+    .distill-site-header {
+      --title-size: 1.3rem;
+      --text-size: 0.95rem;
+    }
+    
+    #distill-search,
+    .nav-search.aa-input {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+  }</style>
   <style type="text/css">
   /* base style */
 
