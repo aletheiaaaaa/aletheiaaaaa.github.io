@@ -1,0 +1,14 @@
+name: "blog"
+title: "Locally Optimal"
+description: |
+  Wisps of Wisdom
+output_dir: "_site"
+theme: theme.css
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+  search: true
+output: distill::distill_article

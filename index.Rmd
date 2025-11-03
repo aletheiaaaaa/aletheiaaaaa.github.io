@@ -1,0 +1,5 @@
+---
+title: "Locally Optimal"
+site: distill::distill_website
+listing: posts
+---
