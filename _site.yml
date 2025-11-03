@@ -2,7 +2,7 @@ name: "blog"
 title: "Locally Optimal"
 description: |
   Wisps of Wisdom
-output_dir: "_site"
+output_dir: "docs"
 theme: theme.css
 navbar:
   right:
