@@ -2267,11 +2267,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --heading-size: 1.3rem;
     --contents-size: 1rem;
     color: var(--body-color);
-    position: sticky;
-    top: 2rem;
-    align-self: start;
-    max-height: calc(100vh - 4rem);
-    overflow-y: auto;
   }
 
   .d-contents nav a {
@@ -2280,6 +2275,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .d-contents nav a:hover {
     color: var(--link-hover);
+  }
+
+  d-contents {
+    position: sticky;
+    top: 20px;
+    align-self: start;
   }
 
   d-appendix {
