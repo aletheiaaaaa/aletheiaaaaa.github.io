@@ -22,9 +22,9 @@ Building fast neural network inference code ultimately boils down to writing fas
 
 ## The Trouble with Layer 1
 
-Let's say you've got a single-layer network with the architecture (768 -> 1024)x2 -> 1. This network has two weight matrices --- one with shape 1024x768 for layer 0 (also known as the feature transformer), and the other with shape 1x1024 for layer 1. Computing a forward pass through this network is trivial: you can compute layer 0 using efficient updates, and layer 1 with a simple dot product.
+Let's say you've got a single-layer network with the architecture (768 -> 1024)x2 -> 1. This network has two weight matrices --- one with shape 1024x768 for layer 0 (also known as the feature transformer), and the other with shape 1x2048 for layer 1. Computing a forward pass through this network is trivial: you can compute layer 0 using efficient updates, and layer 1 with a simple dot product.
 
-Now let's say you've got a *multi-layer* network, with the architecture of (768 -> 1024)x2 -> 16 -> 32 -> 1. This has four weight matrices, with shapes 1024x768, 16x1024, 32x16 and 1x32 respectively. As before, we can avoid an expensive layer 0 matrix multiplication by using efficient updates, while the layer 2 and 3 multiplications are small enough to not significantly impact performance. This leaves us with layer 1.
+Now let's say you've got a *multi-layer* network, with the architecture of (768 -> 1024)x2 -> 16 -> 32 -> 1. This has four weight matrices, with shapes 1024x768, 16x1024, 32x16 and 1x32 respectively (assuming pairwise multiplication). As before, we can avoid an expensive layer 0 matrix multiplication by using efficient updates, while the layer 2 and 3 multiplications are small enough to not significantly impact performance. This leaves us with layer 1.
 
 Unlike the other layers, layer 1 is neither small nor efficiently updateable, so every forward pass requires $2\times 16\times 1024=32768$ operations! Even though the output dimension is tiny, we still end up spending most of our time here. By contrast, the average layer 0 update requires only $2\times 1024=2048$ operations, despite being much larger. We somehow need to find a way to make layer 1 much cheaper.
 
@@ -58,7 +58,7 @@ At this point, all that's left is to translate our ideas into code. Specifically
 
 ```cpp
 // x is assumed to be of type uint8_t[4], reinterpret_cast reads all of it as one uint32_t
-__m512i inputs = _mm512_set1_epi32(*reinterpret_cast<const uint32_t*>(&x)); 
+__m512i inputs = _mm512_set1_epi32(std::bitcast<std::uint32_t>(x)); 
 __m512i weights = _mm512_loadu_si512(reinterpret_cast<const __m512i*>(&w));
 
 // Set first argument to zero since we aren't accumulating anything
