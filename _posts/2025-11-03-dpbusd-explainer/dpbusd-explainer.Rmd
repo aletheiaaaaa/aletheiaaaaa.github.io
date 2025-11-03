@@ -59,7 +59,7 @@ At this point, all that's left is to translate our ideas into code. Specifically
 ```cpp
 // x is assumed to be of type uint8_t[4], reinterpret_cast reads all of it as one uint32_t
 __m512i inputs = _mm512_set1_epi32(*reinterpret_cast<const uint32_t*>(&x)); 
-__m512i weights = _mm512_loadu_si512(reinterpret_cast<const __m512i*>(&weights));
+__m512i weights = _mm512_loadu_si512(reinterpret_cast<const __m512i*>(&w));
 
 // Set first argument to zero since we aren't accumulating anything
 __m512i outputs = _mm512_dpbusd_epi32(_mm512_setzero_si512(), inputs, weights);
