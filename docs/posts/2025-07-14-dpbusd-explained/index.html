@@ -2252,9 +2252,9 @@ html {
   --aside-size: 1.05rem;
   --fig-cap-size: 1.05rem;
 
-  --title-color: #1a1411;
-  --header-color: #2d2520;
-  --body-color: #3a342f;
+  --title-color: #001f4d;
+  --header-color: #001637;
+  --body-color: #000c1e;
   --aside-color: #6b7280;
   --fig-cap-color: #6b7280;
 
@@ -2287,27 +2287,28 @@ d-byline {
 
 d-appendix {
   --heading-size: 1.1rem;
-  --heading-color: #1a1411;
+  --heading-color: #001f4d;
   --text-size: 0.9rem;
   --text-color: #6b7280;
 }
 
 .distill-site-header {
   --title-size: 1.8rem;
-  --text-color: #002147;
+  --text-color: #001f4d;
   --text-size: 1.3rem;
-  --hover-color: #002147;
+  --hover-color: #002863;
   --bkgd-color: #f5f5f5;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 33, 71, 0.25);
+  border-bottom: 1px solid #002e6e;
 }
 
 .distill-site-footer {
   --text-color: #3a342f;
   --text-size: 0.9rem;
-  --hover-color: #002147;
+  --hover-color: #001f4d;
   --bkgd-color: #f5f5f5;
   border-top: 1px solid #999999;
 }
@@ -2328,13 +2329,13 @@ d-appendix {
 }
 
 .posts-list .description h2 {
-  color: var(--header-color);
+  color: #002966;
   font-size: 1.2rem;
   margin-top: 0.5rem;
 }
 
 .posts-list .description p {
-  color: var(--body-color);
+  color: #003380;
   margin-top: 0.5rem;
 }
 
@@ -2369,7 +2370,7 @@ d-appendix {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
-  border-bottom: 2px solid rgba(0, 33, 71, 0.3) !important;
+  border-bottom: 2px solid #001f4d !important;
   border-radius: 0 !important;
   padding: 0.5rem 0.5rem !important;
   color: #1a1411 !important;
@@ -2392,10 +2393,10 @@ input#distill-search.nav-search.aa-input[style],
 #distill-search:focus,
 .nav-search.aa-input:focus {
   outline: none !important;
-  border-bottom-color: #002147 !important;
+  border-bottom-color: #001f4d !important;
   box-shadow: none !important;
   border: none !important;
-  border-bottom: 2px solid #002147 !important;
+  border-bottom: 2px solid #001f4d !important;
 }
 
 #distill-search:focus-visible,
@@ -2478,7 +2479,7 @@ span.algolia-autocomplete {
 
 .aa-dropdown-menu {
   background: var(--bg-secondary) !important;
-  border: 1px solid rgba(0, 33, 71, 0.25) !important;
+  border: 1px solid #002e6e !important;
   border-radius: 12px !important;
   margin-top: 0.5rem !important;
   color: var(--body-color) !important;
@@ -2491,7 +2492,7 @@ span.algolia-autocomplete {
   right: auto !important;
   transform: none !important;
   margin-left: 0 !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 10px 40px #d9d9d9 !important;
 }
 
 .aa-dropdown-menu::-webkit-scrollbar {
@@ -2503,7 +2504,7 @@ span.algolia-autocomplete {
 }
 
 .aa-dropdown-menu::-webkit-scrollbar-thumb {
-  background: rgba(0, 33, 71, 0.3) !important;
+  background: #003b73 !important;
   border-radius: 4px !important;
 }
 
@@ -2526,8 +2527,8 @@ span.algolia-autocomplete {
 
 .aa-dropdown-menu .aa-suggestion:hover,
 .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background: rgba(0, 33, 71, 0.1) !important;
-  color: #002147 !important;
+  background: #e6f0f9 !important;
+  color: #001f4d !important;
 }
 
 .aa-dropdown-menu .aa-suggestion strong,
@@ -2537,7 +2538,7 @@ span.algolia-autocomplete {
 
 .aa-dropdown-menu .aa-suggestion:hover strong,
 .aa-dropdown-menu .aa-suggestion.aa-cursor strong {
-  color: #002147 !important;
+  color: #001f4d !important;
 }
 
 .aa-dropdown-menu .search-item,
@@ -2557,43 +2558,26 @@ span.algolia-autocomplete {
   --bg-primary: #fafafa;
   --bg-secondary: #f5f5f5;
   --bg-accent: #f0f0f0;
-  --border-light: rgba(0, 33, 71, 0.2);
-  --border-medium: rgba(0, 33, 71, 0.3);
+  --border-light: #00366b;
+  --border-medium: #003d66;
   --link-color: #4a5568;
-  --link-hover: #002147;
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --link-hover: #001f4d;
+  --shadow-light: #e6e6e6;
+  --shadow-medium: #d9d9d9;
   --quote-bg: #eeeeee;
-  --quote-border: #002147;
+  --quote-border: #002d70;
   --proof-bg: #fafafa;
   --proof-border: #6b7280;
   --remark-bg: #eeeeee;
-  --remark-border: #6b7280;
-  --axiom-bg: #f3f3f3;
-  --axiom-border: #6b7280;
-  --assumption-bg: #f4f4f4;
-  --assumption-border: #6b7280;
-  --note-bg: #f5f5f5;
-  --note-border: #6b7280;
+  --remark-border: #303a4d;
   --definition-bg: #f2f2f2;
   --definition-border: #6b7280;
   --example-bg: #f4f4f4;
   --example-border: #6b7280;
-  --code-bg: #f0f0f0;
   --theorem-bg: #ececec;
-  --theorem-border: #002147;
-  --proposition-bg: #eeeeee;
-  --proposition-border: #003a5d;
-  --lemma-bg: #f0f0f0;
-  --lemma-border: #004873;
-  --corollary-bg: #f2f2f2;
-  --corollary-border: #005689;
-  --claim-bg: #f4f4f4;
-  --claim-border: #00649f;
-  --observation-bg: #f4f4f4;
-  --observation-border: #6b7280;
-  --selection-bg: #cfe2f3;
-  --selection-color: #002147;
+  --theorem-border: #001f4d;
+  --selection-bg: #d4e3f7;
+  --selection-color: #003580;
 }
 
 body {
@@ -2616,7 +2600,7 @@ d-article>p:first-of-type:first-letter {
   line-height: 0.75;
   margin: 0.05em 0.1em 0 0;
   color: var(--title-color);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+  text-shadow: 1px 1px 2px #f5f5f5;
 }
 
 blockquote {
@@ -2633,7 +2617,7 @@ blockquote {
 blockquote::before {
   content: '"';
   font-size: 4rem;
-  color: #002147;
+  color: #001f4d;
   position: absolute;
   top: -0.5rem;
   left: 0.5rem;
@@ -2658,7 +2642,7 @@ pre {
   padding: 1.5rem 2rem;
   border-radius: 0;
   border: 1px solid var(--border-light);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px #f5f5f5;
   margin: 2rem 0;
   position: relative;
   overflow-x: auto;
@@ -2684,37 +2668,37 @@ code.sourceCode {
   padding: 0;
 }
 
-/* Oxford Blue themed syntax highlighting */
-.sourceCode .kw { color: #002147; font-weight: 600; } /* Keywords - Oxford blue */
-.sourceCode .dt { color: #003a5d; } /* Data types - darker Oxford blue */
-.sourceCode .dv { color: #2d7a4f; } /* Decimal values - forest green */
-.sourceCode .bn { color: #2d7a4f; } /* Base-n integers - forest green */
-.sourceCode .fl { color: #2d7a4f; } /* Floats - forest green */
-.sourceCode .ch { color: #004873; } /* Chars - medium Oxford blue */
-.sourceCode .st { color: #004873; } /* Strings - medium Oxford blue */
-.sourceCode .co { color: #6b7280; font-style: italic; } /* Comments - muted gray */
-.sourceCode .ot { color: #005689; } /* Other - lighter Oxford blue */
+/* Refined scholarly blue syntax highlighting */
+.sourceCode .kw { color: #00123a; font-weight: 600; } /* Keywords - darker cobalt blue */
+.sourceCode .dt { color: #003080; } /* Data types - darker royal blue */
+.sourceCode .dv { color: #205c38; } /* Decimal values - darker forest green */
+.sourceCode .bn { color: #205c38; } /* Base-n integers - darker forest green */
+.sourceCode .fl { color: #205c38; } /* Floats - darker forest green */
+.sourceCode .ch { color: #17407a; } /* Chars - darker medium blue */
+.sourceCode .st { color: #17407a; } /* Strings - darker medium blue */
+.sourceCode .co { color: #49505a; font-style: italic; } /* Comments - darker muted gray */
+.sourceCode .ot { color: #0d3870; } /* Other - darker steel blue */
 .sourceCode .al { color: #b91c1c; font-weight: 600; } /* Alerts - red */
-.sourceCode .fu { color: #003a5d; } /* Functions - darker Oxford blue */
+.sourceCode .fu { color: #003080; } /* Functions - darker royal blue */
 .sourceCode .er { color: #b91c1c; font-weight: 600; } /* Errors - red */
-.sourceCode .wa { color: #d97706; font-style: italic; } /* Warnings - amber */
-.sourceCode .cn { color: #002147; } /* Constants - Oxford blue */
-.sourceCode .sc { color: #004873; } /* Special chars - medium Oxford blue */
-.sourceCode .vs { color: #004873; } /* Verbatim strings - medium Oxford blue */
-.sourceCode .ss { color: #004873; } /* Special strings - medium Oxford blue */
-.sourceCode .va { color: #3a342f; } /* Variables - dark gray */
-.sourceCode .cf { color: #00649f; font-weight: 600; } /* Control flow - light Oxford blue */
-.sourceCode .op { color: #6b7280; } /* Operators - gray */
-.sourceCode .pp { color: #005689; } /* Preprocessor - lighter Oxford blue */
-.sourceCode .at { color: #003a5d; } /* Attributes - darker Oxford blue */
-.sourceCode .do { color: #6b7280; font-style: italic; } /* Documentation - gray */
-.sourceCode .an { color: #6b7280; font-style: italic; } /* Annotations - gray */
-.sourceCode .cv { color: #6b7280; font-style: italic; } /* CommentVars - gray */
-.sourceCode .in { color: #6b7280; font-style: italic; } /* Information - gray */
+.sourceCode .wa { color: #b45309; font-style: italic; } /* Warnings - darker amber */
+.sourceCode .cn { color: #00123a; } /* Constants - darker cobalt blue */
+.sourceCode .sc { color: #17407a; } /* Special chars - darker medium blue */
+.sourceCode .vs { color: #17407a; } /* Verbatim strings - darker medium blue */
+.sourceCode .ss { color: #17407a; } /* Special strings - darker medium blue */
+.sourceCode .va { color: #23201c; } /* Variables - darker gray */
+.sourceCode .cf { color: #003a8c; font-weight: 600; } /* Control flow - darker azure blue */
+.sourceCode .op { color: #49505a; } /* Operators - darker gray */
+.sourceCode .pp { color: #0d3870; } /* Preprocessor - darker steel blue */
+.sourceCode .at { color: #003080; } /* Attributes - darker royal blue */
+.sourceCode .do { color: #49505a; font-style: italic; } /* Documentation - darker gray */
+.sourceCode .an { color: #49505a; font-style: italic; } /* Annotations - darker gray */
+.sourceCode .cv { color: #49505a; font-style: italic; } /* CommentVars - darker gray */
+.sourceCode .in { color: #49505a; font-style: italic; } /* Information - darker gray */
 
 code {
   white-space: pre-wrap !important;
-  background: rgba(0, 0, 0, 0.05);
+  background: #f2f2f2;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: var(--mono-font);
@@ -2730,9 +2714,9 @@ table {
 }
 
 th {
-  background: var(--bg-accent);
+  background: #e6f0f9;
   font-weight: 600;
-  color: var(--title-color);
+  color: #002966;
   font-family: var(--heading-font);
   padding: 1rem;
 }
@@ -2749,8 +2733,8 @@ img {
 
 hr {
   border: none;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #003d6669, transparent);
   margin: 3rem 0;
 }
 
@@ -2759,16 +2743,6 @@ d-title h1 {
   text-align: center;
   letter-spacing: 0.02em;
   color: var(--title-color);
-}
-
-d-title h1::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #002147, #004873);
-  margin: 1rem auto;
-  border-radius: 2px;
 }
 
 d-title p {
@@ -2780,12 +2754,12 @@ d-title p {
 }
 
 em {
-  color: var(--title-color);
+  color: #001f4d;
   font-style: italic;
 }
 
 strong {
-  color: var(--header-color);
+  color: #002966;
   font-weight: 600;
 }
 
@@ -2793,7 +2767,7 @@ strong {
   text-align: center;
   margin: 3rem 0;
   font-size: 2rem;
-  color: var(--title-color);
+  color: #001f4d;
 }
 
 .ornament::before {
@@ -2809,19 +2783,10 @@ figcaption {
 }
 
 .theorem,
-.proposition,
-.lemma,
-.corollary,
-.claim,
-.observation,
 .remark,
 .proof,
 .definition,
-.example,
-.axiom,
-.assumption,
-.note,
-.algorithm {
+.example {
   padding: 1.5rem 2rem;
   margin: 2rem 0;
   border-radius: 0 8px 8px 0;
@@ -2831,19 +2796,10 @@ figcaption {
 }
 
 .theorem::before,
-.proposition::before,
-.lemma::before,
-.corollary::before,
-.claim::before,
-.observation::before,
 .remark::before,
 .proof::before,
 .definition::before,
-.example::before,
-.axiom::before,
-.assumption::before,
-.note::before,
-.algorithm::before {
+.example::before {
   font-weight: 600;
   font-family: var(--heading-font);
   font-size: 1.1rem;
@@ -2856,21 +2812,6 @@ figcaption {
 .theorem { background: var(--theorem-bg); border-color: var(--theorem-border); }
 .theorem::before { content: "Theorem"; color: var(--theorem-border); background: var(--theorem-bg); }
 
-.proposition { background: var(--proposition-bg); border-color: var(--proposition-border); }
-.proposition::before { content: "Proposition"; color: var(--proposition-border); background: var(--proposition-bg); }
-
-.lemma { background: var(--lemma-bg); border-color: var(--lemma-border); }
-.lemma::before { content: "Lemma"; color: var(--lemma-border); background: var(--lemma-bg); }
-
-.corollary { background: var(--corollary-bg); border-color: var(--corollary-border); }
-.corollary::before { content: "Corollary"; color: var(--corollary-border); background: var(--corollary-bg); }
-
-.claim { background: var(--claim-bg); border-color: var(--claim-border); }
-.claim::before { content: "Claim"; color: var(--claim-border); background: var(--claim-bg); }
-
-.observation { background: var(--observation-bg); border-color: var(--observation-border); }
-.observation::before { content: "Observation"; color: var(--observation-border); background: var(--observation-bg); }
-
 .remark { background: var(--remark-bg); border-color: var(--remark-border); }
 .remark::before { content: "Remark"; color: var(--remark-border); background: var(--remark-bg); }
 
@@ -2882,18 +2823,6 @@ figcaption {
 
 .example { background: var(--example-bg); border-color: var(--example-border); }
 .example::before { content: "Example"; color: var(--example-border); background: var(--example-bg); }
-
-.axiom { background: var(--axiom-bg); border-color: var(--axiom-border); }
-.axiom::before { content: "Axiom"; color: var(--axiom-border); background: var(--axiom-bg); }
-
-.assumption { background: var(--assumption-bg); border-color: var(--assumption-border); }
-.assumption::before { content: "Assumption"; color: var(--assumption-border); background: var(--assumption-bg); }
-
-.note { background: var(--note-bg); border-color: var(--note-border); }
-.note::before { content: "Note"; color: var(--note-border); background: var(--note-bg); }
-
-.algorithm { background: var(--bg-accent); border-color: var(--border-medium); font-family: var(--mono-font); line-height: 1.6; }
-.algorithm::before { content: "Algorithm"; color: var(--border-medium); background: var(--bg-accent); }
 
 ::selection {
   background: var(--selection-bg);
@@ -2931,12 +2860,12 @@ mjx-container *::-moz-selection,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 33, 71, 0.3);
+  background: #003b73;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 33, 71, 0.5);
+  background: #0057ab;
 }
 
 /* TOC scrollbar */
@@ -2949,12 +2878,12 @@ mjx-container *::-moz-selection,
 }
 
 .d-contents::-webkit-scrollbar-thumb {
-  background: rgba(0, 33, 71, 0.25);
+  background: #002e6e;
   border-radius: 3px;
 }
 
 .d-contents::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 33, 71, 0.4);
+  background: #00468a;
 }
 
 /* Headings */
@@ -2962,7 +2891,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #1a1411;
+  color: #001f4d;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
 }
