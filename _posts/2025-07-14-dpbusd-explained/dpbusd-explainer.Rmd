@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Overview
 
-Building fast neural network inference code ultimately boils down to writing fast matrix multiplications, and NNUEs are no different. However, our NNUEs *must* run efficiently on CPU, which forces us to manually parallelize our inference code in order to remain even somewhat competitive. In this article, I'll walk you through the current state-of-the-art in parallelized NNUE inference, and show how careful SIMD can massively boost your network performance. I'll assume that you know what efficienst updates are, the architectures NNUEs typically have, and how neural network inference is really just matrix-vector multiplication under the hood. Bonus points if you've already got a strong single-layer network.
+Building fast neural network inference code ultimately boils down to writing fast matrix multiplications, and NNUEs are no different. However, our NNUEs *must* run efficiently on CPU, which forces us to manually parallelize our inference code in order to remain even somewhat competitive. In this article, I'll walk you through the current state-of-the-art in parallelized NNUE inference, and show how careful SIMD can massively boost your network performance. I'll assume that you know what efficient updates are, the architectures NNUEs typically have, and how neural network inference is really just matrix-vector multiplication under the hood. Bonus points if you've already got a strong single-layer network.
 
 # Understanding the Concept
 

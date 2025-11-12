@@ -2190,7 +2190,6 @@ d-appendix {
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @font-face {
@@ -2256,20 +2255,20 @@ html {
   --title-color: #1a1411;
   --header-color: #2d2520;
   --body-color: #3a342f;
-  --aside-color: #6a5f55;
-  --fig-cap-color: #6a5f55;
+  --aside-color: #6b7280;
+  --fig-cap-color: #6b7280;
 
   --heading-font: 'Cormorant Garamond', serif;
   --mono-font: 'JetBrains Mono', monospace;
   --body-font: 'Crimson Text', serif;
-  --navbar-font: 'EB Garamond', serif;
+  --navbar-font: 'Cormorant Garamond', serif;
 }
 
 d-byline {
   --heading-size: 0.8rem;
   --heading-color: #1a1411;
   --body-size: 1.0rem;
-  --body-color: #6a5f55;
+  --body-color: #6b7280;
 }
 
 .d-contents {
@@ -2290,27 +2289,27 @@ d-appendix {
   --heading-size: 1.1rem;
   --heading-color: #1a1411;
   --text-size: 0.9rem;
-  --text-color: #6a5f55;
+  --text-color: #6b7280;
 }
 
 .distill-site-header {
   --title-size: 1.8rem;
-  --text-color: #1a1411;
+  --text-color: #002147;
   --text-size: 1.3rem;
-  --hover-color: #8b6914;
-  --bkgd-color: #faf8f5;
+  --hover-color: #002147;
+  --bkgd-color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(184, 149, 111, 0.3);
+  border-bottom: 1px solid rgba(0, 33, 71, 0.25);
 }
 
 .distill-site-footer {
   --text-color: #3a342f;
   --text-size: 0.9rem;
-  --hover-color: #1a1411;
-  --bkgd-color: #f5f3f0;
-  border-top: 1px solid rgba(184, 149, 111, 0.3);
+  --hover-color: #002147;
+  --bkgd-color: #f5f5f5;
+  border-top: 1px solid #999999;
 }
 
 .posts-list .metadata {
@@ -2352,7 +2351,7 @@ d-appendix {
 .posts-list .metadata {
   display: block !important;
   opacity: 1 !important;
-  color: var(--aside-color);
+  color: #6b7280;
   font-size: 0.95rem;
   margin-top: 0.5rem;
   font-style: italic;
@@ -2364,17 +2363,18 @@ d-appendix {
   opacity: 1 !important;
 }
 
-/* Modern responsive search bar styling */
+/* Underline search bar styling with responsive width */
 #distill-search,
 .nav-search.aa-input {
-  background: rgba(184, 149, 111, 0.08) !important;
-  background-color: rgba(184, 149, 111, 0.08) !important;
-  border: 1px solid rgba(184, 149, 111, 0.3) !important;
-  border-radius: 8px !important;
-  padding: 0.6rem 1rem !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(0, 33, 71, 0.3) !important;
+  border-radius: 0 !important;
+  padding: 0.5rem 0.5rem !important;
   color: #1a1411 !important;
   font-family: var(--body-font) !important;
-  font-size: 0.95rem !important;
+  font-size: 1.1rem !important;
   transition: all 0.3s ease !important;
   max-width: 400px !important;
   width: 400px !important;
@@ -2385,16 +2385,17 @@ d-appendix {
 input#distill-search.nav-search.aa-input[style],
 .distill-site-header input#distill-search,
 .algolia-autocomplete input {
-  background: rgba(184, 149, 111, 0.08) !important;
-  background-color: rgba(184, 149, 111, 0.08) !important;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 #distill-search:focus,
 .nav-search.aa-input:focus {
   outline: none !important;
-  border-color: var(--link-hover) !important;
-  background: rgba(184, 149, 111, 0.12) !important;
-  box-shadow: 0 0 0 3px rgba(184, 149, 111, 0.15) !important;
+  border-bottom-color: #002147 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 2px solid #002147 !important;
 }
 
 #distill-search:focus-visible,
@@ -2404,8 +2405,8 @@ input#distill-search.nav-search.aa-input[style],
 
 #distill-search::placeholder,
 .nav-search.aa-input::placeholder {
-  color: #6a5f55 !important;
-  opacity: 0.7 !important;
+  color: var(--link-color) !important;
+  opacity: 0.9 !important;
   font-style: normal !important;
 }
 
@@ -2477,7 +2478,7 @@ span.algolia-autocomplete {
 
 .aa-dropdown-menu {
   background: var(--bg-secondary) !important;
-  border: 1px solid rgba(184, 149, 111, 0.3) !important;
+  border: 1px solid rgba(0, 33, 71, 0.25) !important;
   border-radius: 12px !important;
   margin-top: 0.5rem !important;
   color: var(--body-color) !important;
@@ -2502,7 +2503,7 @@ span.algolia-autocomplete {
 }
 
 .aa-dropdown-menu::-webkit-scrollbar-thumb {
-  background: rgba(184, 149, 111, 0.4) !important;
+  background: rgba(0, 33, 71, 0.3) !important;
   border-radius: 4px !important;
 }
 
@@ -2525,8 +2526,8 @@ span.algolia-autocomplete {
 
 .aa-dropdown-menu .aa-suggestion:hover,
 .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background: rgba(184, 149, 111, 0.15) !important;
-  color: var(--link-hover) !important;
+  background: rgba(0, 33, 71, 0.1) !important;
+  color: #002147 !important;
 }
 
 .aa-dropdown-menu .aa-suggestion strong,
@@ -2536,7 +2537,7 @@ span.algolia-autocomplete {
 
 .aa-dropdown-menu .aa-suggestion:hover strong,
 .aa-dropdown-menu .aa-suggestion.aa-cursor strong {
-  color: var(--link-hover) !important;
+  color: #002147 !important;
 }
 
 .aa-dropdown-menu .search-item,
@@ -2553,55 +2554,52 @@ span.algolia-autocomplete {
 }
 
 :root {
-  --bg-primary: #fdfcfa;
-  --bg-secondary: #faf8f5;
-  --bg-accent: #f5f3f0;
-  --border-light: rgba(184, 149, 111, 0.3);
-  --border-medium: rgba(139, 105, 20, 0.4);
-  --link-color: #5a4a35;
-  --link-hover: #8b6914;
+  --bg-primary: #fafafa;
+  --bg-secondary: #f5f5f5;
+  --bg-accent: #f0f0f0;
+  --border-light: rgba(0, 33, 71, 0.2);
+  --border-medium: rgba(0, 33, 71, 0.3);
+  --link-color: #4a5568;
+  --link-hover: #002147;
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-medium: rgba(0, 0, 0, 0.15);
-  --quote-bg: #f9f7f4;
-  --quote-border: #c9a961;
-  --proof-bg: #faf9f7;
-  --proof-border: #9a8a7a;
-  --remark-bg: #f8f9fa;
-  --remark-border: #8a95a0;
-  --axiom-bg: #f8f9fb;
-  --axiom-border: #7a8590;
-  --assumption-bg: #f9f9fb;
-  --assumption-border: #8a8aa0;
-  --note-bg: #f9f9fa;
-  --note-border: #8a8a9a;
-  --definition-bg: #f7f7f7;
-  --definition-border: #8a8a8a;
-  --example-bg: #fafaf9;
-  --example-border: #9a9a8a;
-  --code-bg: #f5f3f0;
-  --theorem-bg: #fdf9f3;
-  --theorem-border: #c9a961;
-  --proposition-bg: #fcf8f1;
-  --proposition-border: #b8956f;
-  --lemma-bg: #fbf7f0;
-  --lemma-border: #a89058;
-  --corollary-bg: #faf6ef;
-  --corollary-border: #987a50;
-  --claim-bg: #f9f5ee;
-  --claim-border: #8a7d58;
-  --observation-bg: #f8f8f7;
-  --observation-border: #8a8a7a;
-  --selection-bg: #d4c5a9;
-  --selection-color: #1a1411;
+  --quote-bg: #eeeeee;
+  --quote-border: #002147;
+  --proof-bg: #fafafa;
+  --proof-border: #6b7280;
+  --remark-bg: #eeeeee;
+  --remark-border: #6b7280;
+  --axiom-bg: #f3f3f3;
+  --axiom-border: #6b7280;
+  --assumption-bg: #f4f4f4;
+  --assumption-border: #6b7280;
+  --note-bg: #f5f5f5;
+  --note-border: #6b7280;
+  --definition-bg: #f2f2f2;
+  --definition-border: #6b7280;
+  --example-bg: #f4f4f4;
+  --example-border: #6b7280;
+  --code-bg: #f0f0f0;
+  --theorem-bg: #ececec;
+  --theorem-border: #002147;
+  --proposition-bg: #eeeeee;
+  --proposition-border: #003a5d;
+  --lemma-bg: #f0f0f0;
+  --lemma-border: #004873;
+  --corollary-bg: #f2f2f2;
+  --corollary-border: #005689;
+  --claim-bg: #f4f4f4;
+  --claim-border: #00649f;
+  --observation-bg: #f4f4f4;
+  --observation-border: #6b7280;
+  --selection-bg: #7ba3c7;
+  --selection-color: #002147;
 }
 
 body {
   background-color: var(--bg-primary);
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(201, 169, 97, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(184, 149, 111, 0.03) 0%, transparent 50%);
-  line-height: 1.7;
   color: var(--body-color);
+  line-height: 1.2;
 }
 
 p {
@@ -2629,13 +2627,13 @@ blockquote {
   font-style: italic;
   position: relative;
   border-radius: 0 8px 8px 0;
-  color: var(--aside-color) !important;
+  color: #6b7280 !important;
 }
 
 blockquote::before {
   content: '"';
   font-size: 4rem;
-  color: var(--quote-border);
+  color: #002147;
   position: absolute;
   top: -0.5rem;
   left: 0.5rem;
@@ -2686,29 +2684,29 @@ code.sourceCode {
   padding: 0;
 }
 
-/* Warm, academic syntax highlighting colors */
-.sourceCode .kw { color: #8b4513; font-weight: 600; } /* Keywords - saddle brown */
-.sourceCode .dt { color: #2e5090; } /* Data types - deep blue */
+/* Oxford Blue themed syntax highlighting */
+.sourceCode .kw { color: #002147; font-weight: 600; } /* Keywords - Oxford blue */
+.sourceCode .dt { color: #003a5d; } /* Data types - darker Oxford blue */
 .sourceCode .dv { color: #2d7a4f; } /* Decimal values - forest green */
 .sourceCode .bn { color: #2d7a4f; } /* Base-n integers - forest green */
 .sourceCode .fl { color: #2d7a4f; } /* Floats - forest green */
-.sourceCode .ch { color: #0e7490; } /* Chars - teal */
-.sourceCode .st { color: #0e7490; } /* Strings - teal */
+.sourceCode .ch { color: #004873; } /* Chars - medium Oxford blue */
+.sourceCode .st { color: #004873; } /* Strings - medium Oxford blue */
 .sourceCode .co { color: #6b7280; font-style: italic; } /* Comments - muted gray */
-.sourceCode .ot { color: #6b4e91; } /* Other - purple */
+.sourceCode .ot { color: #005689; } /* Other - lighter Oxford blue */
 .sourceCode .al { color: #b91c1c; font-weight: 600; } /* Alerts - red */
-.sourceCode .fu { color: #2e5090; } /* Functions - deep blue */
+.sourceCode .fu { color: #003a5d; } /* Functions - darker Oxford blue */
 .sourceCode .er { color: #b91c1c; font-weight: 600; } /* Errors - red */
 .sourceCode .wa { color: #d97706; font-style: italic; } /* Warnings - amber */
-.sourceCode .cn { color: #8b4513; } /* Constants - saddle brown */
-.sourceCode .sc { color: #0e7490; } /* Special chars - teal */
-.sourceCode .vs { color: #0e7490; } /* Verbatim strings - teal */
-.sourceCode .ss { color: #0e7490; } /* Special strings - teal */
+.sourceCode .cn { color: #002147; } /* Constants - Oxford blue */
+.sourceCode .sc { color: #004873; } /* Special chars - medium Oxford blue */
+.sourceCode .vs { color: #004873; } /* Verbatim strings - medium Oxford blue */
+.sourceCode .ss { color: #004873; } /* Special strings - medium Oxford blue */
 .sourceCode .va { color: #3a342f; } /* Variables - dark gray */
-.sourceCode .cf { color: #a16207; font-weight: 600; } /* Control flow - bronze */
+.sourceCode .cf { color: #00649f; font-weight: 600; } /* Control flow - light Oxford blue */
 .sourceCode .op { color: #6b7280; } /* Operators - gray */
-.sourceCode .pp { color: #6b4e91; } /* Preprocessor - purple */
-.sourceCode .at { color: #2e5090; } /* Attributes - deep blue */
+.sourceCode .pp { color: #005689; } /* Preprocessor - lighter Oxford blue */
+.sourceCode .at { color: #003a5d; } /* Attributes - darker Oxford blue */
 .sourceCode .do { color: #6b7280; font-style: italic; } /* Documentation - gray */
 .sourceCode .an { color: #6b7280; font-style: italic; } /* Annotations - gray */
 .sourceCode .cv { color: #6b7280; font-style: italic; } /* CommentVars - gray */
@@ -2716,7 +2714,7 @@ code.sourceCode {
 
 code {
   white-space: pre-wrap !important;
-  background: rgba(184, 149, 111, 0.1);
+  background: rgba(0, 0, 0, 0.05);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: var(--mono-font);
@@ -2768,7 +2766,7 @@ d-title h1::after {
   display: block;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--title-color), var(--link-hover));
+  background: linear-gradient(90deg, #002147, #004873);
   margin: 1rem auto;
   border-radius: 2px;
 }
@@ -2777,7 +2775,7 @@ d-title p {
   text-align: center;
   font-family: var(--navbar-font);
   font-style: italic;
-  color: var(--aside-color);
+  color: #6b7280;
   font-size: 1.2rem;
 }
 
@@ -2804,7 +2802,7 @@ strong {
 
 figcaption {
   font-style: italic;
-  color: var(--fig-cap-color);
+  color: #6b7280;
   text-align: center;
   margin-top: 1rem;
   padding: 0 2rem;
@@ -2933,12 +2931,12 @@ mjx-container *::-moz-selection,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(184, 149, 111, 0.4);
+  background: rgba(0, 33, 71, 0.3);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(184, 149, 111, 0.6);
+  background: rgba(0, 33, 71, 0.5);
 }
 
 /* TOC scrollbar */
@@ -2951,12 +2949,12 @@ mjx-container *::-moz-selection,
 }
 
 .d-contents::-webkit-scrollbar-thumb {
-  background: rgba(184, 149, 111, 0.3);
+  background: rgba(0, 33, 71, 0.25);
   border-radius: 3px;
 }
 
 .d-contents::-webkit-scrollbar-thumb:hover {
-  background: rgba(184, 149, 111, 0.5);
+  background: rgba(0, 33, 71, 0.4);
 }
 
 /* Headings */
@@ -4222,7 +4220,7 @@ distill-header .nav a {
 </nav>
 </div>
 <h1 id="overview">Overview</h1>
-<p>Building fast neural network inference code ultimately boils down to writing fast matrix multiplications, and NNUEs are no different. However, our NNUEs <em>must</em> run efficiently on CPU, which forces us to manually parallelize our inference code in order to remain even somewhat competitive. In this article, I’ll walk you through the current state-of-the-art in parallelized NNUE inference, and show how careful SIMD can massively boost your network performance. I’ll assume that you know what efficienst updates are, the architectures NNUEs typically have, and how neural network inference is really just matrix-vector multiplication under the hood. Bonus points if you’ve already got a strong single-layer network.</p>
+<p>Building fast neural network inference code ultimately boils down to writing fast matrix multiplications, and NNUEs are no different. However, our NNUEs <em>must</em> run efficiently on CPU, which forces us to manually parallelize our inference code in order to remain even somewhat competitive. In this article, I’ll walk you through the current state-of-the-art in parallelized NNUE inference, and show how careful SIMD can massively boost your network performance. I’ll assume that you know what efficient updates are, the architectures NNUEs typically have, and how neural network inference is really just matrix-vector multiplication under the hood. Bonus points if you’ve already got a strong single-layer network.</p>
 <h1 id="understanding-the-concept">Understanding the Concept</h1>
 <h2 id="the-trouble-with-layer-1">The Trouble with Layer 1</h2>
 <p>Let’s say you’ve got a single-layer network with the architecture (768 -&gt; 1024)x2 -&gt; 1. This network has two weight matrices — one with shape 1024x768 for layer 0 (also known as the feature transformer), and the other with shape 1x2048 for layer 1. Computing a forward pass through this network is trivial: you can compute layer 0 using efficient updates, and layer 1 with a simple dot product.</p>
