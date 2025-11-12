@@ -2834,7 +2834,35 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   h1 { font-size: 2.5rem; }
   h2 { font-size: 2rem; }
   h3 { font-size: 1.5rem; }
-  h4 { font-size: 1.25rem; }</style>
+  h4 { font-size: 1.25rem; }
+
+  /* Responsive typography for mobile */
+  @media (max-width: 768px) {
+    html {
+      --title-size: 2rem;
+      --body-size: 1rem;
+    }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    
+    d-title h1 {
+      font-size: 2rem;
+    }
+    
+    .distill-site-header {
+      --title-size: 1.3rem;
+      --text-size: 0.95rem;
+    }
+    
+    #distill-search,
+    .nav-search.aa-input {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+  }</style>
   <style type="text/css">
   /* base style */
 
@@ -3170,12 +3198,14 @@ function init_posts_list() {
 <a href="posts/2025-07-14-dpbusd-explained/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
-<div class="publishedDate">July 13, 2025</div>
+<div class="publishedDate">July 14, 2025</div>
 <div class="dt-authors">
 <div class="dt-author">aletheiaaaa</div>
 </div>
 </div>
-<div class="thumbnail"></div>
+<div class="thumbnail">
+<img/>
+</div>
 <div class="description">
 <h2>dpbusd, explained</h2>
 <div class="dt-tags"></div>
