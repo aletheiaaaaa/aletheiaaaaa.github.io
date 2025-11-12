@@ -1,7 +1,7 @@
 name: "blog"
 title: "Sapere Aude"
 description: |
-  Wisps of Wisdom
+  A blog about programming, technology, and other musings.
 output_dir: "docs"
 theme: theme.css
 navbar:
