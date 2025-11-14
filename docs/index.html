@@ -2382,6 +2382,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --text-color: var(--aside-color);
   }
 
+  a.anchorjs-link {
+    display: none !important;
+    visibility: hidden !important;
+    text-decoration: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
   .distill-site-header {
     --title-size: 1.8rem;
     --text-color: var(--nav-text);
@@ -2966,7 +2974,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   h1 { font-size: 2.5rem; }
   h2 { font-size: 2rem; }
   h3 { font-size: 1.5rem; }
-  h4 { font-size: 1.25rem; }</style>
+  h4 { font-size: 1.25rem; }
+
+  d-article h1 {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  d-article h2, d-article h3, d-article h4, d-article h5, d-article h6 {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    padding-top: 0.5rem !important;
+    margin-bottom: -0.25rem !important;
+  }</style>
   <style type="text/css">
   /* base style */
 
@@ -3302,12 +3323,14 @@ function init_posts_list() {
 <a href="posts/2025-07-14-dpbusd-explained/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
-<div class="publishedDate">July 13, 2025</div>
+<div class="publishedDate">July 14, 2025</div>
 <div class="dt-authors">
 <div class="dt-author">aletheiaaaaa</div>
 </div>
 </div>
-<div class="thumbnail"></div>
+<div class="thumbnail">
+<img/>
+</div>
 <div class="description">
 <h2>dpbusd, explained</h2>
 <div class="dt-tags"></div>

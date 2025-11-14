@@ -11,4 +11,7 @@ navbar:
     - text: "About"
       href: about.html
   search: true
-output: distill::distill_article
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2

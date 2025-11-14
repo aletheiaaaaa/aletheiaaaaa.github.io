@@ -114,7 +114,7 @@ code span.wa { color: #5e5e5e; font-style: italic; }
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["dpbusd, explained"]},{"type":"character","attributes":{},"value":["Demystifying multi-layer inference."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["aletheiaaaaa"]}]}]},{"type":"character","attributes":{},"value":["July 14, 2025"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","theme"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["theme.css"]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["dpbusd, explained"]},{"type":"character","attributes":{},"value":["Demystifying multi-layer inference."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["aletheiaaaaa"]}]}]},{"type":"character","attributes":{},"value":["July 14, 2025"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["anchor_sections","toc","toc_depth","code_folding","number_sections"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2393,6 +2393,14 @@ d-appendix {
   --text-color: var(--aside-color);
 }
 
+a.anchorjs-link {
+  display: none !important;
+  visibility: hidden !important;
+  text-decoration: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
 .distill-site-header {
   --title-size: 1.8rem;
   --text-color: var(--nav-text);
@@ -2977,7 +2985,20 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }</style>
+h4 { font-size: 1.25rem; }
+
+d-article h1 {
+  border-bottom: none !important;
+  box-shadow: none !important;
+  margin-bottom: 1.25rem !important;
+}
+
+d-article h2, d-article h3, d-article h4, d-article h5, d-article h6 {
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding-top: 0.5rem !important;
+  margin-bottom: -0.25rem !important;
+}</style>
 <style type="text/css">
 /* base style */
 
