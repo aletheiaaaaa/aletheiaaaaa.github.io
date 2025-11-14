@@ -6,14 +6,14 @@
       "description": "Hi! I'm Aletheia, a computer science undergrad with a passion for all things ML! Here you'll find my various adventures and misadventures through the wonderful world of code.",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2025-11-14T03:16:23+00:00"
+      "last_modified": "2025-11-14T03:19:59+00:00"
     },
     {
       "path": "index.html",
       "title": "Sapere Aude",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2025-11-14T03:16:23+00:00"
+      "last_modified": "2025-11-14T03:19:59+00:00"
     }
   ],
   "collections": ["posts/posts.json"]
