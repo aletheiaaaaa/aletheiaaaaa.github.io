@@ -2,8 +2,8 @@
    Edit values in the right column for customization.
    All rows must end with a semi-colon.                      */
 
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @font-face {
@@ -175,7 +175,7 @@ html {
 
   --heading-font: 'Cormorant Garamond', serif;
   --mono-font: 'JetBrains Mono', monospace;
-  --body-font: 'Crimson Text', serif;
+  --body-font: 'EB Garamond', serif;
   --navbar-font: 'Cormorant Garamond', serif;
 }
 
