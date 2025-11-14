@@ -2982,13 +2982,24 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
+d-article:not(.description) > h1 { font-size: 2.5rem !important; }
+d-article:not(.description) > h2 { font-size: 2rem !important; }
+d-article:not(.description) > h3 { font-size: 1.5rem !important; }
+d-article:not(.description) > h4 { font-size: 1.25rem !important; }
+
+
 d-article h1 {
   border-bottom: none !important;
   box-shadow: none !important;
+  margin-top: 1.75rem !important;
   margin-bottom: 1.25rem !important;
 }
 
-d-article h2, d-article h3, d-article h4, d-article h5, d-article h6 {
+d-article:not(.description) > h2, 
+d-article:not(.description) > h3, 
+d-article:not(.description) > h4, 
+d-article:not(.description) > h5, 
+d-article:not(.description) > h6 {
   border-bottom: none !important;
   box-shadow: none !important;
   padding-top: 0.5rem !important;
@@ -4226,7 +4237,6 @@ distill-header .nav a {
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#overview" id="toc-overview">Overview</a></li>
 <li><a href="#understanding-the-concept" id="toc-understanding-the-concept">Understanding the Concept</a>
 <ul>
 <li><a href="#the-trouble-with-layer-1" id="toc-the-trouble-with-layer-1">The Trouble with Layer 1</a></li>
@@ -4242,7 +4252,6 @@ distill-header .nav a {
 </ul>
 </nav>
 </div>
-<h1 id="overview">Overview</h1>
 <p>Building fast neural network inference code ultimately boils down to writing fast matrix multiplications, and NNUEs are no different. However, our NNUEs <em>must</em> run efficiently on CPU, which forces us to manually parallelize our inference code in order to remain even somewhat competitive. In this article, I’ll walk you through the current state-of-the-art in parallelized NNUE inference, and show how careful SIMD can massively boost your network performance. I’ll assume that you know what efficient updates are, the architectures NNUEs typically have, and how neural network inference is really just matrix-vector multiplication under the hood. Bonus points if you’ve already got a strong single-layer network.</p>
 <h1 id="understanding-the-concept">Understanding the Concept</h1>
 <h2 id="the-trouble-with-layer-1">The Trouble with Layer 1</h2>
