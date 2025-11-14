@@ -58,7 +58,7 @@ Now that I've walked you through all the details, it's time to put our lessons i
 At this point, all that's left is to translate our ideas into code. Specifically, we need to repeat, or *broadcast*, four elements of the input vector across an entire register, and load in the corresponding weights. We also need to make sure one the registers contains unsigned integers, while the other contains signed integers, since this is the format dpbusd expects. Fortunately, since layer 0 ends with a clipped or squared-clipped ReLU, its outputs are always non-negative, so we can safely store them in uint8. Algorithmicially, this looks a little bit like
 
 ```cpp
-// x is assumed to be of type uint8_t[4], reinterpret_cast reads all of it as one uint32_t
+// x is assumed to be of type uint8_t[4], std::bitcast reads all of it as one uint32_t
 __m512i inputs = _mm512_set1_epi32(std::bitcast<std::uint32_t>(x)); 
 __m512i weights = _mm512_loadu_si512(reinterpret_cast<const __m512i*>(&w));
 

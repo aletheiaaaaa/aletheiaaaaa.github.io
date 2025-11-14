@@ -555,6 +555,11 @@ pre code {
   line-height: 1.6;
 }
 
+d-article p code,
+d-article li code {
+  font-size: 0.8em;
+}
+
 /* Syntax highlighted code blocks */
 pre.sourceCode {
   background: var(--code-bg);
