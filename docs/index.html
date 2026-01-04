@@ -2178,7 +2178,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
      All rows must end with a semi-colon.                      */
 
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   @font-face {
@@ -2236,13 +2236,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   :root {
     /* Primary color palette */
-    --color-primary: #001f4d;
-    --color-medium: #003580;
-    --color-light: #d4e3f7;
-    --color-table: #e6f0f9;
-    --color-slate: #303a4d;
-    --color-dark: #001637;
-    --color-darkest: #000c1e;
+    --color-primary: #001232;
+    --color-medium: #001a4d;
+    --color-light: #c8d9f0;
+    --color-table: #dce8f5;
+    --color-dark: #000e24;
+    --color-darkest: #000816;
 
     /* Neutral grays */
     --color-gray: #6b7280;
@@ -2286,7 +2285,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --border-subtle: var(--color-subtle-gray);
     --hr-color: var(--color-primary);
     --quote-border: var(--color-primary);
-    --remark-border: var(--color-slate);
+    --remark-border: var(--color-gray);
     --proof-border: var(--color-gray);
     --definition-border: var(--color-gray);
     --example-border: var(--color-gray);
@@ -2350,7 +2349,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
     --heading-font: 'Cormorant Garamond', serif;
     --mono-font: 'JetBrains Mono', monospace;
-    --body-font: 'EB Garamond', serif;
+    --body-font: 'Crimson Text', serif;
     --navbar-font: 'Cormorant Garamond', serif;
   }
 
@@ -2358,17 +2357,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --heading-size: 0.8rem;
     --heading-color: var(--byline-heading);
     --body-size: 1.0rem;
-    --body-color: var(--aside-color);
+    --body-color: var(--color-cool-charcoal);
+  }
+
+  d-byline .byline {
+    grid-template-columns: 1fr;
+    grid-column: text;
   }
 
   .d-contents {
-    --heading-size: 1.3rem;
+    --heading-size: 1.5rem;
     --contents-size: 1rem;
     color: var(--body-color);
   }
 
   .d-contents nav a {
-    color: var(--link-color);
+    color: var(--color-cool-charcoal);
   }
 
   .d-contents nav a:hover {
@@ -2658,7 +2662,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   body {
     background-color: var(--bg-primary);
     color: var(--body-color);
-    line-height: 1.2;
+    line-height: 1.0 !important;
   }
 
   p {
@@ -2812,7 +2816,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   hr {
     border: none;
-    height: 1px;
+    height: 0.5px;
     background: var(--hr-color);
     margin: 3rem 0;
   }
@@ -2829,7 +2833,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     text-align: center;
     font-family: var(--navbar-font);
     font-style: italic;
-    color: var(--aside-color);
+    color: var(--color-cool-charcoal);
     font-size: 1.2rem;
   }
 
