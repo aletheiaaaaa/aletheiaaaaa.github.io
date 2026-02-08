@@ -88,22 +88,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Sapere Aude: About this blog</title>
+  <title>p &gt; 0.05: About this blog</title>
 
   <meta property="description" itemprop="description" content="Hi! I&#39;m Aletheia, a computer science undergrad with a passion for all things ML! Here you&#39;ll find my various adventures and misadventures through the wonderful world of code."/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Sapere Aude: About this blog"/>
+  <meta property="og:title" content="p &gt; 0.05: About this blog"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Hi! I&#39;m Aletheia, a computer science undergrad with a passion for all things ML! Here you&#39;ll find my various adventures and misadventures through the wonderful world of code."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Sapere Aude"/>
+  <meta property="og:site_name" content="p &gt; 0.05"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Sapere Aude: About this blog"/>
+  <meta property="twitter:title" content="p &gt; 0.05: About this blog"/>
   <meta property="twitter:description" content="Hi! I&#39;m Aletheia, a computer science undergrad with a passion for all things ML! Here you&#39;ll find my various adventures and misadventures through the wonderful world of code."/>
 
   <!--/radix_placeholder_meta_tags-->
@@ -2176,98 +2176,42 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
   </style>
-  <style type="text/css">/* Academic Light Theme - Classic serif design with warm accents
+  <style type="text/css">/* Dark Neon Theme - Monospaced with purple accents
      Edit values in the right column for customization.
      All rows must end with a semi-colon.                      */
 
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-  @font-face {
-    font-family: 'Computer Modern';
-    src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/cmunrm.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Computer Modern';
-    src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/cmunbx.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Computer Modern';
-    src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/cmunti.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: 'Computer Modern';
-    src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/cmunbi.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-  }
-
-  mjx-container {
-    font-family: 'Computer Modern', 'Latin Modern Math', serif !important;
-  }
-
-  mjx-container * {
-    font-family: inherit !important;
-    font-style: normal !important;
-  }
-
-  .MathJax {
-    font-family: 'Computer Modern', 'Latin Modern Math', serif !important;
-  }
-
-  .MathJax * {
-    font-family: inherit !important;
-    font-style: normal !important;
-  }
-
-  .MathJax_Display,
-  .MJXc-display,
-  span[class*="MJX"] {
-    font-family: 'Computer Modern', 'Latin Modern Math', serif !important;
-    font-style: normal !important;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
 
   :root {
     /* Primary color palette */
-    --color-primary: #001232;
-    --color-medium: #001a4d;
-    --color-light: #c8d9f0;
-    --color-table: #dce8f5;
-    --color-dark: #000e24;
-    --color-darkest: #000816;
+    --color-primary: #6366f1;
+    --color-medium: #4f46e5;
+    --color-light: #0f0a2e;
+    --color-table: #0e0930;
+    --color-dark: #a5b4fc;
+    --color-darkest: #e0e2f0;
 
     /* Neutral grays */
-    --color-gray: #6b7280;
-    --color-subtle-gray: #999999;
-    --color-light-gray: #f1f4f7;
-    --color-lightest-gray: #f3f6f9;
-    --color-off-white: #f5f5f5;
-    --color-white: #ffffff;
-
-    /* Dark text colors */
+    --color-gray: #7f85a3;
+    --color-subtle-gray: #3a3d58;
+    --color-light-gray: #121228;
+    --color-lightest-gray: #101024;
+    --color-off-white: #0d0d20;
+    --color-white: #e8eaf8;
 
     /* Cool neutrals */
-    --color-cool-dark: #1e252d;
-    --color-cool-charcoal: #0f1419;
-    --color-cool-gray: #2d3338;
+    --color-cool-dark: #c8cade;
+    --color-cool-charcoal: #b0b4d0;
+    --color-cool-gray: #8a8eb0;
 
     /* Background colors */
-    --bg-primary: #f8f9fb;
-    --bg-secondary: #f3f5f7;
-    --bg-accent: #eef0f3;
-    --bg-proof: #f7f9fb;
-    --bg-example: #f5f7fa;
-    --bg-theorem: #eff3f8;
+    --bg-primary: #08081a;
+    --bg-secondary: #0c0c22;
+    --bg-accent: #10102a;
+    --bg-proof: #0d0d24;
+    --bg-example: #0e0e26;
+    --bg-theorem: #0f0a2a;
 
     /* Direct color mappings - no intermediate variables */
     /* Backgrounds */
@@ -2282,12 +2226,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --footer-bg: var(--color-off-white);
 
     /* Borders */
-    --border-light: var(--color-primary);
-    --border-medium: var(--color-primary);
-    --border-dark: var(--color-primary);
+    --border-light: #1e1e48;
+    --border-medium: #2a2a5c;
+    --border-dark: #333370;
     --border-subtle: var(--color-subtle-gray);
-    --hr-color: var(--color-primary);
-    --quote-border: var(--color-primary);
+    --hr-color: #4f46e5;
+    --quote-border: var(--color-medium);
     --remark-border: var(--color-gray);
     --proof-border: var(--color-gray);
     --definition-border: var(--color-gray);
@@ -2295,16 +2239,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --theorem-border: var(--color-primary);
 
     /* Links */
-    --link-color: #4a5568;
-    --link-hover: var(--color-primary);
+    --link-color: #818cf8;
+    --link-hover: #a5b4fc;
 
     /* Shadows */
-    --shadow-light: #e6e6e6;
-    --shadow-medium: #d9d9d9;
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.5);
 
     /* Selection */
-    --selection-bg: var(--color-light);
-    --selection-color: var(--color-medium);
+    --selection-bg: #3730a3;
+    --selection-color: #f0e6f8;
 
     /* Text colors */
     --title-color: var(--color-primary);
@@ -2313,53 +2257,53 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color: var(--color-gray);
     --fig-cap-color: var(--color-gray);
     --text-white: var(--color-white);
-    --text-shadow-subtle: var(--color-off-white);
-    --blockquote-text: var(--color-gray);
+    --text-shadow-subtle: rgba(0, 0, 0, 0.4);
+    --blockquote-text: var(--color-cool-gray);
     --table-header-text: var(--color-primary);
     --ornament-color: var(--color-primary);
-    --strong-text: var(--color-primary);
+    --strong-text: #818cf8;
     --code-text: var(--color-cool-dark);
     --byline-heading: var(--color-cool-charcoal);
     --footer-text: var(--color-cool-gray);
-    --quote-icon-color: var(--color-primary);
+    --quote-icon-color: var(--color-medium);
 
     /* Scrollbars */
-    --scrollbar-thumb: var(--color-primary);
+    --scrollbar-thumb: #2a2a60;
     --scrollbar-thumb-hover: var(--color-medium);
-    --scrollbar-toc: var(--color-primary);
+    --scrollbar-toc: #2a2a60;
     --scrollbar-toc-hover: var(--color-medium);
 
     /* Search bar */
     --search-text: var(--color-white);
-    --search-border: var(--color-white);
-    --search-border-focus: var(--color-light);
-    --search-placeholder: var(--color-light);
+    --search-border: #2a2a60;
+    --search-border-focus: var(--color-primary);
+    --search-placeholder: var(--color-gray);
     --search-dropdown-hover: var(--color-light);
 
     /* Navigation */
-    --nav-bg: var(--color-primary);
+    --nav-bg: #0a0a1e;
     --nav-text: var(--color-white);
-    --nav-hover: var(--color-light);
+    --nav-hover: var(--color-primary);
     --footer-hover: var(--color-primary);
   }
 
   html {
-    --title-size: 3.5rem;
-    --body-size: 1.2rem;
-    --code-size: 0.95rem;
-    --aside-size: 1.05rem;
-    --fig-cap-size: 1.05rem;
+    --title-size: 2.8rem;
+    --body-size: 1.0rem;
+    --code-size: 0.88rem;
+    --aside-size: 0.88rem;
+    --fig-cap-size: 0.88rem;
 
-    --heading-font: 'Cormorant Garamond', serif;
-    --mono-font: 'JetBrains Mono', monospace;
-    --body-font: 'Crimson Text', serif;
-    --navbar-font: 'Cormorant Garamond', serif;
+    --heading-font: 'Fira Code', monospace;
+    --mono-font: 'IBM Plex Mono', monospace;
+    --body-font: 'Fira Code', monospace;
+    --navbar-font: 'Fira Code', monospace;
   }
 
   d-byline {
-    --heading-size: 0.8rem;
+    --heading-size: 0.7rem;
     --heading-color: var(--byline-heading);
-    --body-size: 1.0rem;
+    --body-size: 0.85rem;
     --body-color: var(--color-cool-charcoal);
   }
 
@@ -2369,8 +2313,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }
 
   .d-contents {
-    --heading-size: 1.5rem;
-    --contents-size: 1rem;
+    --heading-size: 1.25rem;
+    --contents-size: 0.85rem;
     color: var(--body-color);
   }
 
@@ -2383,9 +2327,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }
 
   d-appendix {
-    --heading-size: 1.1rem;
+    --heading-size: 0.95rem;
     --heading-color: var(--title-color);
-    --text-size: 0.9rem;
+    --text-size: 0.78rem;
     --text-color: var(--aside-color);
   }
 
@@ -2398,12 +2342,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }
 
   .distill-site-header {
-    --title-size: 1.8rem;
+    --title-size: 1.5rem;
     --text-color: var(--nav-text);
-    --text-size: 1.3rem;
+    --text-size: 1.05rem;
     --hover-color: var(--nav-hover);
     --bkgd-color: var(--nav-bg);
-    padding: 0.25rem 0 0.25rem 0;
+    padding: 0.6rem 0 0.6rem 0;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -2413,7 +2357,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .distill-site-footer {
     --text-color: var(--footer-text);
-    --text-size: 0.9rem;
+    --text-size: 0.78rem;
     --hover-color: var(--footer-hover);
     --bkgd-color: var(--footer-bg);
     border-top: 1px solid var(--border-subtle);
@@ -2436,7 +2380,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .posts-list .description h2 {
     color: var(--header-color);
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     margin-top: 0.5rem;
   }
 
@@ -2459,7 +2403,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     display: block !important;
     opacity: 1 !important;
     color: var(--body-color) !important;
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     margin-top: 0.5rem;
     font-style: italic;
   }
@@ -2482,7 +2426,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 0.5rem 0.5rem !important;
     color: var(--search-text) !important;
     font-family: var(--body-font) !important;
-    font-size: 1.1rem !important;
+    font-size: 0.95rem !important;
     transition: all 0.3s ease !important;
     max-width: 400px !important;
     width: 400px !important;
@@ -2650,14 +2594,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .aa-dropdown-menu .search-item,
   .aa-dropdown-menu .search-item * {
-    font-size: 1.1rem !important;
+    font-size: 0.92rem !important;
     font-weight: 500 !important;
     line-height: 1.5 !important;
   }
 
   .aa-dropdown-menu .search-item-description,
   .aa-dropdown-menu .search-item-description * {
-    font-size: 0.9rem !important;
+    font-size: 0.78rem !important;
     font-weight: normal !important;
   }
 
@@ -2675,7 +2619,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }
 
   d-article>p:first-of-type:first-letter {
-    font-size: 6.3rem;
+    font-size: 6.1rem;
     font-family: var(--heading-font);
     font-weight: 600;
     float: left;
@@ -2698,7 +2642,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   blockquote::before {
     content: '"';
-    font-size: 4rem;
+    font-size: 3.2rem;
     color: var(--quote-icon-color);
     position: absolute;
     top: -0.5rem;
@@ -2755,32 +2699,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 0;
   }
 
-  .sourceCode .kw { color: #7c3aed; font-weight: 600; }
-  .sourceCode .dt { color: #0891b2; }
-  .sourceCode .dv { color: #059669; }
-  .sourceCode .bn { color: #10b981; }
-  .sourceCode .fl { color: #14b8a6; }
-  .sourceCode .ch { color: #06b6d4; }
-  .sourceCode .st { color: #0ea5e9; }
-  .sourceCode .co { color: #64748b; font-style: italic; }
-  .sourceCode .ot { color: #8b5cf6; }
-  .sourceCode .al { color: #dc2626; font-weight: 600; }
+  .sourceCode .kw { color: #818cf8; font-weight: 600; }
+  .sourceCode .dt { color: #64d2ff; }
+  .sourceCode .dv { color: #30d158; }
+  .sourceCode .bn { color: #30d158; }
+  .sourceCode .fl { color: #66d4cf; }
+  .sourceCode .ch { color: #64d2ff; }
+  .sourceCode .st { color: #7aafff; }
+  .sourceCode .co { color: #5a5e80; font-style: italic; }
+  .sourceCode .ot { color: #a5b4fc; }
+  .sourceCode .al { color: #ff6b6b; font-weight: 600; }
   .sourceCode .fu { color: #6366f1; }
-  .sourceCode .er { color: #dc2626; font-weight: 600; }
-  .sourceCode .wa { color: #d97706; font-style: italic; }
-  .sourceCode .cn { color: #a855f7; }
-  .sourceCode .sc { color: #22d3ee; }
-  .sourceCode .vs { color: #38bdf8; }
-  .sourceCode .ss { color: #06b6d4; }
-  .sourceCode .va { color: #475569; }
-  .sourceCode .cf { color: #8b5cf6; font-weight: 600; }
-  .sourceCode .op { color: #0d9488; }
-  .sourceCode .pp { color: #2dd4bf; }
-  .sourceCode .at { color: #3b82f6; }
-  .sourceCode .do { color: #6b7280; font-style: italic; }
-  .sourceCode .an { color: #6b7280; font-style: italic; }
-  .sourceCode .cv { color: #6b7280; font-style: italic; }
-  .sourceCode .in { color: #6b7280; font-style: italic; }
+  .sourceCode .er { color: #ff6b6b; font-weight: 600; }
+  .sourceCode .wa { color: #ffd60a; font-style: italic; }
+  .sourceCode .cn { color: #a5b4fc; }
+  .sourceCode .sc { color: #5ce6e6; }
+  .sourceCode .vs { color: #7aafff; }
+  .sourceCode .ss { color: #64d2ff; }
+  .sourceCode .va { color: #a8aac8; }
+  .sourceCode .cf { color: #818cf8; font-weight: 600; }
+  .sourceCode .op { color: #5ce6c8; }
+  .sourceCode .pp { color: #66e6d4; }
+  .sourceCode .at { color: #7aafff; }
+  .sourceCode .do { color: #5a5e80; font-style: italic; }
+  .sourceCode .an { color: #5a5e80; font-style: italic; }
+  .sourceCode .cv { color: #5a5e80; font-style: italic; }
+  .sourceCode .in { color: #5a5e80; font-style: italic; }
 
   code {
     white-space: pre-wrap !important;
@@ -2821,6 +2765,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     border: none;
     height: 0.5px;
     background: var(--hr-color);
+    opacity: 0.4;
     margin: 3rem 0;
   }
 
@@ -2837,11 +2782,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     font-family: var(--navbar-font);
     font-style: italic;
     color: var(--color-cool-charcoal);
-    font-size: 1.2rem;
+    font-size: 1.0rem;
   }
 
   em {
-    color: var(--title-color);
     font-style: italic;
   }
 
@@ -2853,12 +2797,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .ornament {
     text-align: center;
     margin: 3rem 0;
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: var(--ornament-color);
   }
 
   .ornament::before {
-    content: '❦';
+    content: '✦';
   }
 
   figcaption {
@@ -2889,7 +2833,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .example::before {
     font-weight: 600;
     font-family: var(--heading-font);
-    font-size: 1.1rem;
+    font-size: 0.92rem;
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -2983,10 +2927,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-bottom: 1rem;
   }
 
-  d-article:not(.description) > h1 { font-size: 2.5rem !important; }
-  d-article:not(.description) > h2 { font-size: 2rem !important; }
-  d-article:not(.description) > h3 { font-size: 1.5rem !important; }
-  d-article:not(.description) > h4 { font-size: 1.25rem !important; }
+  d-article:not(.description) > h1 { font-size: 2.0rem !important; }
+  d-article:not(.description) > h2 { font-size: 1.6rem !important; }
+  d-article:not(.description) > h3 { font-size: 1.25rem !important; }
+  d-article:not(.description) > h4 { font-size: 1.05rem !important; }
 
 
   d-article h1 {
@@ -3189,7 +3133,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a href="index.html" class="title">Sapere Aude</a>
+<a href="index.html" class="title">p &gt; 0.05</a>
 <input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
