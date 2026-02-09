@@ -84,6 +84,6 @@ Lastly, its worth noting that VNNI is typically only supported by the latest gen
 outputs = _mm256_dpbusd_epi32(outputs, inputs, weights); // 256-bit since AVX-2 doesn't have 512-bit registers
 
 // TO
-outputs = _mm256_add_epi32(outputs, _mm256_madd_epi32(_mm256_maddubs_epi16(inputs, weights), _mm256_set1_epi16(1)));
+outputs = _mm256_add_epi16(outputs, _mm256_madd_epi32(_mm256_maddubs_epi16(inputs, weights), _mm256_set1_epi16(1)));
 ```
 and you're good to go. Happy chessing!

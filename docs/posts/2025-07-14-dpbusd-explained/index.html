@@ -4251,7 +4251,7 @@ distill-header .nav a {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>outputs <span class="op">=</span> _mm256_dpbusd_epi32<span class="op">(</span>outputs<span class="op">,</span> inputs<span class="op">,</span> weights<span class="op">);</span> <span class="co">// 256-bit since AVX-2 doesn&#39;t have 512-bit registers</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// TO</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>outputs <span class="op">=</span> _mm256_add_epi32<span class="op">(</span>outputs<span class="op">,</span> _mm256_madd_epi32<span class="op">(</span>_mm256_maddubs_epi16<span class="op">(</span>inputs<span class="op">,</span> weights<span class="op">),</span> _mm256_set1_epi16<span class="op">(</span><span class="dv">1</span><span class="op">)));</span></span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>outputs <span class="op">=</span> _mm256_add_epi16<span class="op">(</span>outputs<span class="op">,</span> _mm256_madd_epi32<span class="op">(</span>_mm256_maddubs_epi16<span class="op">(</span>inputs<span class="op">,</span> weights<span class="op">),</span> _mm256_set1_epi16<span class="op">(</span><span class="dv">1</span><span class="op">)));</span></span></code></pre></div>
 <p>and you’re good to go. Happy chessing!</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
