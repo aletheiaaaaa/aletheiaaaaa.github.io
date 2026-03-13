@@ -2173,7 +2173,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
   </style>
-  <style type="text/css">/* Dark Neon Theme - Monospaced with purple accents
+  <style type="text/css">/* Light Mono Theme - Monospaced black and white
      Edit values in the right column for customization.
      All rows must end with a semi-colon.                      */
 
@@ -2182,33 +2182,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   :root {
     /* Primary color palette */
-    --color-primary: #6366f1;
-    --color-medium: #4f46e5;
-    --color-light: #0f0a2e;
-    --color-table: #0e0930;
-    --color-dark: #a5b4fc;
-    --color-darkest: #e0e2f0;
+    --color-primary: #1a1a1a;
+    --color-medium: #333333;
+    --color-light: #f5f5f5;
+    --color-table: #f0f0f0;
+    --color-dark: #2a2a2a;
+    --color-darkest: #1a1a1a;
 
     /* Neutral grays */
-    --color-gray: #7f85a3;
-    --color-subtle-gray: #3a3d58;
-    --color-light-gray: #121228;
-    --color-lightest-gray: #101024;
-    --color-off-white: #0d0d20;
-    --color-white: #e8eaf8;
+    --color-gray: #6b6b6b;
+    --color-subtle-gray: #d0d0d0;
+    --color-light-gray: #f4f4f4;
+    --color-lightest-gray: #f8f8f8;
+    --color-off-white: #fafafa;
+    --color-white: #1a1a1a;
 
     /* Cool neutrals */
-    --color-cool-dark: #c8cade;
-    --color-cool-charcoal: #b0b4d0;
-    --color-cool-gray: #8a8eb0;
+    --color-cool-dark: #3a3a3a;
+    --color-cool-charcoal: #555555;
+    --color-cool-gray: #6b6b6b;
 
     /* Background colors */
-    --bg-primary: #08081a;
-    --bg-secondary: #0c0c22;
-    --bg-accent: #10102a;
-    --bg-proof: #0d0d24;
-    --bg-example: #0e0e26;
-    --bg-theorem: #0f0a2a;
+    --bg-primary: #ffffff;
+    --bg-secondary: #fafafa;
+    --bg-accent: #f5f5f5;
+    --bg-proof: #f8f8f8;
+    --bg-example: #f7f7f7;
+    --bg-theorem: #f5f5f5;
 
     /* Direct color mappings - no intermediate variables */
     /* Backgrounds */
@@ -2223,11 +2223,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --footer-bg: var(--color-off-white);
 
     /* Borders */
-    --border-light: #1e1e48;
-    --border-medium: #2a2a5c;
-    --border-dark: #333370;
+    --border-light: #e0e0e0;
+    --border-medium: #cccccc;
+    --border-dark: #bbbbbb;
     --border-subtle: var(--color-subtle-gray);
-    --hr-color: #4f46e5;
+    --hr-color: #333333;
     --quote-border: var(--color-medium);
     --remark-border: var(--color-gray);
     --proof-border: var(--color-gray);
@@ -2236,16 +2236,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --theorem-border: var(--color-primary);
 
     /* Links */
-    --link-color: #818cf8;
-    --link-hover: #a5b4fc;
+    --link-color: #1a1a1a;
+    --link-hover: #000000;
 
     /* Shadows */
-    --shadow-light: rgba(0, 0, 0, 0.3);
-    --shadow-medium: rgba(0, 0, 0, 0.5);
+    --shadow-light: rgba(0, 0, 0, 0.06);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
 
     /* Selection */
-    --selection-bg: #3730a3;
-    --selection-color: #f0e6f8;
+    --selection-bg: #d0d0d0;
+    --selection-color: #000000;
 
     /* Text colors */
     --title-color: var(--color-primary);
@@ -2254,34 +2254,34 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color: var(--color-gray);
     --fig-cap-color: var(--color-gray);
     --text-white: var(--color-white);
-    --text-shadow-subtle: rgba(0, 0, 0, 0.4);
+    --text-shadow-subtle: rgba(0, 0, 0, 0.05);
     --blockquote-text: var(--color-cool-gray);
     --table-header-text: var(--color-primary);
     --ornament-color: var(--color-primary);
-    --strong-text: #818cf8;
+    --strong-text: #000000;
     --code-text: var(--color-cool-dark);
     --byline-heading: var(--color-cool-charcoal);
     --footer-text: var(--color-cool-gray);
     --quote-icon-color: var(--color-medium);
 
     /* Scrollbars */
-    --scrollbar-thumb: #2a2a60;
-    --scrollbar-thumb-hover: var(--color-medium);
-    --scrollbar-toc: #2a2a60;
-    --scrollbar-toc-hover: var(--color-medium);
+    --scrollbar-thumb: #cccccc;
+    --scrollbar-thumb-hover: #999999;
+    --scrollbar-toc: #cccccc;
+    --scrollbar-toc-hover: #999999;
 
     /* Search bar */
     --search-text: var(--color-white);
-    --search-border: #2a2a60;
+    --search-border: #cccccc;
     --search-border-focus: var(--color-primary);
     --search-placeholder: var(--color-gray);
     --search-dropdown-hover: var(--color-light);
 
     /* Navigation */
-    --nav-bg: #0a0a1e;
+    --nav-bg: #ffffff;
     --nav-text: var(--color-white);
-    --nav-hover: var(--color-primary);
-    --footer-hover: var(--color-primary);
+    --nav-hover: #000000;
+    --footer-hover: #000000;
   }
 
   html {
@@ -2696,32 +2696,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 0;
   }
 
-  .sourceCode .kw { color: #818cf8; font-weight: 600; }
-  .sourceCode .dt { color: #64d2ff; }
-  .sourceCode .dv { color: #30d158; }
-  .sourceCode .bn { color: #30d158; }
-  .sourceCode .fl { color: #66d4cf; }
-  .sourceCode .ch { color: #64d2ff; }
-  .sourceCode .st { color: #7aafff; }
-  .sourceCode .co { color: #5a5e80; font-style: italic; }
-  .sourceCode .ot { color: #a5b4fc; }
-  .sourceCode .al { color: #ff6b6b; font-weight: 600; }
-  .sourceCode .fu { color: #6366f1; }
-  .sourceCode .er { color: #ff6b6b; font-weight: 600; }
-  .sourceCode .wa { color: #ffd60a; font-style: italic; }
-  .sourceCode .cn { color: #a5b4fc; }
-  .sourceCode .sc { color: #5ce6e6; }
-  .sourceCode .vs { color: #7aafff; }
-  .sourceCode .ss { color: #64d2ff; }
-  .sourceCode .va { color: #a8aac8; }
-  .sourceCode .cf { color: #818cf8; font-weight: 600; }
-  .sourceCode .op { color: #5ce6c8; }
-  .sourceCode .pp { color: #66e6d4; }
-  .sourceCode .at { color: #7aafff; }
-  .sourceCode .do { color: #5a5e80; font-style: italic; }
-  .sourceCode .an { color: #5a5e80; font-style: italic; }
-  .sourceCode .cv { color: #5a5e80; font-style: italic; }
-  .sourceCode .in { color: #5a5e80; font-style: italic; }
+  .sourceCode .kw { color: #7928a6; font-weight: 600; }
+  .sourceCode .dt { color: #0d7680; }
+  .sourceCode .dv { color: #1a6b35; }
+  .sourceCode .bn { color: #1a6b35; }
+  .sourceCode .fl { color: #1a6b35; }
+  .sourceCode .ch { color: #9e4a08; }
+  .sourceCode .st { color: #9e4a08; }
+  .sourceCode .co { color: #8a8a8a; font-style: italic; }
+  .sourceCode .ot { color: #7928a6; }
+  .sourceCode .al { color: #c52828; font-weight: 600; }
+  .sourceCode .fu { color: #2558c2; }
+  .sourceCode .er { color: #c52828; font-weight: 600; }
+  .sourceCode .wa { color: #9e6b08; font-style: italic; }
+  .sourceCode .cn { color: #0d7680; }
+  .sourceCode .sc { color: #9e4a08; }
+  .sourceCode .vs { color: #9e4a08; }
+  .sourceCode .ss { color: #0d7680; }
+  .sourceCode .va { color: #1a1a1a; }
+  .sourceCode .cf { color: #7928a6; font-weight: 600; }
+  .sourceCode .op { color: #444444; }
+  .sourceCode .pp { color: #7928a6; }
+  .sourceCode .at { color: #2558c2; }
+  .sourceCode .do { color: #8a8a8a; font-style: italic; }
+  .sourceCode .an { color: #8a8a8a; font-style: italic; }
+  .sourceCode .cv { color: #8a8a8a; font-style: italic; }
+  .sourceCode .in { color: #8a8a8a; font-style: italic; }
 
   code {
     white-space: pre-wrap !important;
@@ -3282,12 +3282,14 @@ function init_posts_list() {
 <a href="posts/2025-07-14-dpbusd-explained/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
-<div class="publishedDate">July 13, 2025</div>
+<div class="publishedDate">July 14, 2025</div>
 <div class="dt-authors">
 <div class="dt-author">aletheiaaaaa</div>
 </div>
 </div>
-<div class="thumbnail"></div>
+<div class="thumbnail">
+<img/>
+</div>
 <div class="description">
 <h2>dpbusd, explained</h2>
 <div class="dt-tags"></div>

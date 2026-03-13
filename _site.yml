@@ -3,7 +3,7 @@ title: "p > 0.05"
 description: |
   A blog about programming, technology, and other musings.
 output_dir: "docs"
-theme: neon.css
+theme: mono.css
 navbar:
   right:
     - text: "Home"
