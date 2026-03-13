@@ -40,187 +40,187 @@ text.f5 {font-family:cmr9;font-size:8.966376px}
 
 </style>
 <g id="page1">
-<path d="M-69.609374-69.609374V-44.0977H-44.0977V-69.609374Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 15.3214)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 15.3214)" fill="#a5b4fc">00</text>
-<path d="M-44.0977-69.609374V-44.0977H-18.5859V-69.609374Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 15.3214)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 15.3214)" fill="#a5b4fc">01</text>
-<path d="M-18.5859-69.609374V-44.0977H6.9258V-69.609374Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 15.3214)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 15.3214)" fill="#a5b4fc">02</text>
-<path d="M6.9258-69.609374V-44.0977H32.438V-69.609374Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 15.3214)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 15.3214)" fill="#a5b4fc">03</text>
-<path d="M-69.609374-44.0977V-18.5859H-44.0977V-44.0977Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 40.8333)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 40.8333)" fill="#a5b4fc">10</text>
-<path d="M-44.0977-44.0977V-18.5859H-18.5859V-44.0977Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 40.8333)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 40.8333)" fill="#a5b4fc">11</text>
-<path d="M-18.5859-44.0977V-18.5859H6.9258V-44.0977Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 40.8333)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 40.8333)" fill="#a5b4fc">12</text>
-<path d="M6.9258-44.0977V-18.5859H32.438V-44.0977Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 40.8333)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 40.8333)" fill="#a5b4fc">13</text>
-<path d="M-69.609374-18.5859V6.9258H-44.0977V-18.5859Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 66.34528)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 66.34528)" fill="#a5b4fc">20</text>
-<path d="M-44.0977-18.5859V6.9258H-18.5859V-18.5859Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 66.34528)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 66.34528)" fill="#a5b4fc">21</text>
-<path d="M-18.5859-18.5859V6.9258H6.9258V-18.5859Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 66.34528)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 66.34528)" fill="#a5b4fc">22</text>
-<path d="M6.9258-18.5859V6.9258H32.438V-18.5859Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 66.34528)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 66.34528)" fill="#a5b4fc">23</text>
-<path d="M-69.609374 6.9258V32.438H-44.0977V6.9258Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 91.8572)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 91.8572)" fill="#a5b4fc">30</text>
-<path d="M-44.0977 6.9258V32.438H-18.5859V6.9258Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 91.8572)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 91.8572)" fill="#a5b4fc">31</text>
-<path d="M-18.5859 6.9258V32.438H6.9258V6.9258Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 91.8572)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 91.8572)" fill="#a5b4fc">32</text>
-<path d="M6.9258 6.9258V32.438H32.438V6.9258Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 91.8572)" fill="#a5b4fc">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 91.8572)" fill="#a5b4fc">33</text>
-<path d="M57.949-69.609374V-44.0977H83.461V-69.609374Z" fill="#6366f1" />
-<path d="M57.949-69.609374V-44.0977H83.461V-69.609374Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 14.1881)" fill="#ffffff">x</text>
-<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 14.1881)" fill="#ffffff">0</text>
-<path d="M57.949-44.0977V-18.5859H83.461V-44.0977Z" fill="#6366f1" />
-<path d="M57.949-44.0977V-18.5859H83.461V-44.0977Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 39.7001)" fill="#ffffff">x</text>
-<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 39.7001)" fill="#ffffff">1</text>
-<path d="M57.949-18.5859V6.9258H83.461V-18.5859Z" fill="#6366f1" />
-<path d="M57.949-18.5859V6.9258H83.461V-18.5859Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 65.212)" fill="#ffffff">x</text>
-<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 65.212)" fill="#ffffff">2</text>
-<path d="M57.949 6.9258V32.438H83.461V6.9258Z" fill="#6366f1" />
-<path d="M57.949 6.9258V32.438H83.461V6.9258Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 90.724)" fill="#ffffff">x</text>
-<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 90.724)" fill="#ffffff">3</text>
-<text class="f0" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 105.1642 57.2207)" fill="#a5b4fc">×</text>
-<text class="f1" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 169.662 55.4308)" fill="#a5b4fc">=</text>
-<path d="M134.488-69.609374V-44.0977H310.52V-69.609374Z" fill="#3730a3" />
-<path d="M134.488-69.609374V-44.0977H310.52V-69.609374Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">0</text>
-<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">,</text>
-<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">0</text>
-<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">x</text>
-<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">0</text>
-<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">+</text>
-<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">W</text>
-<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">0</text>
-<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">,</text>
-<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">1</text>
-<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">x</text>
-<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">1</text>
-<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">+</text>
-<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">W</text>
-<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">0</text>
-<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">,</text>
-<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">2</text>
-<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">x</text>
-<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">2</text>
-<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">+</text>
-<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">W</text>
-<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">0</text>
-<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">,</text>
-<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">3</text>
-<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">x</text>
-<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#ffffff">3</text>
-<path d="M134.488-44.0977V-18.5859H310.52V-44.0977Z" fill="#3730a3" />
-<path d="M134.488-44.0977V-18.5859H310.52V-44.0977Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">1</text>
-<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">,</text>
-<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">0</text>
-<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">x</text>
-<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">0</text>
-<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">+</text>
-<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">W</text>
-<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">1</text>
-<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">,</text>
-<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">1</text>
-<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">x</text>
-<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">1</text>
-<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">+</text>
-<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">W</text>
-<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">1</text>
-<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">,</text>
-<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">2</text>
-<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">x</text>
-<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">2</text>
-<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">+</text>
-<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">W</text>
-<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">1</text>
-<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">,</text>
-<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">3</text>
-<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">x</text>
-<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#ffffff">3</text>
-<path d="M134.488-18.5859V6.9258H310.52V-18.5859Z" fill="#3730a3" />
-<path d="M134.488-18.5859V6.9258H310.52V-18.5859Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">2</text>
-<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">,</text>
-<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">0</text>
-<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">x</text>
-<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">0</text>
-<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">+</text>
-<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">W</text>
-<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">2</text>
-<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">,</text>
-<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">1</text>
-<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">x</text>
-<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">1</text>
-<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">+</text>
-<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">W</text>
-<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">2</text>
-<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">,</text>
-<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">2</text>
-<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">x</text>
-<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">2</text>
-<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">+</text>
-<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">W</text>
-<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">2</text>
-<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">,</text>
-<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">3</text>
-<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">x</text>
-<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#ffffff">3</text>
-<path d="M134.488 6.9258V32.438H310.52V6.9258Z" fill="#3730a3" />
-<path d="M134.488 6.9258V32.438H310.52V6.9258Z" stroke="#a5b4fc" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
-<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">W</text>
-<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">3</text>
-<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">,</text>
-<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">0</text>
-<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">x</text>
-<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">0</text>
-<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">+</text>
-<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">W</text>
-<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">3</text>
-<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">,</text>
-<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">1</text>
-<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">x</text>
-<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">1</text>
-<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">+</text>
-<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">W</text>
-<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">3</text>
-<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">,</text>
-<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">2</text>
-<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">x</text>
-<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">2</text>
-<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">+</text>
-<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">W</text>
-<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">3</text>
-<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">,</text>
-<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">3</text>
-<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">x</text>
-<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#ffffff">3</text>
+<path d="M-69.609374-69.609374V-44.0977H-44.0977V-69.609374Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 15.3214)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 15.3214)" fill="#1a1a1a">00</text>
+<path d="M-44.0977-69.609374V-44.0977H-18.5859V-69.609374Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 15.3214)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 15.3214)" fill="#1a1a1a">01</text>
+<path d="M-18.5859-69.609374V-44.0977H6.9258V-69.609374Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 15.3214)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 15.3214)" fill="#1a1a1a">02</text>
+<path d="M6.9258-69.609374V-44.0977H32.438V-69.609374Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 15.3214)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 15.3214)" fill="#1a1a1a">03</text>
+<path d="M-69.609374-44.0977V-18.5859H-44.0977V-44.0977Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 40.8333)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 40.8333)" fill="#1a1a1a">10</text>
+<path d="M-44.0977-44.0977V-18.5859H-18.5859V-44.0977Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 40.8333)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 40.8333)" fill="#1a1a1a">11</text>
+<path d="M-18.5859-44.0977V-18.5859H6.9258V-44.0977Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 40.8333)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 40.8333)" fill="#1a1a1a">12</text>
+<path d="M6.9258-44.0977V-18.5859H32.438V-44.0977Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 40.8333)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 40.8333)" fill="#1a1a1a">13</text>
+<path d="M-69.609374-18.5859V6.9258H-44.0977V-18.5859Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 66.34528)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 66.34528)" fill="#1a1a1a">20</text>
+<path d="M-44.0977-18.5859V6.9258H-18.5859V-18.5859Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 66.34528)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 66.34528)" fill="#1a1a1a">21</text>
+<path d="M-18.5859-18.5859V6.9258H6.9258V-18.5859Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 66.34528)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 66.34528)" fill="#1a1a1a">22</text>
+<path d="M6.9258-18.5859V6.9258H32.438V-18.5859Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 66.34528)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 66.34528)" fill="#1a1a1a">23</text>
+<path d="M-69.609374 6.9258V32.438H-44.0977V6.9258Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 4.5029 91.8572)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 4.5029 91.8572)" fill="#1a1a1a">30</text>
+<path d="M-44.0977 6.9258V32.438H-18.5859V6.9258Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 30.0148 91.8572)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 30.0148 91.8572)" fill="#1a1a1a">31</text>
+<path d="M-18.5859 6.9258V32.438H6.9258V6.9258Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 55.5267 91.8572)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 55.5267 91.8572)" fill="#1a1a1a">32</text>
+<path d="M6.9258 6.9258V32.438H32.438V6.9258Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 81.0387 91.8572)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 81.0387 91.8572)" fill="#1a1a1a">33</text>
+<path d="M57.949-69.609374V-44.0977H83.461V-69.609374Z" fill="#cccccc" />
+<path d="M57.949-69.609374V-44.0977H83.461V-69.609374Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 14.1881)" fill="#1a1a1a">x</text>
+<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 14.1881)" fill="#1a1a1a">0</text>
+<path d="M57.949-44.0977V-18.5859H83.461V-44.0977Z" fill="#cccccc" />
+<path d="M57.949-44.0977V-18.5859H83.461V-44.0977Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 39.7001)" fill="#1a1a1a">x</text>
+<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 39.7001)" fill="#1a1a1a">1</text>
+<path d="M57.949-18.5859V6.9258H83.461V-18.5859Z" fill="#cccccc" />
+<path d="M57.949-18.5859V6.9258H83.461V-18.5859Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 65.212)" fill="#1a1a1a">x</text>
+<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 65.212)" fill="#1a1a1a">2</text>
+<path d="M57.949 6.9258V32.438H83.461V6.9258Z" fill="#cccccc" />
+<path d="M57.949 6.9258V32.438H83.461V6.9258Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 135.6284 90.724)" fill="#1a1a1a">x</text>
+<text class="f4" x="-64.38552" y="-68.612728" transform="matrix(1 0 0 1 135.6284 90.724)" fill="#1a1a1a">3</text>
+<text class="f0" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 105.1642 57.2207)" fill="#1a1a1a">×</text>
+<text class="f1" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 169.662 55.4308)" fill="#1a1a1a">=</text>
+<path d="M134.488-69.609374V-44.0977H310.52V-69.609374Z" fill="#e0e0e0" />
+<path d="M134.488-69.609374V-44.0977H310.52V-69.609374Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">0</text>
+<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">,</text>
+<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">0</text>
+<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">x</text>
+<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">0</text>
+<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">+</text>
+<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">W</text>
+<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">0</text>
+<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">,</text>
+<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">1</text>
+<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">x</text>
+<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">1</text>
+<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">+</text>
+<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">W</text>
+<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">0</text>
+<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">,</text>
+<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">2</text>
+<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">x</text>
+<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">2</text>
+<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">+</text>
+<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">W</text>
+<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">0</text>
+<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">,</text>
+<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">3</text>
+<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">x</text>
+<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 14.7402)" fill="#1a1a1a">3</text>
+<path d="M134.488-44.0977V-18.5859H310.52V-44.0977Z" fill="#e0e0e0" />
+<path d="M134.488-44.0977V-18.5859H310.52V-44.0977Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">1</text>
+<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">,</text>
+<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">0</text>
+<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">x</text>
+<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">0</text>
+<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">+</text>
+<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">W</text>
+<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">1</text>
+<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">,</text>
+<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">1</text>
+<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">x</text>
+<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">1</text>
+<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">+</text>
+<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">W</text>
+<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">1</text>
+<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">,</text>
+<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">2</text>
+<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">x</text>
+<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">2</text>
+<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">+</text>
+<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">W</text>
+<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">1</text>
+<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">,</text>
+<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">3</text>
+<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">x</text>
+<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 40.2522)" fill="#1a1a1a">3</text>
+<path d="M134.488-18.5859V6.9258H310.52V-18.5859Z" fill="#e0e0e0" />
+<path d="M134.488-18.5859V6.9258H310.52V-18.5859Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">2</text>
+<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">,</text>
+<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">0</text>
+<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">x</text>
+<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">0</text>
+<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">+</text>
+<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">W</text>
+<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">2</text>
+<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">,</text>
+<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">1</text>
+<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">x</text>
+<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">1</text>
+<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">+</text>
+<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">W</text>
+<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">2</text>
+<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">,</text>
+<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">2</text>
+<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">x</text>
+<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">2</text>
+<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">+</text>
+<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">W</text>
+<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">2</text>
+<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">,</text>
+<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">3</text>
+<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">x</text>
+<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 65.7641)" fill="#1a1a1a">3</text>
+<path d="M134.488 6.9258V32.438H310.52V6.9258Z" fill="#e0e0e0" />
+<path d="M134.488 6.9258V32.438H310.52V6.9258Z" stroke="#1a1a1a" fill="none" stroke-width=".79701" stroke-miterlimit="10" />
+<text class="f3" x="-69.608977" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">W</text>
+<text class="f4" x="-60.906929" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">3</text>
+<text class="f2" x="-57.254004" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">,</text>
+<text class="f4" x="-54.984744" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">0</text>
+<text class="f3" x="-50.833727" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">x</text>
+<text class="f4" x="-45.61027" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">0</text>
+<text class="f5" x="-39.411363" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">+</text>
+<text class="f3" x="-30.195982" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">W</text>
+<text class="f4" x="-21.493934" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">3</text>
+<text class="f2" x="-17.841008" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">,</text>
+<text class="f4" x="-15.571749" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">1</text>
+<text class="f3" x="-11.420731" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">x</text>
+<text class="f4" x="-6.197275" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">1</text>
+<text class="f5" x=".001632" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">+</text>
+<text class="f3" x="9.217014" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">W</text>
+<text class="f4" x="17.919061" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">3</text>
+<text class="f2" x="21.571987" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">,</text>
+<text class="f4" x="23.841246" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">2</text>
+<text class="f3" x="27.992264" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">x</text>
+<text class="f4" x="33.215721" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">2</text>
+<text class="f5" x="39.414627" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">+</text>
+<text class="f3" x="48.630009" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">W</text>
+<text class="f4" x="57.332056" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">3</text>
+<text class="f2" x="60.984982" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">,</text>
+<text class="f4" x="63.254241" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">3</text>
+<text class="f3" x="67.405259" y="-69.608977" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">x</text>
+<text class="f4" x="72.628716" y="-68.612728" transform="matrix(1 0 0 1 212.469 91.2761)" fill="#1a1a1a">3</text>
 </g>
 </svg>
