@@ -1,9 +1,9 @@
-/* Light Mono Theme - Monospaced black and white
+/* Light Sans Theme - Clean black and white
    Edit values in the right column for customization.
    All rows must end with a semi-colon.                      */
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
 
 :root {
   /* Primary color palette */
@@ -116,10 +116,10 @@ html {
   --aside-size: 0.88rem;
   --fig-cap-size: 0.88rem;
 
-  --heading-font: 'Fira Code', monospace;
-  --mono-font: 'IBM Plex Mono', monospace;
-  --body-font: 'Fira Code', monospace;
-  --navbar-font: 'Fira Code', monospace;
+  --heading-font: 'Fira Sans', sans-serif;
+  --mono-font: 'Fira Mono', monospace;
+  --body-font: 'Fira Sans', sans-serif;
+  --navbar-font: 'Fira Sans', sans-serif;
 }
 
 d-byline {
