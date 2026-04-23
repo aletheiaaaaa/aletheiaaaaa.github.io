@@ -2,8 +2,8 @@
    Edit values in the right column for customization.
    All rows must end with a semi-colon.                      */
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@300&display=swap');
 
 :root {
   /* Primary color palette */
@@ -170,7 +170,7 @@ a.anchorjs-link {
   --hover-color: var(--nav-hover);
   --bkgd-color: var(--nav-bg);
   padding: 0.6rem 0 0.6rem 0;
-  font-weight: 400;
+  font-weight: 300;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -389,7 +389,7 @@ span.algolia-autocomplete {
 .aa-dropdown-menu .search-item,
 .aa-dropdown-menu .search-item * {
   font-size: 0.92rem !important;
-  font-weight: 400 !important;
+  font-weight: 300 !important;
   line-height: 1.5 !important;
 }
 
@@ -415,7 +415,7 @@ p {
 d-article>p:first-of-type:first-letter {
   font-size: 6.1rem;
   font-family: var(--heading-font);
-  font-weight: 400;
+  font-weight: 300;
   float: left;
   line-height: 0.75;
   margin: 0.05em 0.1em 0 0;
@@ -495,7 +495,7 @@ code.sourceCode {
 
 .sourceCode .kw {
   color: #7928a6;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .sourceCode .dt {
@@ -533,7 +533,7 @@ code.sourceCode {
 
 .sourceCode .al {
   color: #c52828;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .sourceCode .fu {
@@ -542,7 +542,7 @@ code.sourceCode {
 
 .sourceCode .er {
   color: #c52828;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .sourceCode .wa {
@@ -572,7 +572,7 @@ code.sourceCode {
 
 .sourceCode .cf {
   color: #7928a6;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .sourceCode .op {
@@ -626,7 +626,7 @@ table {
 
 th {
   background: var(--table-header-bg);
-  font-weight: 400;
+  font-weight: 300;
   color: var(--table-header-text);
   font-family: var(--heading-font);
   padding: 1rem;
@@ -669,7 +669,7 @@ em {
 
 strong {
   color: var(--strong-text);
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .ornament {
@@ -709,7 +709,7 @@ figcaption {
 .proof::before,
 .definition::before,
 .example::before {
-  font-weight: 400;
+  font-weight: 300;
   font-family: var(--heading-font);
   font-size: 0.92rem;
   position: absolute;
@@ -845,7 +845,7 @@ h4,
 h5,
 h6 {
   font-family: var(--heading-font);
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: -0.02em;
   color: var(--title-color);
   margin-top: 2.5rem;
