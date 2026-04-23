@@ -2177,8 +2177,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
      Edit values in the right column for customization.
      All rows must end with a semi-colon.                      */
 
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;1,300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@300&display=swap');
 
   :root {
     /* Primary color palette */
@@ -2345,7 +2345,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --hover-color: var(--nav-hover);
     --bkgd-color: var(--nav-bg);
     padding: 0.6rem 0 0.6rem 0;
-    font-weight: 500;
+    font-weight: 300;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2456,7 +2456,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .nav-search.aa-input::placeholder {
     color: var(--search-placeholder) !important;
     opacity: 0.7 !important;
-    font-style: normal !important;
+    font-style: italic !important;
   }
 
   .algolia-autocomplete,
@@ -2491,34 +2491,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     justify-content: space-between !important;
     flex-wrap: nowrap !important;
     gap: 1rem !important;
-  }
-
-  @media (max-width: 1200px) {
-    .algolia-autocomplete,
-    span.algolia-autocomplete {
-      width: 300px !important;
-      max-width: 300px !important;
-    }
-    
-    #distill-search,
-    .nav-search.aa-input {
-      width: 300px !important;
-      max-width: 300px !important;
-    }
-  }
-
-  @media (max-width: 900px) {
-    .algolia-autocomplete,
-    span.algolia-autocomplete {
-      width: 200px !important;
-      max-width: 200px !important;
-    }
-    
-    #distill-search,
-    .nav-search.aa-input {
-      width: 200px !important;
-      max-width: 200px !important;
-    }
   }
 
   span.algolia-autocomplete {
@@ -2592,7 +2564,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .aa-dropdown-menu .search-item,
   .aa-dropdown-menu .search-item * {
     font-size: 0.92rem !important;
-    font-weight: 500 !important;
+    font-weight: 300 !important;
     line-height: 1.5 !important;
   }
 
@@ -2618,7 +2590,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article>p:first-of-type:first-letter {
     font-size: 6.1rem;
     font-family: var(--heading-font);
-    font-weight: 600;
+    font-weight: 300;
     float: left;
     line-height: 0.75;
     margin: 0.05em 0.1em 0 0;
@@ -2696,32 +2668,119 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 0;
   }
 
-  .sourceCode .kw { color: #7928a6; font-weight: 600; }
-  .sourceCode .dt { color: #0d7680; }
-  .sourceCode .dv { color: #1a6b35; }
-  .sourceCode .bn { color: #1a6b35; }
-  .sourceCode .fl { color: #1a6b35; }
-  .sourceCode .ch { color: #9e4a08; }
-  .sourceCode .st { color: #9e4a08; }
-  .sourceCode .co { color: #8a8a8a; font-style: italic; }
-  .sourceCode .ot { color: #7928a6; }
-  .sourceCode .al { color: #c52828; font-weight: 600; }
-  .sourceCode .fu { color: #2558c2; }
-  .sourceCode .er { color: #c52828; font-weight: 600; }
-  .sourceCode .wa { color: #9e6b08; font-style: italic; }
-  .sourceCode .cn { color: #0d7680; }
-  .sourceCode .sc { color: #9e4a08; }
-  .sourceCode .vs { color: #9e4a08; }
-  .sourceCode .ss { color: #0d7680; }
-  .sourceCode .va { color: #1a1a1a; }
-  .sourceCode .cf { color: #7928a6; font-weight: 600; }
-  .sourceCode .op { color: #444444; }
-  .sourceCode .pp { color: #7928a6; }
-  .sourceCode .at { color: #2558c2; }
-  .sourceCode .do { color: #8a8a8a; font-style: italic; }
-  .sourceCode .an { color: #8a8a8a; font-style: italic; }
-  .sourceCode .cv { color: #8a8a8a; font-style: italic; }
-  .sourceCode .in { color: #8a8a8a; font-style: italic; }
+  .sourceCode .kw {
+    color: #7928a6;
+    font-weight: 300;
+  }
+
+  .sourceCode .dt {
+    color: #0d7680;
+  }
+
+  .sourceCode .dv {
+    color: #1a6b35;
+  }
+
+  .sourceCode .bn {
+    color: #1a6b35;
+  }
+
+  .sourceCode .fl {
+    color: #1a6b35;
+  }
+
+  .sourceCode .ch {
+    color: #9e4a08;
+  }
+
+  .sourceCode .st {
+    color: #9e4a08;
+  }
+
+  .sourceCode .co {
+    color: #8a8a8a;
+    font-style: italic;
+  }
+
+  .sourceCode .ot {
+    color: #7928a6;
+  }
+
+  .sourceCode .al {
+    color: #c52828;
+    font-weight: 300;
+  }
+
+  .sourceCode .fu {
+    color: #2558c2;
+  }
+
+  .sourceCode .er {
+    color: #c52828;
+    font-weight: 300;
+  }
+
+  .sourceCode .wa {
+    color: #9e6b08;
+    font-style: italic;
+  }
+
+  .sourceCode .cn {
+    color: #0d7680;
+  }
+
+  .sourceCode .sc {
+    color: #9e4a08;
+  }
+
+  .sourceCode .vs {
+    color: #9e4a08;
+  }
+
+  .sourceCode .ss {
+    color: #0d7680;
+  }
+
+  .sourceCode .va {
+    color: #1a1a1a;
+  }
+
+  .sourceCode .cf {
+    color: #7928a6;
+    font-weight: 300;
+  }
+
+  .sourceCode .op {
+    color: #444444;
+  }
+
+  .sourceCode .pp {
+    color: #7928a6;
+  }
+
+  .sourceCode .at {
+    color: #2558c2;
+  }
+
+  .sourceCode .do {
+    color: #8a8a8a;
+    font-style: italic;
+  }
+
+  .sourceCode .an {
+    color: #8a8a8a;
+    font-style: italic;
+  }
+
+  .sourceCode .cv {
+    color: #8a8a8a;
+    font-style: italic;
+  }
+
+  .sourceCode .in {
+    color: #8a8a8a;
+    font-style: italic;
+  }
 
   code {
     white-space: pre-wrap !important;
@@ -2742,7 +2801,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   th {
     background: var(--table-header-bg);
-    font-weight: 600;
+    font-weight: 300;
     color: var(--table-header-text);
     font-family: var(--heading-font);
     padding: 1rem;
@@ -2785,7 +2844,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   strong {
     color: var(--strong-text);
-    font-weight: 600;
+    font-weight: 300;
   }
 
   .ornament {
@@ -2825,7 +2884,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .proof::before,
   .definition::before,
   .example::before {
-    font-weight: 600;
+    font-weight: 300;
     font-family: var(--heading-font);
     font-size: 0.92rem;
     position: absolute;
@@ -2834,20 +2893,62 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     padding: 0 0.5rem;
   }
 
-  .theorem { background: var(--theorem-bg); border-color: var(--theorem-border); }
-  .theorem::before { content: "Theorem"; color: var(--theorem-border); background: var(--theorem-bg); }
+  .theorem {
+    background: var(--theorem-bg);
+    border-color: var(--theorem-border);
+  }
 
-  .remark { background: var(--remark-bg); border-color: var(--remark-border); }
-  .remark::before { content: "Remark"; color: var(--remark-border); background: var(--remark-bg); }
+  .theorem::before {
+    content: "Theorem";
+    color: var(--theorem-border);
+    background: var(--theorem-bg);
+  }
 
-  .proof { background: var(--proof-bg); border-color: var(--proof-border); margin: 1rem 0 2rem 0; }
-  .proof::before { content: "Proof"; color: var(--proof-border); background: var(--proof-bg); font-style: italic; }
+  .remark {
+    background: var(--remark-bg);
+    border-color: var(--remark-border);
+  }
 
-  .definition { background: var(--definition-bg); border-color: var(--definition-border); }
-  .definition::before { content: "Definition"; color: var(--definition-border); background: var(--definition-bg); }
+  .remark::before {
+    content: "Remark";
+    color: var(--remark-border);
+    background: var(--remark-bg);
+  }
 
-  .example { background: var(--example-bg); border-color: var(--example-border); }
-  .example::before { content: "Example"; color: var(--example-border); background: var(--example-bg); }
+  .proof {
+    background: var(--proof-bg);
+    border-color: var(--proof-border);
+    margin: 1rem 0 2rem 0;
+  }
+
+  .proof::before {
+    content: "Proof";
+    color: var(--proof-border);
+    background: var(--proof-bg);
+    font-style: italic;
+  }
+
+  .definition {
+    background: var(--definition-bg);
+    border-color: var(--definition-border);
+  }
+
+  .definition::before {
+    content: "Definition";
+    color: var(--definition-border);
+    background: var(--definition-bg);
+  }
+
+  .example {
+    background: var(--example-bg);
+    border-color: var(--example-border);
+  }
+
+  .example::before {
+    content: "Example";
+    color: var(--example-border);
+    background: var(--example-bg);
+  }
 
   ::selection {
     background: var(--selection-bg);
@@ -2912,19 +3013,35 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }
 
   /* Headings */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--heading-font);
-    font-weight: 600;
+    font-weight: 300;
     letter-spacing: -0.02em;
     color: var(--title-color);
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   }
 
-  d-article:not(.description) > h1 { font-size: 2.0rem !important; }
-  d-article:not(.description) > h2 { font-size: 1.6rem !important; }
-  d-article:not(.description) > h3 { font-size: 1.25rem !important; }
-  d-article:not(.description) > h4 { font-size: 1.05rem !important; }
+  d-article:not(.description)>h1 {
+    font-size: 2.0rem !important;
+  }
+
+  d-article:not(.description)>h2 {
+    font-size: 1.6rem !important;
+  }
+
+  d-article:not(.description)>h3 {
+    font-size: 1.25rem !important;
+  }
+
+  d-article:not(.description)>h4 {
+    font-size: 1.05rem !important;
+  }
 
 
   d-article h1 {
@@ -2934,11 +3051,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-bottom: 1.25rem !important;
   }
 
-  d-article:not(.description) > h2, 
-  d-article:not(.description) > h3, 
-  d-article:not(.description) > h4, 
-  d-article:not(.description) > h5, 
-  d-article:not(.description) > h6 {
+  d-article:not(.description)>h2,
+  d-article:not(.description)>h3,
+  d-article:not(.description)>h4,
+  d-article:not(.description)>h5,
+  d-article:not(.description)>h6 {
     border-bottom: none !important;
     box-shadow: none !important;
     padding-top: 0.5rem !important;
@@ -3279,12 +3396,14 @@ function init_posts_list() {
 <a href="posts/2025-07-14-dpbusd-explained/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":[]}</script>
 <div class="metadata">
-<div class="publishedDate">July 13, 2025</div>
+<div class="publishedDate">July 14, 2025</div>
 <div class="dt-authors">
 <div class="dt-author">aletheiaaaaa</div>
 </div>
 </div>
-<div class="thumbnail"></div>
+<div class="thumbnail">
+<img/>
+</div>
 <div class="description">
 <h2>dpbusd, explained</h2>
 <div class="dt-tags"></div>
