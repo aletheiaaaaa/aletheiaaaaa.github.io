@@ -2180,8 +2180,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
      Edit values in the right column for customization.
      All rows must end with a semi-colon.                      */
 
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;1,300&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap');
 
   :root {
     /* Primary color palette */
@@ -2267,6 +2267,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --footer-text: var(--color-cool-gray);
     --quote-icon-color: var(--color-medium);
 
+    /* Font weights — base scale */
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+
+    /* Semantic weight aliases */
+    --weight-heading: var(--weight-semibold);
+    --weight-dropcap: var(--weight-medium);
+    --weight-strong: var(--weight-semibold);
+    --weight-nav: var(--weight-semibold);
+    --weight-search: var(--weight-light);
+    --weight-table-header: var(--weight-regular);
+    --weight-label: var(--weight-regular);
+    --weight-code-emphasis: var(--weight-medium);
+
     /* Scrollbars */
     --scrollbar-thumb: #cccccc;
     --scrollbar-thumb-hover: #999999;
@@ -2348,7 +2364,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --hover-color: var(--nav-hover);
     --bkgd-color: var(--nav-bg);
     padding: 0.6rem 0 0.6rem 0;
-    font-weight: 300;
+    font-weight: var(--weight-nav);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2567,20 +2583,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .aa-dropdown-menu .search-item,
   .aa-dropdown-menu .search-item * {
     font-size: 0.92rem !important;
-    font-weight: 300 !important;
+    font-weight: var(--weight-search) !important;
     line-height: 1.5 !important;
   }
 
   .aa-dropdown-menu .search-item-description,
   .aa-dropdown-menu .search-item-description * {
     font-size: 0.78rem !important;
-    font-weight: normal !important;
+    font-weight: var(--weight-search) !important;
   }
 
 
   body {
     background-color: var(--bg-primary);
     color: var(--body-color);
+    font-weight: var(--weight-light);
     line-height: 1.0 !important;
   }
 
@@ -2593,7 +2610,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article>p:first-of-type:first-letter {
     font-size: 6.1rem;
     font-family: var(--heading-font);
-    font-weight: 300;
+    font-weight: var(--weight-dropcap);
     float: left;
     line-height: 0.75;
     margin: 0.05em 0.1em 0 0;
@@ -2673,7 +2690,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .sourceCode .kw {
     color: #7928a6;
-    font-weight: 300;
+    font-weight: var(--weight-code-emphasis);
   }
 
   .sourceCode .dt {
@@ -2711,7 +2728,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .sourceCode .al {
     color: #c52828;
-    font-weight: 300;
+    font-weight: var(--weight-code-emphasis);
   }
 
   .sourceCode .fu {
@@ -2720,7 +2737,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .sourceCode .er {
     color: #c52828;
-    font-weight: 300;
+    font-weight: var(--weight-code-emphasis);
   }
 
   .sourceCode .wa {
@@ -2750,7 +2767,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   .sourceCode .cf {
     color: #7928a6;
-    font-weight: 300;
+    font-weight: var(--weight-code-emphasis);
   }
 
   .sourceCode .op {
@@ -2804,7 +2821,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   th {
     background: var(--table-header-bg);
-    font-weight: 300;
+    font-weight: var(--weight-table-header);
     color: var(--table-header-text);
     font-family: var(--heading-font);
     padding: 1rem;
@@ -2847,7 +2864,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   strong {
     color: var(--strong-text);
-    font-weight: 300;
+    font-weight: var(--weight-strong);
   }
 
   .ornament {
@@ -2887,7 +2904,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   .proof::before,
   .definition::before,
   .example::before {
-    font-weight: 300;
+    font-weight: var(--weight-label);
     font-family: var(--heading-font);
     font-size: 0.92rem;
     position: absolute;
@@ -3023,7 +3040,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   h5,
   h6 {
     font-family: var(--heading-font);
-    font-weight: 300;
+    font-weight: var(--weight-heading);
     letter-spacing: -0.02em;
     color: var(--title-color);
     margin-top: 2.5rem;
