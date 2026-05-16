@@ -383,12 +383,12 @@ main { flex: 1; }
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  align-items: start;
 }
 
 .post-wrap {
   min-width: 0;
   padding: 4rem 0 7rem;
+  align-self: start;
 }
 
 /* ── Sticky TOC sidebar ── */
@@ -444,6 +444,7 @@ main { flex: 1; }
 }
 
 .toc-inner .toc a:hover { color: var(--accent-light); }
+.toc-inner .toc a.toc-active { color: var(--accent-light); font-weight: 400; }
 
 /* ── Post header ── */
 .post-header {
@@ -504,6 +505,10 @@ main { flex: 1; }
   font-weight: 300;
   line-height: 1.82;
 }
+
+.post-body h2,
+.post-body h3,
+.post-body h4 { scroll-margin-top: 6rem; }
 
 
 .post-body p { margin-bottom: 1.5rem; }
@@ -750,6 +755,46 @@ figcaption, .img-caption {
 .remark::before     { content: "remark";     color: var(--text-muted); }
 .example    { background: var(--surface-raised); border-color: var(--border); }
 .example::before    { content: "example";    color: var(--text-muted); }
+
+/* ── Post prev/next nav ── */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.post-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: inherit;
+  max-width: 46%;
+  transition: opacity 0.15s;
+}
+
+.post-nav-newer { margin-left: auto; text-align: right; }
+
+.post-nav-label {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.post-nav-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-heading);
+  line-height: 1.3;
+  transition: color 0.15s;
+}
+
+.post-nav-item:hover .post-nav-title { color: var(--accent-light); }
 
 /* ── Page (non-post) ── */
 .page-wrap {

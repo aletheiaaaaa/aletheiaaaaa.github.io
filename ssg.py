@@ -324,6 +324,28 @@ def render_page(title, body_html, cfg, root_rel='', math=False):
     }});
   }});
 }})();
+(function () {{
+  var headings = Array.from(document.querySelectorAll('.post-body h2, .post-body h3, .post-body h4'));
+  if (!headings.length) return;
+  var links = {{}};
+  document.querySelectorAll('.toc-inner a').forEach(function (a) {{
+    links[decodeURIComponent(a.getAttribute('href').slice(1))] = a;
+  }});
+  var cur = null;
+  function update() {{
+    var cut = window.scrollY + 112;
+    var next = null;
+    for (var i = 0; i < headings.length; i++) {{
+      if (headings[i].getBoundingClientRect().top + window.scrollY <= cut) next = headings[i].id;
+    }}
+    if (next === cur) return;
+    if (links[cur]) links[cur].classList.remove('toc-active');
+    cur = next;
+    if (links[cur]) links[cur].classList.add('toc-active');
+  }}
+  window.addEventListener('scroll', update, {{ passive: true }});
+  update();
+}})();
   </script>
 </body>
 </html>"""
@@ -463,7 +485,7 @@ def out_path_for_post(post):
 
 # ── Builders ──────────────────────────────────────────────────────────────────
 
-def build_post(post, cfg):
+def build_post(post, cfg, older=None, newer=None):
     text = post['path'].read_text()
     meta, body = parse_frontmatter(text)
 
@@ -505,10 +527,34 @@ def build_post(post, cfg):
             f'</div>'
             f'</aside>'
         )
+    post_nav = ''
+    if older or newer:
+        older_html = ''
+        newer_html = ''
+        if older:
+            older_title = older['meta'].get('title', older['slug'])
+            older_href  = f'../{older["slug"]}/index.html'
+            older_html  = (
+                f'<a class="post-nav-item post-nav-older" href="{older_href}">'
+                f'<span class="post-nav-label">← Previous</span>'
+                f'<span class="post-nav-title">{older_title}</span>'
+                f'</a>'
+            )
+        if newer:
+            newer_title = newer['meta'].get('title', newer['slug'])
+            newer_href  = f'../{newer["slug"]}/index.html'
+            newer_html  = (
+                f'<a class="post-nav-item post-nav-newer" href="{newer_href}">'
+                f'<span class="post-nav-label">Next →</span>'
+                f'<span class="post-nav-title">{newer_title}</span>'
+                f'</a>'
+            )
+        post_nav = f'<nav class="post-nav">{older_html}{newer_html}</nav>'
+
     body_html = (
         f'<div class="post-layout">'
         f'{toc_sidebar}'
-        f'<article class="post-wrap">{header}<div class="post-body">{content_html}</div></article>'
+        f'<article class="post-wrap">{header}<div class="post-body">{content_html}</div>{post_nav}</article>'
         f'</div>'
     )
 
@@ -670,9 +716,13 @@ def cmd_build():
         for md_file in sorted(PAGES_DIR.glob('*.md')):
             build_page(md_file, cfg, posts=posts)
 
-    # Build posts
-    for post in posts:
-        build_post(post, cfg)
+    # Build posts (sorted newest-first, so older = higher index, newer = lower index)
+    for i, post in enumerate(posts):
+        build_post(
+            post, cfg,
+            older=posts[i + 1] if i + 1 < len(posts) else None,
+            newer=posts[i - 1] if i > 0 else None,
+        )
 
     # Build index
     build_index(posts, cfg)

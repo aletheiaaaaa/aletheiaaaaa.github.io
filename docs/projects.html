@@ -113,6 +113,28 @@
     });
   });
 })();
+(function () {
+  var headings = Array.from(document.querySelectorAll('.post-body h2, .post-body h3, .post-body h4'));
+  if (!headings.length) return;
+  var links = {};
+  document.querySelectorAll('.toc-inner a').forEach(function (a) {
+    links[decodeURIComponent(a.getAttribute('href').slice(1))] = a;
+  });
+  var cur = null;
+  function update() {
+    var cut = window.scrollY + 112;
+    var next = null;
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].getBoundingClientRect().top + window.scrollY <= cut) next = headings[i].id;
+    }
+    if (next === cur) return;
+    if (links[cur]) links[cur].classList.remove('toc-active');
+    cur = next;
+    if (links[cur]) links[cur].classList.add('toc-active');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
   </script>
 </body>
 </html>
