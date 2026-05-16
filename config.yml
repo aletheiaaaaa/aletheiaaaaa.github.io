@@ -1,0 +1,37 @@
+title: "p > 0.05"
+description: "A blog about programming, technology, and other musings."
+author: "aletheiaaaaa"
+base_url: ""
+
+hero:
+  title: "p > 0.05"
+  tagline: "Programming, math, and ML — by Aletheia."
+  body: ""
+
+posts_label: "Latest Posts"
+
+projects:
+  - name: "Episteme"
+    description: "A high-performance alpha-beta UCI chess engine with neural network evaluation."
+    href: "https://github.com/aletheiaaaaa/Episteme"
+    lang: "C++"
+    links:
+      - text: "GitHub ↗"
+        href: "https://github.com/aletheiaaaaa/Episteme"
+  - name: "Mirage"
+    description: "Domain-specific zeroth-order optimization library with SIMD acceleration."
+    href: "https://github.com/aletheiaaaaa/Mirage"
+    lang: "C++"
+    links:
+      - text: "GitHub ↗"
+        href: "https://github.com/aletheiaaaaa/Mirage"
+
+nav:
+  - text: "Home"
+    href: "index.html"
+  - text: "Projects"
+    href: "projects.html"
+  - text: "Blog"
+    href: "blog.html"
+  - text: "About"
+    href: "about.html"

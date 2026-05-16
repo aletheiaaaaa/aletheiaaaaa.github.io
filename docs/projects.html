@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About — p > 0.05</title>
+  <title>Projects — p > 0.05</title>
   <link rel="stylesheet" href="style.css">
   
 </head>
@@ -15,17 +15,7 @@
     </nav>
   </header>
   <main>
-    <div class="page-wrap"><h1 class="page-title">About</h1><p>I'm Aletheia, a CS undergrad who writes chess engines for fun and ML code when forced to be productive.</p>
-<p>My main obsession is making things fast — figuring out how close you can get to the hardware, and what breaks when you do. That's led me through SIMD intrinsics, quantized arithmetic, and more failed AVX-512 experiments than I care to count. Sometimes the profiler agrees with me. Usually not.</p>
-<h2 id="right-now">Right now</h2>
-<p>I'm building <strong><a href="https://github.com/aletheiaaaaa/aletheia">Aletheia</a></strong>, a UCI chess engine with hand-rolled NNUE inference in C++. The interesting part is that <em>hand-rolled</em> isn't stylistic — competitive engines have to squeeze every cycle out of layer 1, which means writing the matrix multiplication yourself with <code>_mm512_dpbusd_epi32</code> and convincing yourself it's correct. This blog is where I write up the things I had to figure out the hard way.</p>
-<h2 id="stack">Stack</h2>
-<div class="tag-list" style="margin: 1.5rem 0 2rem;">
-<span class="tag">C++</span><span class="tag">Python</span><span class="tag">AVX-512</span><span class="tag">NNUE</span><span class="tag">quantization</span><span class="tag">chess engines</span><span class="tag">ML</span><span class="tag">systems</span>
-</div>
-
-<h2 id="find-me">Find me</h2>
-<p><a href="https://github.com/aletheiaaaaa">GitHub</a> &middot; <a href="mailto:carbon674@gmail.com">Email</a></p></div>
+    <div class="page-wrap"><h1 class="page-title">Projects</h1><div class="page-intro"><p>Things I've built, broken, and occasionally gotten to work.</p></div><div class="projects-page-grid"><a class="project-card project-card--full" href="https://github.com/aletheiaaaaa/Episteme" target="_blank" rel="noopener"><h3>Episteme</h3><p class="card-desc">A high-performance alpha-beta UCI chess engine with neural network evaluation.</p><div class="card-tags"><span class="card-tag">C++</span></div><span class="card-gh-link">GitHub ↗</span></a><a class="project-card project-card--full" href="https://github.com/aletheiaaaaa/Mirage" target="_blank" rel="noopener"><h3>Mirage</h3><p class="card-desc">Domain-specific zeroth-order optimization library with SIMD acceleration.</p><div class="card-tags"><span class="card-tag">C++</span></div><span class="card-gh-link">GitHub ↗</span></a></div></div>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
