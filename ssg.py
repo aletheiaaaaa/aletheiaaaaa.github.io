@@ -217,12 +217,14 @@ def render_page(title, body_html, cfg, root_rel='', math=False):
   <title>{full_title}</title>
   <link rel="stylesheet" href="{root_rel}style.css">
   {math_snippet}
+  <script>(function(){{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}})();</script>
 </head>
 <body>
   <header class="site-header">
     <nav class="site-nav">
       <div class="nav-brand"><a href="{root_rel}index.html">{brand}</a></div>
       <ul class="nav-links">{nav_items_html(cfg, root_rel)}</ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">◑</button>
     </nav>
   </header>
   <main>
@@ -235,6 +237,20 @@ def render_page(title, body_html, cfg, root_rel='', math=False):
     </div>
   </footer>
   <script>
+(function () {{
+  var btn = document.getElementById('theme-toggle');
+  if (btn) {{
+    function _theme() {{
+      return document.documentElement.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    }}
+    btn.addEventListener('click', function () {{
+      var next = _theme() === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }});
+  }}
+}})();
 (function () {{
   var C = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#%&*_+-=<>[]{{}}|;:.,?/\\~^`';
   function rand() {{ return C[Math.floor(Math.random() * C.length)]; }}
@@ -531,7 +547,7 @@ def build_index(posts, cfg):
         hero_html += '</section>'
 
     items = ''
-    for p in posts[:4]:
+    for p in posts[:3]:
         title     = p['meta'].get('title', p['slug'])
         desc      = p['meta'].get('description', p['meta'].get('subtitle', ''))
         date_str  = p['date'].strftime('%b %-d, %Y') if p['date'].year > 1970 else ''

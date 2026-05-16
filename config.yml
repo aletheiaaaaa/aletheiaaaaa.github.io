@@ -27,8 +27,6 @@ projects:
         href: "https://github.com/aletheiaaaaa/Mirage"
 
 nav:
-  - text: "Home"
-    href: "index.html"
   - text: "Projects"
     href: "projects.html"
   - text: "Blog"
