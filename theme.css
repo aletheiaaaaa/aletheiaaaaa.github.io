@@ -266,7 +266,7 @@ main { flex: 1; }
 }
 
 .project-card--full {
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/3;
   padding: 1.1rem;
 }
 
@@ -945,3 +945,15 @@ html[data-theme="dark"] .codehilite .nd  { color: #67e8f9; }
 html[data-theme="dark"] .codehilite .ne  { color: #fca5a5; }
 html[data-theme="dark"] .codehilite .o,  html[data-theme="dark"] .codehilite .ow  { color: #71717a; }
 html[data-theme="dark"] .codehilite .hll { background: rgba(217, 70, 239, 0.1); }
+
+/* ── Post images: invert dark-mode diagrams for light mode ── */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .post-body img {
+    filter: invert(1) hue-rotate(180deg);
+    border-color: transparent;
+  }
+}
+html[data-theme="light"] .post-body img {
+  filter: invert(1) hue-rotate(180deg);
+  border-color: transparent;
+}
