@@ -15,13 +15,12 @@
     </nav>
   </header>
   <main>
-    <div class="page-wrap"><h1 class="page-title">About</h1><p>I'm Aletheia, a CS undergrad who writes chess engines for fun and ML code when forced to be productive.</p>
-<p>My main obsession is making things fast — figuring out how close you can get to the hardware, and what breaks when you do. That's led me through SIMD intrinsics, quantized arithmetic, and more failed AVX-512 experiments than I care to count. Sometimes the profiler agrees with me. Usually not.</p>
+    <div class="page-wrap"><h1 class="page-title">About</h1><p>I'm Aletheia (pseudonymous), a CS undergrad that really finds anything interesting, but is currently obsessed with machine learning and high-performance computing! When I'm not failing to understand a machine learning paper or "accidentally" pessimizing a scalar implementation, you can find me listening to classical music, or more likely just hanging out on online forums. I hope you enjoy!</p>
 <h2 id="right-now">Right now</h2>
-<p>I'm building <strong><a href="https://github.com/aletheiaaaaa/aletheia">Aletheia</a></strong>, a UCI chess engine with hand-rolled NNUE inference in C++. The interesting part is that <em>hand-rolled</em> isn't stylistic — competitive engines have to squeeze every cycle out of layer 1, which means writing the matrix multiplication yourself with <code>_mm512_dpbusd_epi32</code> and convincing yourself it's correct. This blog is where I write up the things I had to figure out the hard way.</p>
+<p>I'm building <strong><a href="https://github.com/aletheiaaaaa/Mirage">Mirage</a></strong>, a custom zeroth-order optimization library for <strong><a href="https://github.com/aletheiaaaaa/Episteme">Episteme</a></strong>, a superhuman UCI chess engine. Currently, Episteme (like all other good engines) uses a neural net trained to regress the scores of labelled positions, but I'd like to explore training the net directly on games themselves. This requires estimating gradients through a nondifferentiable win-draw-loss score, and existing frameworks (under the name "SPSA") don't allow for that sort of work at this scale. This library is an experiment in changing that, I don't know if it will work!</p>
 <h2 id="stack">Stack</h2>
 <div class="tag-list" style="margin: 1.5rem 0 2rem;">
-<span class="tag">C++</span><span class="tag">Python</span><span class="tag">AVX-512</span><span class="tag">NNUE</span><span class="tag">quantization</span><span class="tag">chess engines</span><span class="tag">ML</span><span class="tag">systems</span>
+<span class="tag">C++</span><span class="tag">Python</span><span class="tag">SIMD</span><span class="tag">multithreading</span><span class="tag">ML</span><span class="tag">systems</span>
 </div>
 
 <h2 id="find-me">Find me</h2>
