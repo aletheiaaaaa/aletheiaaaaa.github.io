@@ -44,8 +44,10 @@
     }
     btn.addEventListener('click', function () {
       var next = _theme() === 'light' ? 'dark' : 'light';
+      document.documentElement.classList.add('theme-transitioning');
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      setTimeout(function () { document.documentElement.classList.remove('theme-transitioning'); }, 400);
     });
   }
 })();

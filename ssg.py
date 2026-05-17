@@ -246,8 +246,10 @@ def render_page(title, body_html, cfg, root_rel='', math=False):
     }}
     btn.addEventListener('click', function () {{
       var next = _theme() === 'light' ? 'dark' : 'light';
+      document.documentElement.classList.add('theme-transitioning');
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      setTimeout(function () {{ document.documentElement.classList.remove('theme-transitioning'); }}, 400);
     }});
   }}
 }})();
