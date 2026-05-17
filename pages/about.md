@@ -6,7 +6,7 @@ I'm Aletheia (pseudonymous), a CS undergrad that really finds anything interesti
 
 ## Right now
 
-I'm building **[Mirage](https://github.com/aletheiaaaaa/Mirage)**, a custom zeroth-order optimization library for **[Episteme](https://github.com/aletheiaaaaa/Episteme)**, a superhuman UCI chess engine. Currently, Episteme (like most good engines) uses a neural net trained to regress the scores of labelled positions, but I'd like to explore training the net directly on games themselves. This requires estimating gradients through a nondifferentiable win-draw-loss score, and existing frameworks (under the name "SPSA") don't allow for that sort of work at this scale. This library is an experiment in changing that, I don't know if it will work!
+I'm building **[Mirage](https://github.com/aletheiaaaaa/Mirage)**, a custom zeroth-order optimization library for **[Episteme](https://github.com/aletheiaaaaa/Episteme)**, a superhuman UCI chess engine. Currently, Episteme (like other modern engines) uses a neural net trained to regress the scores of labelled positions, but I'd like to explore training the net directly on games themselves. This requires estimating gradients through a nondifferentiable win-draw-loss score, and existing frameworks (under the name "SPSA") don't allow for that sort of work at this scale. This library is an experiment in changing that, I don't know if it will work!
 
 ## Stack
 
