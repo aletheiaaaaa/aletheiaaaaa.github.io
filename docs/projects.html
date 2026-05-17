@@ -17,7 +17,7 @@
     </nav>
   </header>
   <main>
-    <div class="page-wrap"><h1 class="page-title">Projects</h1><div class="page-intro"><p>Things I've built, broken, and occasionally gotten to work.</p></div><div class="projects-page-grid"><a class="project-card project-card--full" href="https://github.com/aletheiaaaaa/Episteme" target="_blank" rel="noopener"><h3>Episteme</h3><p class="card-desc">A high-performance alpha-beta UCI chess engine with neural network evaluation.</p><div class="card-tags"><span class="card-tag">C++</span></div><span class="card-gh-link">GitHub ↗</span></a><a class="project-card project-card--full" href="https://github.com/aletheiaaaaa/Mirage" target="_blank" rel="noopener"><h3>Mirage</h3><p class="card-desc">Domain-specific zeroth-order optimization library with SIMD acceleration.</p><div class="card-tags"><span class="card-tag">C++</span></div><span class="card-gh-link">GitHub ↗</span></a></div></div>
+    <div class="page-wrap"><h1 class="page-title">Projects</h1><div class="page-intro"><p>Things I've built, broken, and occasionally gotten to work.</p></div><div class="projects-page-grid"><a class="project-card project-card--full" href="https://github.com/aletheiaaaaa/Episteme" target="_blank" rel="noopener"><h3>Episteme</h3><p class="card-desc">A high-performance alpha-beta UCI chess engine with neural network evaluation.</p><div class="card-footer"><span class="card-tag">C++</span><span class="card-gh-link">GitHub ↗</span></div></a><a class="project-card project-card--full" href="https://github.com/aletheiaaaaa/Mirage" target="_blank" rel="noopener"><h3>Mirage</h3><p class="card-desc">Domain-specific zeroth-order optimization library with SIMD acceleration.</p><div class="card-footer"><span class="card-tag">C++</span><span class="card-gh-link">GitHub ↗</span></div></a></div></div>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -54,6 +54,7 @@
         while (p) {
           if (SKIP.has(p.tagName.toLowerCase())) return NodeFilter.FILTER_REJECT;
           if (p.getAttribute('aria-hidden') === 'true') return NodeFilter.FILTER_REJECT;
+          if (p.classList && p.classList.contains('hero-type')) return NodeFilter.FILTER_REJECT;
           p = p.parentElement;
         }
         if (!n.textContent.trim()) return NodeFilter.FILTER_SKIP;
@@ -76,6 +77,17 @@
           main.style.transform = 'translate(0,0)';
         });
       });
+    }
+
+    var heroType = document.querySelector('.hero-type');
+    if (heroType) {
+      var _full = heroType.textContent;
+      heroType.textContent = '';
+      var _i = 0;
+      function _typeNext() {
+        if (_i < _full.length) { heroType.textContent = _full.slice(0, ++_i); setTimeout(_typeNext, 110); }
+      }
+      setTimeout(_typeNext, 80);
     }
 
     var nodes = walk(document.body);

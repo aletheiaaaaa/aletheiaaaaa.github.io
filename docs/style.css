@@ -246,7 +246,12 @@ main { flex: 1; }
   overflow: hidden;
 }
 
-.project-card .card-tags { margin-top: 0.6rem; }
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
 
 .project-card .card-tag {
   font-size: 0.62rem;
@@ -276,15 +281,13 @@ main { flex: 1; }
 .project-card--full .card-desc { font-size: 0.72rem; -webkit-line-clamp: 4; }
 
 .card-gh-link {
-  display: block;
   font-size: 0.65rem;
   font-weight: 500;
   color: var(--accent);
-  margin-top: 0.6rem;
   transition: color 0.15s;
 }
 
-.project-card--full:hover .card-gh-link { color: var(--accent-light); }
+.project-card:hover .card-gh-link { color: var(--accent-light); }
 
 .page-intro {
   color: var(--text-muted);

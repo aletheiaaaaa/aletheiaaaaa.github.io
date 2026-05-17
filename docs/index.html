@@ -17,13 +17,13 @@
     </nav>
   </header>
   <main>
-    <section class="content-width hero"><h1>p > 0.05<span class="cursor" aria-hidden="true">▎</span></h1><p class="hero-tagline">Programming, math, and ML — by Aletheia.</p></section><div class="content-width"><div class="index-grid"><div class="posts-section"><div class="section-row"><span class="section-label">Latest Posts</span><a class="section-link" href="blog.html">all →</a></div><div class="posts-list">
+    <section class="content-width hero"><h1><span class="hero-type">p > 0.05</span><span class="cursor" aria-hidden="true">▎</span></h1><p class="hero-tagline">Programming, math, and ML — by Aletheia.</p></section><div class="content-width"><div class="index-grid"><div class="posts-section"><div class="section-row"><span class="section-label">Latest Posts</span><a class="section-link" href="blog.html">all →</a></div><div class="posts-list">
 <a class="post-item" href="posts/2025-07-14-dpbusd-explained/index.html">
   <div class="post-meta"><span>Jul 14, 2025</span><span class="sep">&middot;</span><span>7 min read</span></div>
   <h3>dpbusd, explained</h3>
   <p class="post-desc">Demystifying multi-layer inference.</p>
   <div class="tag-list"><span class="tag">simd</span><span class="tag">nnue</span><span class="tag">chess</span><span class="tag">cpp</span></div>
-</a></div></div><div class="projects-col"><div class="section-row"><span class="section-label">Projects</span><a class="section-link" href="projects.html">all →</a></div><div class="projects-grid"><a class="project-card" href="https://github.com/aletheiaaaaa/Episteme" target="_blank" rel="noopener"><h3>Episteme</h3><p class="card-desc">A high-performance alpha-beta UCI chess engine with neural network evaluation.</p><div class="card-tags"><span class="card-tag">C++</span></div></a><a class="project-card" href="https://github.com/aletheiaaaaa/Mirage" target="_blank" rel="noopener"><h3>Mirage</h3><p class="card-desc">Domain-specific zeroth-order optimization library with SIMD acceleration.</p><div class="card-tags"><span class="card-tag">C++</span></div></a></div></div></div></div>
+</a></div></div><div class="projects-col"><div class="section-row"><span class="section-label">Projects</span><a class="section-link" href="projects.html">all →</a></div><div class="projects-grid"><a class="project-card" href="https://github.com/aletheiaaaaa/Episteme" target="_blank" rel="noopener"><h3>Episteme</h3><p class="card-desc">A high-performance alpha-beta UCI chess engine with neural network evaluation.</p><div class="card-footer"><span class="card-tag">C++</span><span class="card-gh-link">GitHub ↗</span></div></a><a class="project-card" href="https://github.com/aletheiaaaaa/Mirage" target="_blank" rel="noopener"><h3>Mirage</h3><p class="card-desc">Domain-specific zeroth-order optimization library with SIMD acceleration.</p><div class="card-footer"><span class="card-tag">C++</span><span class="card-gh-link">GitHub ↗</span></div></a></div></div></div></div>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -60,6 +60,7 @@
         while (p) {
           if (SKIP.has(p.tagName.toLowerCase())) return NodeFilter.FILTER_REJECT;
           if (p.getAttribute('aria-hidden') === 'true') return NodeFilter.FILTER_REJECT;
+          if (p.classList && p.classList.contains('hero-type')) return NodeFilter.FILTER_REJECT;
           p = p.parentElement;
         }
         if (!n.textContent.trim()) return NodeFilter.FILTER_SKIP;
@@ -82,6 +83,17 @@
           main.style.transform = 'translate(0,0)';
         });
       });
+    }
+
+    var heroType = document.querySelector('.hero-type');
+    if (heroType) {
+      var _full = heroType.textContent;
+      heroType.textContent = '';
+      var _i = 0;
+      function _typeNext() {
+        if (_i < _full.length) { heroType.textContent = _full.slice(0, ++_i); setTimeout(_typeNext, 110); }
+      }
+      setTimeout(_typeNext, 80);
     }
 
     var nodes = walk(document.body);

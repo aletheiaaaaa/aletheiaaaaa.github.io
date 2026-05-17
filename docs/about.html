@@ -63,6 +63,7 @@
         while (p) {
           if (SKIP.has(p.tagName.toLowerCase())) return NodeFilter.FILTER_REJECT;
           if (p.getAttribute('aria-hidden') === 'true') return NodeFilter.FILTER_REJECT;
+          if (p.classList && p.classList.contains('hero-type')) return NodeFilter.FILTER_REJECT;
           p = p.parentElement;
         }
         if (!n.textContent.trim()) return NodeFilter.FILTER_SKIP;
@@ -85,6 +86,17 @@
           main.style.transform = 'translate(0,0)';
         });
       });
+    }
+
+    var heroType = document.querySelector('.hero-type');
+    if (heroType) {
+      var _full = heroType.textContent;
+      heroType.textContent = '';
+      var _i = 0;
+      function _typeNext() {
+        if (_i < _full.length) { heroType.textContent = _full.slice(0, ++_i); setTimeout(_typeNext, 110); }
+      }
+      setTimeout(_typeNext, 80);
     }
 
     var nodes = walk(document.body);

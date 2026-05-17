@@ -265,6 +265,7 @@ def render_page(title, body_html, cfg, root_rel='', math=False):
         while (p) {{
           if (SKIP.has(p.tagName.toLowerCase())) return NodeFilter.FILTER_REJECT;
           if (p.getAttribute('aria-hidden') === 'true') return NodeFilter.FILTER_REJECT;
+          if (p.classList && p.classList.contains('hero-type')) return NodeFilter.FILTER_REJECT;
           p = p.parentElement;
         }}
         if (!n.textContent.trim()) return NodeFilter.FILTER_SKIP;
@@ -287,6 +288,17 @@ def render_page(title, body_html, cfg, root_rel='', math=False):
           main.style.transform = 'translate(0,0)';
         }});
       }});
+    }}
+
+    var heroType = document.querySelector('.hero-type');
+    if (heroType) {{
+      var _full = heroType.textContent;
+      heroType.textContent = '';
+      var _i = 0;
+      function _typeNext() {{
+        if (_i < _full.length) {{ heroType.textContent = _full.slice(0, ++_i); setTimeout(_typeNext, 110); }}
+      }}
+      setTimeout(_typeNext, 80);
     }}
 
     var nodes = walk(document.body);
@@ -378,33 +390,24 @@ def projects_grid_html(projects, full=False):
         href  = proj.get('href', '#')
         lang  = proj.get('lang', '')
         links = proj.get('links', [])
-        lang_tag = (
-            f'<div class="card-tags"><span class="card-tag">{lang}</span></div>'
-            if lang else ''
+
+        lang_tag = f'<span class="card-tag">{lang}</span>' if lang else ''
+
+        gh_label = ''
+        for lnk in links:
+            if 'github' in lnk.get('href', '').lower():
+                gh_label = '<span class="card-gh-link">GitHub ↗</span>'
+                break
+
+        footer = f'<div class="card-footer">{lang_tag}{gh_label}</div>' if (lang_tag or gh_label) else ''
+        card_class = 'project-card project-card--full' if full else 'project-card'
+        cards += (
+            f'<a class="{card_class}" href="{href}" target="_blank" rel="noopener">'
+            f'<h3>{name}</h3>'
+            f'<p class="card-desc">{desc}</p>'
+            f'{footer}'
+            f'</a>'
         )
-        if full:
-            gh_label = ''
-            for lnk in links:
-                if 'github' in lnk.get('href', '').lower():
-                    gh_label = f'<span class="card-gh-link">GitHub ↗</span>'
-                    break
-            cards += (
-                f'<a class="project-card project-card--full" href="{href}" '
-                f'target="_blank" rel="noopener">'
-                f'<h3>{name}</h3>'
-                f'<p class="card-desc">{desc}</p>'
-                f'{lang_tag}'
-                f'{gh_label}'
-                f'</a>'
-            )
-        else:
-            cards += (
-                f'<a class="project-card" href="{href}" target="_blank" rel="noopener">'
-                f'<h3>{name}</h3>'
-                f'<p class="card-desc">{desc}</p>'
-                f'{lang_tag}'
-                f'</a>'
-            )
     grid_class = 'projects-page-grid' if full else 'projects-grid'
     return f'<div class="{grid_class}">{cards}</div>'
 
@@ -584,7 +587,7 @@ def build_index(posts, cfg):
         h_title    = hero.get('title', cfg['title'])
         h_tagline  = hero.get('tagline', hero.get('subtitle', ''))
         h_body     = hero.get('body', cfg.get('description', ''))
-        brand      = f'{h_title}<span class="cursor" aria-hidden="true">▎</span>'
+        brand      = f'<span class="hero-type">{h_title}</span><span class="cursor" aria-hidden="true">▎</span>'
         hero_html  = f'<section class="content-width hero"><h1>{brand}</h1>'
         if h_tagline:
             hero_html += f'<p class="hero-tagline">{h_tagline}</p>'
