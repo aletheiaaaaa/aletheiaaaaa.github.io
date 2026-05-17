@@ -124,7 +124,8 @@ main { flex: 1; }
 
 /* ── Hero ── */
 .hero {
-  padding: 6rem 0 4rem;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
 .hero h1 {
@@ -852,7 +853,6 @@ footer.site-footer {
   .post-layout   { grid-template-columns: 1fr; gap: 0; }
   .post-toc      { display: none; }
   .index-grid    { grid-template-columns: 1fr; }
-  .projects-col  { display: none; }
   .projects-page-grid { grid-template-columns: 1fr; }
 }
 
@@ -860,7 +860,7 @@ footer.site-footer {
   nav.site-nav        { padding: 0 1rem; }
   .content-width      { padding: 0 1rem; }
   .page-wrap          { padding: 2.5rem 1rem 5rem; }
-  .hero               { padding: 3rem 0 2rem; }
+  .hero               { padding-top: 3rem; padding-bottom: 2rem; }
   .projects-page-grid { grid-template-columns: 1fr; }
   .footer-inner       { flex-direction: column; text-align: center; }
 }
