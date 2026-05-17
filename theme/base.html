@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>%%TITLE%%</title>
+  <link rel="stylesheet" href="%%ROOT_REL%%style.css">
+  %%MATH%%
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <div class="nav-brand"><a href="%%ROOT_REL%%index.html">%%NAV_BRAND%%</a></div>
+      <ul class="nav-links">%%NAV_ITEMS%%</ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">◑</button>
+    </nav>
+  </header>
+  <main>
+    %%BODY%%
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>%%FOOTER_LEFT%%</span>
+      <nav class="footer-links">%%FOOTER_LINKS%%</nav>
+    </div>
+  </footer>
+  <script src="%%ROOT_REL%%main.js"></script>
+</body>
+</html>
