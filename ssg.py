@@ -208,7 +208,7 @@ def _load_base_template():
     return _BASE_TEMPLATE
 
 
-def render_page(title, body_html, cfg, root_rel="", math=False):
+def render_page(title, body_html, cfg, root_rel="", math=False, page_id=""):
     math_snippet = ""
     if math:
         math_snippet = (
@@ -239,6 +239,7 @@ def render_page(title, body_html, cfg, root_rel="", math=False):
         .replace("%%BODY%%", body_html)
         .replace("%%FOOTER_LEFT%%", footer_left)
         .replace("%%FOOTER_LINKS%%", footer_links)
+        .replace("%%PAGE_ID%%", page_id)
     )
 
 
@@ -520,7 +521,7 @@ def build_index(posts, cfg):
 
     index_grid = f'<div class="content-width"><div class="index-grid">{posts_col}{projects_col}</div></div>'
     body = hero_html + index_grid
-    html = render_page(cfg["title"], body, cfg, root_rel="")
+    html = render_page(cfg["title"], body, cfg, root_rel="", page_id="index")
     (OUT_DIR / "index.html").write_text(html)
     print(f"  index → index.html")
 

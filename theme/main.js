@@ -43,6 +43,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    var isIndex = document.body.dataset.page === 'index';
+    var firstVisit = !sessionStorage.getItem('scramble-done');
+    if (isIndex) sessionStorage.setItem('scramble-done', '1');
+    if (!isIndex || !firstVisit) return;
+
     var main = document.querySelector('main');
     if (main) {
       main.style.cssText = 'opacity:0;transform:translate(-10px,-10px);transition:opacity 0.45s ease,transform 0.45s ease';
