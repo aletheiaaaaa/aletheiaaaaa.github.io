@@ -21,7 +21,7 @@
   date: none,
   read-time: none,
   tags: none,
-  font: "Fira Code",
+  font: "Fira Sans",
   size: 10pt,
   body,
 ) = {
@@ -61,11 +61,11 @@
       v(0.8em, weak: true)
       block(above: 3.2em, below: 1.3em, text(size: 1.25em, weight: 600, it.body))
     } else if it.level == 2 {
-      block(above: 2.8em, below: 1.0em, text(size: 1.1em, weight: 500, it.body))
+      block(above: 2.8em, below: 1.2em, text(size: 1.1em, weight: 500, it.body))
     } else if it.level == 3 {
-      block(above: 2.2em, below: 0.85em, text(size: 1em, weight: 500, it.body))
+      block(above: 2.4em, below: 1.1em, text(size: 1em, weight: 500, it.body))
     } else {
-      block(above: 1.8em, below: 0.65em, text(size: 1em, weight: 400, emph(it.body)))
+      block(above: 2.0em, below: 0.95em, text(size: 1em, weight: 400, emph(it.body)))
     }
   }
   show strong: set text(fill: _heading, weight: 500)
