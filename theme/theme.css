@@ -516,6 +516,8 @@ main { flex: 1; }
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.82;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .post-body h2,
