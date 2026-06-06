@@ -1263,7 +1263,7 @@ main {
 }
 
 body[data-page="index"] main {
-  animation-duration: 5s;
+  animation-duration: 10s;
 }
 
 /* ── Responsive ── */
