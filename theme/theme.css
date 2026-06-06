@@ -987,8 +987,6 @@ tr:last-child td {
 /* ── Images ── */
 img {
   max-width: 100%;
-  border-radius: 6px;
-  border: 1px solid var(--border);
   display: block;
   margin: 2rem auto;
 }
