@@ -12,32 +12,6 @@
   setTimeout(typeNext, 200);
 })();
 
-/* ── Page transition: fade out on navigation ── */
-(function () {
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto') ||
-        a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
-    e.preventDefault();
-    var main = document.querySelector('main');
-    var heroType = document.querySelector('.hero-type');
-    if (heroType && heroType.textContent.length > 0) {
-      var text = heroType.textContent;
-      var i = text.length;
-      var perChar = 300 / (i || 1);
-      main.style.cssText = 'animation:none;opacity:0;transition:opacity 0.35s ease';
-      (function untype() {
-        if (i > 0) { heroType.textContent = text.slice(0, --i); setTimeout(untype, perChar); }
-      })();
-      setTimeout(function () { window.location.href = href; }, 360);
-    } else {
-      main.style.cssText = 'animation:none;opacity:0;transition:opacity 0.05s ease';
-      setTimeout(function () { window.location.href = href; }, 60);
-    }
-  });
-})();
 
 /* ── TOC drawer (mobile) ── */
 (function () {
