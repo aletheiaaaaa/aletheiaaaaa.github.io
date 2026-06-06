@@ -11,8 +11,9 @@ Source layout:
   config.yml                   site metadata + nav
   pages/about.md               static pages
   _posts/YYYY-MM-DD-slug/      post directory
-    index.md                   post content (YAML frontmatter + markdown)
-    assets/                    images, diagrams, etc.
+    index.Rmd                  post content (YAML frontmatter + R Markdown)
+    figures/                   knitr figure output (auto-generated)
+    assets/                    static images, etc.
 
 Markdown extras:
   :::theorem / :::proof / :::definition / :::remark / :::example / :::lemma
@@ -21,7 +22,7 @@ Markdown extras:
   ```lang  fenced code         → syntax-highlighted via Pygments
 """
 
-import os, sys, re, json, shutil, datetime, http.server, socketserver
+import os, sys, re, json, shutil, datetime, http.server, socketserver, subprocess
 from pathlib import Path
 import yaml
 import markdown
@@ -142,6 +143,59 @@ def render_markdown(text):
     return html, md.toc
 
 
+# ── Rmd support ───────────────────────────────────────────────────────────────
+
+
+def knit_rmd(rmd_file: Path) -> Path:
+    """Run knitr on an .Rmd file and return the path to the output .md file.
+
+    HTML widgets (plotly, leaflet, etc.) are saved as PNG screenshots via
+    webshot2 — install it in R with: install.packages('webshot2')
+    Figures go into figures/ inside the post directory.
+    """
+    out_md = rmd_file.parent / (rmd_file.stem + ".knit.md")
+    r_script = (
+        "knitr::opts_chunk$set("
+        "  dev = 'png',"
+        "  fig.path = 'figures/',"
+        "  screenshot.opts = list(delay = 2)"
+        ");"
+        f"knitr::knit('{rmd_file.name}', output = '{out_md.name}')"
+    )
+    result = subprocess.run(
+        ["Rscript", "--vanilla", "-e", r_script],
+        cwd=rmd_file.parent,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"knitr failed for {rmd_file.name}:\n{result.stderr}")
+    text = out_md.read_text()
+    out_md.unlink()
+    return text
+
+
+def extract_asides(html: str):
+    """Pull <aside>…</aside> and <div class="aside">…</div> out of html.
+
+    Returns (cleaned_html, [aside_html, ...]).
+    """
+    asides = []
+
+    def _collect(m):
+        asides.append(m.group(0))
+        return ""
+
+    html = re.sub(r"<aside\b[^>]*>.*?</aside>", _collect, html, flags=re.DOTALL)
+    html = re.sub(
+        r'<div\s+class=["\']aside["\'][^>]*>.*?</div>',
+        _collect,
+        html,
+        flags=re.DOTALL,
+    )
+    return html, asides
+
+
 def has_math(text):
     return bool(re.search(r"\$", text))
 
@@ -219,7 +273,7 @@ def render_page(title, body_html, cfg, root_rel="", math=False, page_id=""):
         )
     site_title = cfg["title"]
     full_title = f"{title} — {site_title}" if title != site_title else site_title
-    brand = f'{site_title}<span class="cursor" aria-hidden="true">▎</span>'
+    brand = site_title
     year = datetime.date.today().year
     author = cfg.get("author", "")
     footer_left = f"&copy; {year} {site_title}"
@@ -327,17 +381,16 @@ def find_posts():
         if not re.match(r"^\d{4}-\d{2}-\d{2}", slug):
             continue
 
-        md_file = entry / "index.md"
-        if not md_file.exists():
-            candidates = sorted(entry.glob("*.md"))
+        rmd_file = entry / "index.Rmd"
+        if rmd_file.exists():
+            source_file = rmd_file
+        else:
+            candidates = sorted(entry.glob("*.Rmd"))
             if not candidates:
                 continue
-            md_file = candidates[0]
+            source_file = candidates[0]
 
-        if not md_file.exists():
-            continue
-
-        text = md_file.read_text()
+        text = source_file.read_text()
         meta, _ = parse_frontmatter(text)
 
         date = None
@@ -356,8 +409,8 @@ def find_posts():
         posts.append(
             {
                 "slug": slug,
-                "path": md_file,
-                "dir": md_file.parent,
+                "path": source_file,
+                "dir": source_file.parent,
                 "meta": meta,
                 "date": date,
             }
@@ -378,10 +431,11 @@ def out_path_for_post(post):
 
 
 def build_post(post, cfg, older=None, newer=None):
-    text = post["path"].read_text()
+    text = knit_rmd(post["path"])
     meta, body = parse_frontmatter(text)
 
     content_html, toc_html = render_markdown(body)
+    content_html, aside_blocks = extract_asides(content_html)
     math = has_math(body)
 
     title = meta.get("title", post["slug"])
@@ -441,18 +495,31 @@ def build_post(post, cfg, older=None, newer=None):
             )
         post_nav = f'<nav class="post-nav">{older_html}{newer_html}</nav>'
 
+    asides_col = ""
+    if aside_blocks:
+        asides_inner = "".join(aside_blocks)
+        asides_col = f'<div class="post-asides">{asides_inner}</div>'
+
+    toc_toggle = ""
+    if toc_sidebar:
+        toc_toggle = '<button class="toc-toggle" id="toc-toggle" aria-label="Table of contents" aria-expanded="false">§</button>'
+
     body_html = (
         f'<div class="post-layout">'
         f"{toc_sidebar}"
         f'<article class="post-wrap">{header}<div class="post-body">{content_html}</div>{post_nav}</article>'
+        f"{asides_col}"
         f"</div>"
+        f"{toc_toggle}"
     )
 
     out_dir, root_rel = out_path_for_post(post)
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    _skip_names = {post["path"].name}
+
     for asset in post["dir"].iterdir():
-        if asset.name == "index.md":
+        if asset.name in _skip_names:
             continue
         dst = out_dir / asset.name
         if asset.is_dir():
@@ -474,7 +541,7 @@ def build_index(posts, cfg):
         h_title = hero.get("title", cfg["title"])
         h_tagline = hero.get("tagline", hero.get("subtitle", ""))
         h_body = hero.get("body", cfg.get("description", ""))
-        brand = f'<span class="hero-type">{h_title}</span><span class="cursor" aria-hidden="true">▎</span>'
+        brand = f'<span class="hero-type">{h_title}</span>'
         hero_html = f'<section class="content-width hero"><h1>{brand}</h1>'
         if h_tagline:
             hero_html += f'<p class="hero-tagline">{h_tagline}</p>'
@@ -645,11 +712,11 @@ def cmd_new(title):
     name = f"{today}-{slug}"
     post_dir = PAGES_DIR / name
     post_dir.mkdir(parents=True, exist_ok=True)
-    md_file = post_dir / "index.md"
-    if md_file.exists():
-        print(f"Already exists: {md_file}")
+    rmd_file = post_dir / "index.Rmd"
+    if rmd_file.exists():
+        print(f"Already exists: {rmd_file}")
         return
-    md_file.write_text(f"""---
+    rmd_file.write_text(f"""---
 title: "{title}"
 description: |
   One-line summary of the post.
@@ -658,7 +725,7 @@ date: {today}
 tags: []
 ---
 
-Write your post here. The first paragraph gets a drop cap automatically.
+Write your post here.
 
 ## Section heading
 
@@ -667,6 +734,10 @@ Body text. Inline math: $E = mc^2$. Display math:
 $$
 \\int_0^\\infty e^{{-x^2}} \\, dx = \\frac{{\\sqrt{{\\pi}}}}{{2}}
 $$
+
+```{{r example-plot, echo=FALSE}}
+# R code chunks work here; JS widgets become PNG via webshot2
+```
 
 :::theorem
 State a theorem here. *Markdown* works inside.
