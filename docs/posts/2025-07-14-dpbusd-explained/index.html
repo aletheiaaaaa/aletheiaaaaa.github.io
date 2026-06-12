@@ -47,10 +47,137 @@
 <p>Unlike the other layers, layer 1 is neither small nor efficiently updateable, so every forward pass requires $2\times 16\times 1024=32768$ operations! Even though the output dimension is tiny, we still end up spending most of our time here. By contrast, the average layer 0 update requires only $2\times 1024=2048$ operations, despite being much larger. We somehow need to find a way to make layer 1 much cheaper.</p>
 <h2 id="rewriting-the-matrix-multiplication">Rewriting the Matrix Multiplication</h2>
 <p>Let's say you have a 4x4 weight matrix $W$ that you want to multiply with a 4-dimensional vector $x$. Graphically, this looks like the diagram below, where each output entry is given by the dot product of the input vector with a row of the weight matrix. However, computers can't directly store 2D matrices (unless you're on Intel Sapphire Rapids, for some reason), so we need to somehow encode this matrix multiplication in one dimension.</p>
-<figure><img alt="4x4 matrix-vector product" src="diagrams/4x4-tile.svg" /><figcaption>4x4 matrix-vector product</figcaption></figure>
+<figure class="figure--svg"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="380.926384pt" height="102.844384pt" viewBox="-70.007879 -70.007879 380.926384 102.844384" role="img" data-themed="true">
+<g>
+<path d="M-69.609374 -69.609374H-44.0977V-44.0977H-69.609374Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-44.0977 -69.609374H-18.586V-44.0977H-44.0977Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-18.5859 -69.609374H6.9258V-44.0977H-18.5859Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M6.9258 -69.609374H32.4375V-44.0977H6.9258Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-69.609374 -44.0977H-44.0977V-18.586H-69.609374Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-44.0977 -44.0977H-18.586V-18.586H-44.0977Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-18.5859 -44.0977H6.9258V-18.586H-18.5859Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M6.9258 -44.0977H32.4375V-18.586H6.9258Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-69.609374 -18.5859H-44.0977V6.9258H-69.609374Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-44.0977 -18.5859H-18.586V6.9258H-44.0977Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-18.5859 -18.5859H6.9258V6.9258H-18.5859Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M6.9258 -18.5859H32.4375V6.9258H6.9258Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-69.609374 6.9258H-44.0977V32.4375H-69.609374Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-44.0977 6.9258H-18.586V32.4375H-44.0977Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-18.5859 6.9258H6.9258V32.4375H-18.5859Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M6.9258 6.9258H32.4375V32.4375H6.9258Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M57.949 -69.609374H83.461V-44.0977H57.949Z" fill="#222540"/>
+<path d="M57.949 -69.609374H83.461V-44.0977H57.949Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M57.949 -44.0977H83.461V-18.586H57.949Z" fill="#222540"/>
+<path d="M57.949 -44.0977H83.461V-18.586H57.949Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M57.949 -18.5859H83.461V6.9258H57.949Z" fill="#222540"/>
+<path d="M57.949 -18.5859H83.461V6.9258H57.949Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M57.949 6.9258H83.461V32.4375H57.949Z" fill="#222540"/>
+<path d="M57.949 6.9258H83.461V32.4375H57.949Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M134.488 -69.609374H310.52V-44.0977H134.488Z" fill="#2b2f5e"/>
+<path d="M134.488 -69.609374H310.52V-44.0977H134.488Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M134.488 -44.0977H310.52V-18.586H134.488Z" fill="#2b2f5e"/>
+<path d="M134.488 -44.0977H310.52V-18.586H134.488Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M134.488 -18.5859H310.52V6.9258H134.488Z" fill="#2b2f5e"/>
+<path d="M134.488 -18.5859H310.52V6.9258H134.488Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M134.488 6.9258H310.52V32.4375H134.488Z" fill="#2b2f5e"/>
+<path d="M134.488 6.9258H310.52V32.4375H134.488Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<foreignObject x="-69.609374" y="-69.609374" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{00}\)</div></foreignObject>
+<foreignObject x="-44.0977" y="-69.609374" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{01}\)</div></foreignObject>
+<foreignObject x="-18.5859" y="-69.609374" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{02}\)</div></foreignObject>
+<foreignObject x="6.9258" y="-69.609374" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{03}\)</div></foreignObject>
+<foreignObject x="-69.609374" y="-44.0977" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{10}\)</div></foreignObject>
+<foreignObject x="-44.0977" y="-44.0977" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{11}\)</div></foreignObject>
+<foreignObject x="-18.5859" y="-44.0977" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{12}\)</div></foreignObject>
+<foreignObject x="6.9258" y="-44.0977" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{13}\)</div></foreignObject>
+<foreignObject x="-69.609374" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{20}\)</div></foreignObject>
+<foreignObject x="-44.0977" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{21}\)</div></foreignObject>
+<foreignObject x="-18.5859" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{22}\)</div></foreignObject>
+<foreignObject x="6.9258" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{23}\)</div></foreignObject>
+<foreignObject x="-69.609374" y="6.9258" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{30}\)</div></foreignObject>
+<foreignObject x="-44.0977" y="6.9258" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{31}\)</div></foreignObject>
+<foreignObject x="-18.5859" y="6.9258" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{32}\)</div></foreignObject>
+<foreignObject x="6.9258" y="6.9258" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{33}\)</div></foreignObject>
+<foreignObject x="57.949" y="-69.609374" width="25.512" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_0\)</div></foreignObject>
+<foreignObject x="57.949" y="-44.0977" width="25.512" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_1\)</div></foreignObject>
+<foreignObject x="57.949" y="-18.5859" width="25.512" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_2\)</div></foreignObject>
+<foreignObject x="57.949" y="6.9258" width="25.512" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_3\)</div></foreignObject>
+<foreignObject x="134.488" y="-69.609374" width="176.032" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{0,0}x_0+W_{0,1}x_1+W_{0,2}x_2+W_{0,3}x_3\)</div></foreignObject>
+<foreignObject x="134.488" y="-44.0977" width="176.032" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{1,0}x_0+W_{1,1}x_1+W_{1,2}x_2+W_{1,3}x_3\)</div></foreignObject>
+<foreignObject x="134.488" y="-18.5859" width="176.032" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{2,0}x_0+W_{2,1}x_1+W_{2,2}x_2+W_{2,3}x_3\)</div></foreignObject>
+<foreignObject x="134.488" y="6.9258" width="176.032" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{3,0}x_0+W_{3,1}x_1+W_{3,2}x_2+W_{3,3}x_3\)</div></foreignObject>
+<foreignObject x="32.438" y="-31.34" width="25.511" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo op">\(\times\)</div></foreignObject>
+<foreignObject x="83.461" y="-31.34" width="51.027" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo op">\(=\)</div></foreignObject>
+</g></svg><figcaption>4x4 matrix-vector product</figcaption></figure>
 <p>As it turns out, we can represent the matrix in one dimension using <em>flattening</em>, which just involves writing each row of the matrix side-by-side to produce one 16-element vector. Since the input vector is now much shorter than the weight vector, let's repeat it until the two vectors match in length --- you'll see why in a moment.</p>
 <p>Now that we've lined up the repeated input vector with the weight vector, the matrix-vector product is just the "group-wise dot product" of these two vectors! What do I mean by that? Well, we first multiply "vertically adjacent" elements in the input and weight vector, and then sum over consecutive groups of four to get the final result. The diagram below illustrates this process.</p>
-<figure><img alt="Flattened 4x4 matrix-vector product" src="diagrams/4x4-flat.svg" /><figcaption>Flattened 4x4 matrix-vector product</figcaption></figure>
+<figure class="figure--svg"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="373.27361pt" height="128.35601pt" viewBox="-70.007905 -70.007905 373.27361 128.35601" role="img" data-themed="true">
+<g>
+<path d="M-36.445311 -69.6094H-10.9336V-44.0968H-36.445311Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-10.9336 -69.6094H14.5781V-44.0968H-10.9336Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M14.582 -69.6094H40.0937V-44.0968H14.582Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M40.0938 -69.6094H65.6055V-44.0968H40.0938Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M167.6522 -69.6094H193.1639V-44.0968H167.6522Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M193.1642 -69.6094H218.6759V-44.0968H193.1642Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M218.6762 -69.6094H244.1879V-44.0968H218.6762Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M244.1872 -69.6094H269.6989V-44.0968H244.1872Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-36.445311 -18.5859H-10.9336V6.9267H-36.445311Z" fill="#222540"/>
+<path d="M-36.445311 -18.5859H-10.9336V6.9267H-36.445311Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-10.9336 -18.5859H14.5781V6.9267H-10.9336Z" fill="#222540"/>
+<path d="M-10.9336 -18.5859H14.5781V6.9267H-10.9336Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M14.582 -18.5859H40.0937V6.9267H14.582Z" fill="#222540"/>
+<path d="M14.582 -18.5859H40.0937V6.9267H14.582Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M40.0938 -18.5859H65.6055V6.9267H40.0938Z" fill="#222540"/>
+<path d="M40.0938 -18.5859H65.6055V6.9267H40.0938Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M167.6522 -18.5859H193.1639V6.9267H167.6522Z" fill="#222540"/>
+<path d="M167.6522 -18.5859H193.1639V6.9267H167.6522Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M193.1642 -18.5859H218.6759V6.9267H193.1642Z" fill="#222540"/>
+<path d="M193.1642 -18.5859H218.6759V6.9267H193.1642Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M218.6762 -18.5859H244.1879V6.9267H218.6762Z" fill="#222540"/>
+<path d="M218.6762 -18.5859H244.1879V6.9267H218.6762Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M244.1872 -18.5859H269.6989V6.9267H244.1872Z" fill="#222540"/>
+<path d="M244.1872 -18.5859H269.6989V6.9267H244.1872Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-23.6875-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M1.8242-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M27.3359-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M52.8477-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M180.4062-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M205.9182-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M231.4332-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M256.9452-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-23.6875 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M1.8242 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M27.3359 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M52.8477 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M180.4062 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M205.9182 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M231.4332 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M256.9452 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-69.6094 32.4375H98.7692V57.9496H-69.6094Z" fill="#2b2f5e"/>
+<path d="M-69.6094 32.4375H98.7692V57.9496H-69.6094Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M134.4842 32.4375H302.8672V57.9496H134.4842Z" fill="#2b2f5e"/>
+<path d="M134.4842 32.4375H302.8672V57.9496H134.4842Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<foreignObject x="-36.445311" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{00}\)</div></foreignObject>
+<foreignObject x="-10.9336" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{01}\)</div></foreignObject>
+<foreignObject x="14.582" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{02}\)</div></foreignObject>
+<foreignObject x="40.0938" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{03}\)</div></foreignObject>
+<foreignObject x="167.6522" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{30}\)</div></foreignObject>
+<foreignObject x="193.1642" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{31}\)</div></foreignObject>
+<foreignObject x="218.6762" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{32}\)</div></foreignObject>
+<foreignObject x="244.1872" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{33}\)</div></foreignObject>
+<foreignObject x="-36.445311" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_0\)</div></foreignObject>
+<foreignObject x="-10.9336" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_1\)</div></foreignObject>
+<foreignObject x="14.582" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_2\)</div></foreignObject>
+<foreignObject x="40.0938" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_3\)</div></foreignObject>
+<foreignObject x="167.6522" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_0\)</div></foreignObject>
+<foreignObject x="193.1642" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_1\)</div></foreignObject>
+<foreignObject x="218.6762" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_2\)</div></foreignObject>
+<foreignObject x="244.1872" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_3\)</div></foreignObject>
+<foreignObject x="-69.6094" y="32.4375" width="168.3786" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{0,0}x_0+W_{0,1}x_1+W_{0,2}x_2+W_{0,3}x_3\)</div></foreignObject>
+<foreignObject x="134.4842" y="32.4375" width="168.383" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{3,0}x_0+W_{3,1}x_1+W_{3,2}x_2+W_{3,3}x_3\)</div></foreignObject>
+<foreignObject x="65.6052" y="-69.6094" width="102.047" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
+<foreignObject x="65.6052" y="-18.5859" width="102.047" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
+<foreignObject x="98.7692" y="32.4375" width="35.715" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
+</g></svg><figcaption>Flattened 4x4 matrix-vector product</figcaption></figure>
 <p>As you can see, repeating the input vector to match the length of the weight vector has given us a <em>different</em> way to perform the matrix-vector product, all in one dimension! This is good, because 1D vectors, or <em>registers</em>, are exactly what CPUs use to parallelize operations.</p>
 <h2 id="fewer-bits-faster-code">Fewer Bits, Faster Code</h2>
 <p>So far, I've shown you how to rearrange the matrix-vector product in a way that fits on a CPU register. Since registers are the fundamental unit of SIMD programming, it's good practice to maximize the performance we get out of each one --- the more multiplications we can fit into a single register, the better. Unless you're still on Intel Pentium, your CPU will typically have either 256- or 512-bit wide registers, which would fit 8 or 16 float32s respectively. However, floats are slow, so our first order of business is to use int32s instead. Faster, but we can do better.</p>
@@ -70,7 +197,22 @@
 <p>Notice how I mentioned <em>accumulation</em> – as it turns out, <code>dpbusd</code> actually <em>adds</em> the matrix-vector product to an existing tally! For a single 16x4 matrix, we accumulate into a bunch of zeros since we don't need it, but for bigger matrices, it makes all the difference.</p>
 <h2 id="partitioning-the-l1-matrix">Partitioning the L1 Matrix</h2>
 <p>You might remember that our original layer 1 matrix had shape 16x1024, and are probably wondering how to implement a matrix-vector product that wide using an algorithm that handles only four inputs at a time. Well, the trick is to <em>partition</em> the input matrix into many 16x4 blocks, each of which can be handled by dpbusd, and then sum together the results. This looks like the diagram below, where we're just running dpbusd on each of the $1024/4=256$ tiles and summing the results. Algorithmically? Just directly replace the <code>_mm512_setzero_si512()</code> with the <code>outputs</code> register, and it's all taken care of for you.</p>
-<figure><img alt="A 16x1024 matrix split into 256 16x4 blocks" src="diagrams/partition.svg" /><figcaption>A 16x1024 matrix split into 256 16x4 blocks</figcaption></figure>
+<figure class="figure--svg"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="339.078291pt" height="140.254521pt" viewBox="-66.687486 -66.687166 339.078291 140.254521" role="img" data-themed="true">
+<g>
+<path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" fill="#2b2f5e"/>
+<path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M22.5391-47.585937V54.4647H67.8945V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M67.8945-47.585937V54.4647H113.2503V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M181.2813-47.585937V54.4647H226.6363V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M226.6363-47.585937V54.4647H271.9923V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-22.816406-52.12109C-21.917968-53.91406-19.82812-55.10937-16.83984-55.10937H-6.1172C-3.1289-55.10937-1.0352-56.30469-.1367-58.0977C.7578-56.30469 2.8516-55.10937 5.8398-55.10937H16.5625C19.5508-55.10937 21.6445-53.91406 22.5391-52.12109" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-22.816406 58.9997C-21.917968 60.7927-19.82812 61.9887-16.83984 61.9887H118.6093C121.5973 61.9887 123.6913 63.1837 124.5903 64.9767C125.4843 63.1837 127.5783 61.9887 130.5663 61.9887H266.0153C269.0043 61.9887 271.0933 60.7927 271.9923 58.9997" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<path d="M-27.35156-47.585937C-29.14453-46.687499-30.33984-44.59375-30.33984-41.60547V-2.5391C-30.33984 .4531-31.53516 2.543-33.3281 3.4414C-31.53516 4.3359-30.33984 6.4297-30.33984 9.418V48.4883C-30.33984 51.4766-29.14453 53.5667-27.35156 54.4647" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
+<foreignObject x="-22.816406" y="-66.687" width="45.3555" height="14"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(4\ \text{cols}\)</div></foreignObject>
+<foreignObject x="-22.816406" y="59.5" width="294.8087" height="14"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(1024\ \text{cols}\)</div></foreignObject>
+<foreignObject x="-66.687" y="-4.56" width="38" height="16"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(16\ \text{rows}\)</div></foreignObject>
+<foreignObject x="113.2503" y="-4.56" width="68.031" height="16"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
+</g></svg><figcaption>A 16x1024 matrix split into 256 16x4 blocks</figcaption></figure>
 <p>Of course, to actually implement this algorithm, we need to make sure the matrix is stored in a format ready to be tiled, or we'll waste time shuffling the entries before every load. To fix this, we just pre-permute the the matrix at startup, flattening it into blocks of 16x4 entries stored back-to-back. This way, each load is simply the next block in the array.</p>
 <h2 id="avx2-considerations">AVX2 Considerations</h2>
 <p>Lastly, its worth noting that VNNI is typically only supported by the latest generation of AVX-512 capable CPUs. If you're on AVX-2, simply make the following replacement </p>

@@ -58,7 +58,7 @@ header.site-header {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   background-color: var(--nav-blur-bg);
-  border-bottom: 1px solid var(--accent-border);
+  border-bottom: 1px solid var(--accent);
 }
 
 nav.site-nav {
@@ -669,7 +669,7 @@ pre code {
      negative margin-right cancels the width, so body text doesn't wrap around it. */
   width: 200px;
   margin-right: calc(-200px - 4rem);
-  margin-top: -3rem;
+  margin-top: 0rem;
   margin-bottom: 1rem;
   font-size: 0.72rem;
   font-weight: 300;
@@ -696,9 +696,9 @@ pre code {
   margin: 0;
 }
 
+.post-body h1,
 .post-body h2,
-.post-body h3,
-.post-body h4 {
+.post-body h3 {
   scroll-margin-top: 6rem;
 }
 
@@ -707,7 +707,7 @@ pre code {
   margin-bottom: 1.5rem;
 }
 
-.post-body h2 {
+.post-body h1 {
   font-size: 1.35rem;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -716,7 +716,7 @@ pre code {
   line-height: 1.2;
 }
 
-.post-body h3 {
+.post-body h2 {
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -725,7 +725,7 @@ pre code {
   line-height: 1.2;
 }
 
-.post-body h4 {
+.post-body h3 {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-heading);
@@ -1535,11 +1535,7 @@ body[data-page="index"] main {
   }
 
   html:not([data-theme="dark"]) header.site-header {
-    border-bottom-color: transparent;
-    background-image: linear-gradient(to right, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
-    background-size: 100% 1px;
-    background-position: bottom;
-    background-repeat: no-repeat;
+    border-bottom: 1px solid var(--accent);
   }
 
   html:not([data-theme="dark"]) ::-webkit-scrollbar-thumb {
@@ -1664,11 +1660,7 @@ html[data-theme="light"] .project-card:hover {
 }
 
 html[data-theme="light"] header.site-header {
-  border-bottom-color: transparent;
-  background-image: linear-gradient(to right, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
-  background-size: 100% 1px;
-  background-position: bottom;
-  background-repeat: no-repeat;
+  border-bottom: 1px solid var(--accent);
 }
 
 html[data-theme="light"] ::-webkit-scrollbar-thumb {
@@ -1878,27 +1870,205 @@ html[data-theme="light"] .post-body img {
 /* ── Inlined SVG diagrams: dark-first palette lives in the SVG; recolour for
    light mode here so they track the manual toggle (no invert filter). ── */
 @media (prefers-color-scheme: light) {
-  html:not([data-theme="dark"]) .post-body svg .mv { fill: #5f5e5a; }
-  html:not([data-theme="dark"]) .post-body svg .mvp { fill: #4f46e5; }
+  html:not([data-theme="dark"]) .post-body svg .mv {
+    fill: #5f5e5a;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .mvp {
+    fill: #4f46e5;
+  }
+
   html:not([data-theme="dark"]) .post-body svg .mvx,
-  html:not([data-theme="dark"]) .post-body svg .pl { fill: #818cf8; }
-  html:not([data-theme="dark"]) .post-body svg .edge { stroke: #afb5bf; }
+  html:not([data-theme="dark"]) .post-body svg .pl {
+    fill: #818cf8;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .edge {
+    stroke: #afb5bf;
+  }
+
   html:not([data-theme="dark"]) .post-body svg .edgep,
-  html:not([data-theme="dark"]) .post-body svg .cut { stroke: #4f46e5; }
-  html:not([data-theme="dark"]) .post-body svg .edgex { stroke: #818cf8; }
-  html:not([data-theme="dark"]) .post-body svg .node { fill: #edf1f6; stroke: #828a94; }
-  html:not([data-theme="dark"]) .post-body svg .nodep { fill: #eeedfe; stroke: #4f46e5; }
-  html:not([data-theme="dark"]) .post-body svg .nodex { fill: #f4f2fd; stroke: #818cf8; }
+  html:not([data-theme="dark"]) .post-body svg .cut {
+    stroke: #4f46e5;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .edgex {
+    stroke: #818cf8;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .node {
+    fill: #edf1f6;
+    stroke: #828a94;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .nodep {
+    fill: #eeedfe;
+    stroke: #4f46e5;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .nodex {
+    fill: #f4f2fd;
+    stroke: #818cf8;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .nodenew,
+  html:not([data-theme="dark"]) .post-body svg .net {
+    fill: #f4f2fd;
+    stroke: #818cf8;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .leaf {
+    fill: #dcd9fb;
+    stroke: #4f46e5;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .ring {
+    stroke: #818cf8;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .edgeback {
+    stroke: #6366f1;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .tag {
+    fill: #6366f1;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg .netd {
+    fill: #4f46e5;
+  }
 }
 
-html[data-theme="light"] .post-body svg .mv { fill: #5f5e5a; }
-html[data-theme="light"] .post-body svg .mvp { fill: #4f46e5; }
+html[data-theme="light"] .post-body svg .mv {
+  fill: #5f5e5a;
+}
+
+html[data-theme="light"] .post-body svg .mvp {
+  fill: #4f46e5;
+}
+
 html[data-theme="light"] .post-body svg .mvx,
-html[data-theme="light"] .post-body svg .pl { fill: #818cf8; }
-html[data-theme="light"] .post-body svg .edge { stroke: #afb5bf; }
+html[data-theme="light"] .post-body svg .pl {
+  fill: #818cf8;
+}
+
+html[data-theme="light"] .post-body svg .edge {
+  stroke: #afb5bf;
+}
+
 html[data-theme="light"] .post-body svg .edgep,
-html[data-theme="light"] .post-body svg .cut { stroke: #4f46e5; }
-html[data-theme="light"] .post-body svg .edgex { stroke: #818cf8; }
-html[data-theme="light"] .post-body svg .node { fill: #edf1f6; stroke: #828a94; }
-html[data-theme="light"] .post-body svg .nodep { fill: #eeedfe; stroke: #4f46e5; }
-html[data-theme="light"] .post-body svg .nodex { fill: #f4f2fd; stroke: #818cf8; }
+html[data-theme="light"] .post-body svg .cut {
+  stroke: #4f46e5;
+}
+
+html[data-theme="light"] .post-body svg .edgex {
+  stroke: #818cf8;
+}
+
+html[data-theme="light"] .post-body svg .node {
+  fill: #edf1f6;
+  stroke: #828a94;
+}
+
+html[data-theme="light"] .post-body svg .nodep {
+  fill: #eeedfe;
+  stroke: #4f46e5;
+}
+
+html[data-theme="light"] .post-body svg .nodex {
+  fill: #f4f2fd;
+  stroke: #818cf8;
+}
+
+html[data-theme="light"] .post-body svg .nodenew,
+html[data-theme="light"] .post-body svg .net {
+  fill: #f4f2fd;
+  stroke: #818cf8;
+}
+
+html[data-theme="light"] .post-body svg .leaf {
+  fill: #dcd9fb;
+  stroke: #4f46e5;
+}
+
+html[data-theme="light"] .post-body svg .ring {
+  stroke: #818cf8;
+}
+
+html[data-theme="light"] .post-body svg .edgeback {
+  stroke: #6366f1;
+}
+
+html[data-theme="light"] .post-body svg .tag {
+  fill: #6366f1;
+}
+
+html[data-theme="light"] .post-body svg .netd {
+  fill: #4f46e5;
+}
+
+/* ── LaTeX-generated diagrams (dpbusd post): box/line geometry stays in the SVG,
+   labels are MathJax inside <foreignObject>. Recolour the grayscale strokes and
+   purple highlight fills for light mode via attribute selectors. ── */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .post-body svg [stroke="#c4c4c4"] {
+    stroke: #9aa1ad;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg [fill="#222540"] {
+    fill: #c7d2fe;
+  }
+
+  html:not([data-theme="dark"]) .post-body svg [fill="#2b2f5e"] {
+    fill: #a5b4fc;
+  }
+}
+
+html[data-theme="light"] .post-body svg [stroke="#c4c4c4"] {
+  stroke: #9aa1ad;
+}
+
+html[data-theme="light"] .post-body svg [fill="#222540"] {
+  fill: #c7d2fe;
+}
+
+html[data-theme="light"] .post-body svg [fill="#2b2f5e"] {
+  fill: #a5b4fc;
+}
+
+/* MathJax labels rendered into the diagrams' <foreignObject> cells. Colour is
+   inherited from the theme, so they track light/dark automatically. */
+.post-body svg foreignObject {
+  overflow: visible;
+}
+
+.post-body svg .fo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-primary);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.post-body svg .fo.lbl {
+  font-size: 11px;
+}
+
+.post-body svg .fo.res {
+  font-size: 8.5px;
+}
+
+.post-body svg .fo.op {
+  font-size: 17px;
+}
+
+.post-body svg .fo.dots {
+  font-size: 13px;
+}
+
+.post-body svg .fo .MathJax {
+  margin: 0 !important;
+}

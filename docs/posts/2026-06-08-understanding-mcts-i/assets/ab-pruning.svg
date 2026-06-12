@@ -1,0 +1,81 @@
+<svg width="680" height="412" viewBox="0 0 680 412" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>Alpha-beta pruning chess search tree</title>
+  <desc>An abstract four-level minimax tree of circular nodes representing a chess search from the position after 1.e4 e5 2.Nf3 Nc6. Each edge is annotated with a plausible move. A purple principal variation runs from root to a leaf, several branches are pruned (shown as faded purple dashed edges with cut marks and pruned labels), and a legend at the bottom keys the line styles.</desc>
+  <style>
+    /* Dark-first palette to match the site default; light-mode overrides live in style.css */
+    text { font-family: "Fira Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 400; }
+    .mv  { fill: #c0c0c0; }
+    .mvp { fill: #c7d2fe; }
+    .mvx { fill: #a5b4fc; }
+    .pl  { fill: #a5b4fc; font-size: 10px; font-style: italic; }
+    .edge { stroke: #52525b; stroke-width: 1.5; fill: none; }
+    .edgep{ stroke: #818cf8; stroke-width: 2.5; fill: none; }
+    .edgex{ stroke: #6f7ad1; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .node { fill: #1a1a1d; stroke: #52525b; stroke-width: 1.5; }
+    .nodep{ fill: #1a1d33; stroke: #818cf8; stroke-width: 2; }
+    .nodex{ fill: #181a2b; stroke: #6f7ad1; stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .cut  { stroke: #818cf8; stroke-width: 1.8; }
+  </style>
+
+  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5"/>
+  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5"/>
+  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edgex" x1="511.2" y1="174.1" x2="570.0" y2="247.5"/>
+
+  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9"/>
+  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edgex" x1="265.9" y1="274.9" x2="295.5" y2="348.9"/>
+  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+  <line class="edgex" x1="574.1" y1="274.9" x2="544.5" y2="348.9"/>
+  <line class="edgex" x1="585.9" y1="274.9" x2="615.5" y2="348.9"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="nodex" cx="580" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="nodep" cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="nodex" cx="300" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+  <circle class="nodex" cx="540" cy="360" r="12"/>
+  <circle class="nodex" cx="620" cy="360" r="12"/>
+
+  <line class="cut" x1="536" y1="206" x2="546" y2="216" stroke-linecap="round"/>
+  <line class="cut" x1="546" y1="206" x2="536" y2="216" stroke-linecap="round"/>
+  <line class="cut" x1="276" y1="307" x2="286" y2="317" stroke-linecap="round"/>
+  <line class="cut" x1="286" y1="307" x2="276" y2="317" stroke-linecap="round"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mvx" x="552" y="202" text-anchor="start" dominant-baseline="central">Nf6 (pruned)</text>
+
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mvx" x="290" y="304" text-anchor="start" dominant-baseline="central">d3 (pruned)</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="mvx" x="552" y="306" text-anchor="end"   dominant-baseline="central">d3</text>
+  <text class="mvx" x="608" y="306" text-anchor="start" dominant-baseline="central">Ng5</text>
+
+  <line class="edgep" x1="168" y1="394" x2="194" y2="394"/>
+  <text class="mv" x="200" y="394" text-anchor="start" dominant-baseline="central">principal variation</text>
+  <line class="edgex" x1="336" y1="394" x2="362" y2="394"/>
+  <text class="mv" x="368" y="394" text-anchor="start" dominant-baseline="central">pruned</text>
+  <line class="edge" x1="430" y1="394" x2="456" y2="394"/>
+  <text class="mv" x="462" y="394" text-anchor="start" dominant-baseline="central">searched</text>
+</svg>

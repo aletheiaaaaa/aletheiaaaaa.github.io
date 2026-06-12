@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deconstructing AlphaGo: Exploring Monte Carlo Tree Search — p > 0.05</title>
+  <link rel="stylesheet" href="../../style.css">
+  <script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre"]}};</script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body data-page="">
+  <header class="site-header">
+    <nav class="site-nav">
+      <div class="nav-brand"><a href="../../index.html">p > 0.05</a></div>
+      <ul class="nav-links"><li><a href="../../projects.html">Projects</a></li><li><a href="../../blog.html">Blog</a></li><li><a href="../../about.html">About</a></li></ul>
+      <div class="nav-end">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">◑</button>
+        <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="post-layout"><aside class="post-toc"><div class="toc-inner"><p class="toc-label">Contents</p><div class="toc">
+<ul>
+<li><a href="#when-the-action-space-is-too-big">When the Action Space is Too Big</a></li>
+<li><a href="#building-the-tree-step-by-step">Building the Tree Step-by-Step</a><ul>
+<li><a href="#stage-1-selection">Stage 1: Selection</a></li>
+<li><a href="#stage-2-expansion">Stage 2: Expansion</a></li>
+<li><a href="#stage-3-simulation">Stage 3: Simulation</a></li>
+<li><a href="#stage-4-backpropagation">Stage 4: Backpropagation</a></li>
+</ul>
+</li>
+<li><a href="#formalizing-the-algorithm">Formalizing the Algorithm</a><ul>
+<li><a href="#setup-and-notation">Setup and Notation</a></li>
+<li><a href="#selection-with-puct">Selection with pUCT</a></li>
+</ul>
+</li>
+<li><a href="#training-the-networks">Training the Networks</a></li>
+<li><a href="#looking-ahead-formalism-and-extensions">Looking Ahead: Formalism and Extensions</a></li>
+</ul>
+</div>
+</div></aside><article class="post-wrap"><header class="post-header"><h1>Deconstructing AlphaGo: Exploring Monte Carlo Tree Search</h1><p class="subtitle">What do you do when there are too many possibilities?
+</p><p class="byline"><span>aletheiaaaaa</span><span class="sep">&middot;</span><span>Jun 8, 2026</span><span class="sep">&middot;</span><span>10 min read</span></p></header><div class="post-body"><p>In what's since become a watershed moment in AI, DeepMind's AlphaGo <a href="http://theguardian.com/technology/2016/mar/15/googles-alphago-seals-4-1-victory-over-grandmaster-lee-sedol">defeated 18-time Go champion Lee Sedol</a> in 2016, about a decade earlier than expected. DeepMind would then go on to produce a flurry of advancements: first <a href="https://www.nature.com/articles/nature24270">AlphaGo Zero</a>, which taught itself instead of learning from humans, and then <a href="https://www.science.org/doi/10.1126/science.aar6404">AlphaZero</a>, which extended the approach to other board games like chess and shogi. Throughout these advancements was an approach known as <em>Monte Carlo tree search</em>, or <em>MCTS</em> for short, but when I first got into learning about it, I couldn't find any good resources. To fix this, I've written this blogpost, that hopefully demystifies some of the confusion for you too. I'll start by giving the basic idea, and then formalizing it as needed.</p>
+<h1 id="when-the-action-space-is-too-big">When the Action Space is Too Big</h1>
+<p>Let's say you've just wrapped up a chess game, and you're using the state-of-the-art computer program <a href="https://stockfishchess.org/">Stockfish</a> to get feedback. What Stockfish does under the hood is to list all possible responses to a move (in what's known as the <em>action space</em>), and then their responses, and so on until it's searched deep enough to provide a good answer. Since most continuations of a position are bad (for instance, if your queen is attacked, you probably won't move anything other than the queen), Stockfish uses a technique called <em>alpha-beta pruning</em> to stop searching lines that it knows are suboptimal. This, combined with an extensive array of heuristics to eliminate moves that are likely to be poor, is what makes Stockfish the undisputed champion at computer chess.</p>
+<figure class="figure--svg"><svg width="680" height="412" viewBox="0 0 680 412" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>Alpha-beta pruning chess search tree</title>
+  <desc>An abstract four-level minimax tree of circular nodes representing a chess search from the position after 1.e4 e5 2.Nf3 Nc6. Each edge is annotated with a plausible move. A purple principal variation runs from root to a leaf, several branches are pruned (shown as faded purple dashed edges with cut marks and pruned labels), and a legend at the bottom keys the line styles.</desc>
+  <style>
+    /* Dark-first palette to match the site default; light-mode overrides live in style.css */
+    text { font-family: "Fira Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 400; }
+    .mv  { fill: #c0c0c0; }
+    .mvp { fill: #c7d2fe; }
+    .mvx { fill: #a5b4fc; }
+    .pl  { fill: #a5b4fc; font-size: 10px; font-style: italic; }
+    .edge { stroke: #52525b; stroke-width: 1.5; fill: none; }
+    .edgep{ stroke: #818cf8; stroke-width: 2.5; fill: none; }
+    .edgex{ stroke: #6f7ad1; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .node { fill: #1a1a1d; stroke: #52525b; stroke-width: 1.5; }
+    .nodep{ fill: #1a1d33; stroke: #818cf8; stroke-width: 2; }
+    .nodex{ fill: #181a2b; stroke: #6f7ad1; stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .cut  { stroke: #818cf8; stroke-width: 1.8; }
+  </style>
+
+  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5"/>
+  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5"/>
+  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edgex" x1="511.2" y1="174.1" x2="570.0" y2="247.5"/>
+
+  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9"/>
+  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edgex" x1="265.9" y1="274.9" x2="295.5" y2="348.9"/>
+  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+  <line class="edgex" x1="574.1" y1="274.9" x2="544.5" y2="348.9"/>
+  <line class="edgex" x1="585.9" y1="274.9" x2="615.5" y2="348.9"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="nodex" cx="580" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="nodep" cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="nodex" cx="300" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+  <circle class="nodex" cx="540" cy="360" r="12"/>
+  <circle class="nodex" cx="620" cy="360" r="12"/>
+
+  <line class="cut" x1="536" y1="206" x2="546" y2="216" stroke-linecap="round"/>
+  <line class="cut" x1="546" y1="206" x2="536" y2="216" stroke-linecap="round"/>
+  <line class="cut" x1="276" y1="307" x2="286" y2="317" stroke-linecap="round"/>
+  <line class="cut" x1="286" y1="307" x2="276" y2="317" stroke-linecap="round"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mvx" x="552" y="202" text-anchor="start" dominant-baseline="central">Nf6 (pruned)</text>
+
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mvx" x="290" y="304" text-anchor="start" dominant-baseline="central">d3 (pruned)</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="mvx" x="552" y="306" text-anchor="end"   dominant-baseline="central">d3</text>
+  <text class="mvx" x="608" y="306" text-anchor="start" dominant-baseline="central">Ng5</text>
+
+  <line class="edgep" x1="168" y1="394" x2="194" y2="394"/>
+  <text class="mv" x="200" y="394" text-anchor="start" dominant-baseline="central">principal variation</text>
+  <line class="edgex" x1="336" y1="394" x2="362" y2="394"/>
+  <text class="mv" x="368" y="394" text-anchor="start" dominant-baseline="central">pruned</text>
+  <line class="edge" x1="430" y1="394" x2="456" y2="394"/>
+  <text class="mv" x="462" y="394" text-anchor="start" dominant-baseline="central">searched</text>
+</svg><figcaption>Searching after 1. e4 e5 2. Nf3 Nc6 with alpha-beta</figcaption></figure>
+<p>Enter Go: unlike chess, which has about 30 or so moves each position, Go has about 250, so even a list of all the possible continuations becomes computationally infeasible to store. <sup class="aside-ref">1</sup><span class="aside-note"><span class="aside-num">1</span> Formally, we'd say that the <em>branching factor</em> is too high </span> If you can't list the moves, you can't try them; and if you can't try them, alpha-beta can't be sure that they're suboptimal to prune. We need to do something different.</p>
+<h1 id="building-the-tree-step-by-step">Building the Tree Step-by-Step</h1>
+<p>You may have noticed a central tension in alpha-beta: we enumerate moves so that we can try them, and then immediately discard them when we find out that they're bad. What if we could somehow avoid considering those bad moves to begin with? The problem is that alpha-beta is "blind": it doesn't know that a move is bad until it's tried it, unlike a great human player, who can instinctively tell what moves are promising. What we need is some search strategy (in jargon, a <em>policy</em>) that assigns scores to moves <em>a priori</em>, and then tries out moves accordingly (neglecting moves that are too poor to even consider). Instead of pruning the giant tree of all possible continuations, we can <em>grow</em> the tree by iteratively picking new moves, evaluating the resulting positions, and using those evaluations to update what the best moves are. This process is all there is to MCTS.</p>
+<h2 id="stage-1-selection">Stage 1: Selection</h2>
+<p>Before we explore new moves, we need to pick some position along the game tree as our starting point. Aptly, selecting the right position (or <em>node</em>) in the tree is called <em>selection</em>, and is done using three quantities:</p>
+<ul>
+<li>the <em>node value</em>, based on previous results from having walked along this position,</li>
+<li>the <em>visit count</em>, or how many times we've walked this node before, and</li>
+<li>the <em>policy value</em>, or the initial assessment of how good this node is</li>
+</ul>
+<p>Starting from the root node (that is, the node corresponding to no moves searched at the top of the tree), we combine these three quantities using a formula called PUCT (more on that below) to progressively walk the tree until we reach a leaf node, that is, a node that has no edges leading out of it.</p>
+<figure class="figure--svg"><svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>MCTS stage 1 — Selection</title>
+  <desc>Minimax-style Ruy Lopez tree (pruned branches removed). A purple PUCT path descends from the root through Bb5 and a6 to the leaf Bxc6, marked as the node to expand. Arrowheads show the downward direction of selection.</desc>
+  <defs>
+    <marker id="sel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#818cf8"/></marker>
+  </defs>
+  <style>
+    /* Dark-first palette; light-mode overrides live in style.css */
+    text { font-family:"Fira Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:400; }
+    .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
+    .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
+    .edgep{ stroke:#818cf8; stroke-width:2.5; fill:none; }
+    .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
+    .nodep{ fill:#1a1d33; stroke:#818cf8; stroke-width:2; }
+    .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
+    .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
+    .cap{ fill:#a1a1aa; font-size:11.5px; } .lgd{ fill:#a1a1aa; font-size:10.5px; }
+  </style>
+
+  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5" marker-end="url(#sel)"/>
+  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5" marker-end="url(#sel)"/>
+  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9" marker-end="url(#sel)"/>
+  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="leaf"  cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="tag" x="140" y="386" text-anchor="middle">leaf</text>
+
+  <line class="edgep" x1="230" y1="400" x2="258" y2="400" marker-end="url(#sel)"/>
+  <text class="lgd" x="266" y="400" dominant-baseline="central">selected path</text>
+  <circle class="leaf" cx="406" cy="400" r="7"/>
+  <text class="lgd" x="418" y="400" dominant-baseline="central">leaf to expand</text>
+</svg><figcaption>The selection phase after 1. e4 e5 2. Nf3 Nc6</figcaption></figure>
+<p>Notice how the tree is <em>asymmetric</em>: since we choose the search the moves we want, some lines get searched deeper than others. In particular, we haven't searched the lines that were pruned!</p>
+<h2 id="stage-2-expansion">Stage 2: Expansion</h2>
+<p>Once we've picked a leaf node, the natural next step is to consider the moves we can play from it. This step is known as <em>expansion</em>: for the chosen leaf node, we expand the tree by adding nodes for all the continuations one move deeper. <sup class="aside-ref">2</sup><span class="aside-note"><span class="aside-num">2</span> Older versions of MCTS, based on the algorithm UCB1, only expand one node at a time </span></p>
+<figure class="figure--svg"><svg width="680" height="500" viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>MCTS stage 2 — Expansion</title>
+  <desc>The selected leaf Bxc6 is expanded into all of its children — the two recaptures dxc6 and bxc6 — drawn as fresh dashed nodes. Each new edge carries a symbolic prior p supplied by the policy head.</desc>
+  <style>
+    /* Dark-first palette; light-mode overrides live in style.css */
+    text { font-family:"Fira Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:400; }
+    .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
+    .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
+    .edgep{ stroke:#818cf8; stroke-width:2.5; fill:none; }
+    .edgenew{ stroke:#818cf8; stroke-width:2; stroke-dasharray:5 3; fill:none; }
+    .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
+    .nodep{ fill:#1a1d33; stroke:#818cf8; stroke-width:2; }
+    .nodenew{ fill:#1a1d33; stroke:#818cf8; stroke-width:1.8; stroke-dasharray:4 2.5; }
+    .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
+    .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
+    .cap{ fill:#a1a1aa; font-size:11.5px; } .lgd{ fill:#a1a1aa; font-size:10.5px; }
+  </style>
+
+  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5"/>
+  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5"/>
+  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9"/>
+  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+
+  <line class="edgenew" x1="135.9" y1="371.3" x2="111.4" y2="438.6"/>
+  <line class="edgenew" x1="144.1" y1="371.3" x2="168.6" y2="438.6"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="leaf"  cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+  <circle class="nodenew" cx="108" cy="448" r="10"/>
+  <circle class="nodenew" cx="172" cy="448" r="10"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="tag" x="112" y="402" text-anchor="end"   dominant-baseline="central">dxc6</text>
+  <text class="tag" x="166" y="402" text-anchor="start" dominant-baseline="central">bxc6</text>
+
+  <circle class="nodenew" cx="334" cy="480" r="7"/>
+  <text class="lgd" x="346" y="480" dominant-baseline="central">new child (all moves expanded)</text>
+</svg><figcaption>The expansion phase after 1. e4 e5 2. Nf3 Nc6</figcaption></figure>
+<p>Note that in some implementations, we might only expand after having visited the node enough times! In this case, we jump straight to the next step</p>
+<h2 id="stage-3-simulation">Stage 3: Simulation</h2>
+<p>From our newly expanded leaf node (not it's children!), we then <em>simulate</em> the outcome of the game by playing random moves until the end (explaining the name Monte Carlo), or, as is more common these days, substitute the simulation with a neural network that approximates the end result directly. <sup class="aside-ref">3</sup><span class="aside-note"><span class="aside-num">3</span> The original version of AlphaGo used a tunable mix of both these approaches, but this was later dropped in favor of deep learning </span>. When we do this, our leaf node gets assigned a value (the node value from earlier) representing the expected utility from playing it, which is cached and stored.</p>
+<figure class="figure--svg"><svg width="680" height="500" viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>MCTS stage 3 — Evaluation</title>
+  <desc>Instead of a rollout, the network fθ scores the just-expanded leaf Bxc6 directly. A small network glyph emits an arrow to the leaf, and a symbolic value meter v sits beside it — no numbers, no simulation playout.</desc>
+  <defs>
+    <marker id="ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c7d2fe"/></marker>
+  </defs>
+  <style>
+    /* Dark-first palette; light-mode overrides live in style.css */
+    text { font-family:"Fira Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:400; }
+    .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
+    .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
+    .edgep{ stroke:#818cf8; stroke-width:2.5; fill:none; }
+    .edgenew{ stroke:#818cf8; stroke-width:2; stroke-dasharray:5 3; fill:none; }
+    .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
+    .nodep{ fill:#1a1d33; stroke:#818cf8; stroke-width:2; }
+    .nodenew{ fill:#1a1d33; stroke:#818cf8; stroke-width:1.8; stroke-dasharray:4 2.5; }
+    .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
+    .net{ fill:#1a1d33; stroke:#818cf8; stroke-width:1.5; }
+    .netl{ stroke:#6f7ad1; stroke-width:0.8; fill:none; } .netd{ fill:#c7d2fe; }
+    .meter{ fill:none; stroke:#818cf8; stroke-width:1; } .meterf{ fill:#818cf8; }
+    .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
+    .cap{ fill:#a1a1aa; font-size:11.5px; } .lgd{ fill:#a1a1aa; font-size:10.5px; }
+  </style>
+
+  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5"/>
+  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5"/>
+  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9"/>
+  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+  <line class="edgenew" x1="135.9" y1="371.3" x2="111.4" y2="438.6"/>
+  <line class="edgenew" x1="144.1" y1="371.3" x2="168.6" y2="438.6"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="leaf"  cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+  <circle class="nodenew" cx="108" cy="448" r="10"/>
+  <circle class="nodenew" cx="172" cy="448" r="10"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="tag" x="112" y="402" text-anchor="end"   dominant-baseline="central">dxc6</text>
+  <text class="tag" x="166" y="402" text-anchor="start" dominant-baseline="central">bxc6</text>
+
+  <rect class="net" x="216" y="400" width="110" height="58" rx="8"/>
+  <text x="271" y="416" text-anchor="middle" fill="#c7d2fe" font-size="12" font-style="italic">f&#952;</text>
+  <line class="netl" x1="236" y1="432" x2="261" y2="439"/>
+  <line class="netl" x1="236" y1="446" x2="261" y2="439"/>
+  <line class="netl" x1="261" y1="439" x2="291" y2="439"/>
+  <circle class="netd" cx="236" cy="432" r="2.5"/>
+  <circle class="netd" cx="236" cy="446" r="2.5"/>
+  <circle class="netd" cx="261" cy="439" r="2.5"/>
+  <circle class="netd" cx="291" cy="439" r="2.5"/>
+  <line stroke="#818cf8" stroke-width="1.5" x1="216" y1="420" x2="149.4" y2="367.4" marker-end="url(#ev)"/>
+  <rect class="meter"  x="158" y="336" width="34" height="7" rx="2"/>
+  <rect class="meterf" x="158" y="336" width="20" height="7" rx="2"/>
+  <text class="tag" x="196" y="339" text-anchor="start" dominant-baseline="central">v</text>
+
+  <rect class="net" x="28" y="471" width="18" height="14" rx="3"/>
+  <text class="lgd" x="54" y="480" dominant-baseline="central" fill="#c7d2fe">value net f&#952;</text>
+  <rect class="meter"  x="210" y="476" width="30" height="7"/>
+  <rect class="meterf" x="210" y="476" width="18" height="7"/>
+  <text class="lgd" x="248" y="480" dominant-baseline="central">leaf value v (no simulation)</text>
+</svg><figcaption>The simulation phase after 1. e4 e5 2. Nf3 Nc6</figcaption></figure>
+<h2 id="stage-4-backpropagation">Stage 4: Backpropagation</h2>
+<p>Once we have our node value, we then recursively use it to update the values of all the nodes in the path we took. Specifically, we add our node value to the node values of the previous nodes, and increment their visit counts by one (allowing us to compute the average value when needed). </p>
+<figure class="figure--svg"><svg width="680" height="500" viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>MCTS stage 4 — Backup</title>
+  <desc>The leaf value v is propagated up the selection path. Upward arrows run from Bxc6 through a6 and Bb5 to the root, and each visited node carries a pulse ring indicating its visit count N and mean value Q have been updated.</desc>
+  <defs>
+    <marker id="bak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#a5b4fc"/></marker>
+  </defs>
+  <style>
+    /* Dark-first palette; light-mode overrides live in style.css */
+    text { font-family:"Fira Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:400; }
+    .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
+    .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
+    .edgeback{ stroke:#a5b4fc; stroke-width:2.5; fill:none; }
+    .edgenew{ stroke:#818cf8; stroke-width:2; stroke-dasharray:5 3; fill:none; }
+    .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
+    .nodep{ fill:#1a1d33; stroke:#818cf8; stroke-width:2; }
+    .nodenew{ fill:#1a1d33; stroke:#818cf8; stroke-width:1.8; stroke-dasharray:4 2.5; }
+    .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
+    .ring{ fill:none; stroke:#c7d2fe; stroke-width:1.2; opacity:0.75; }
+    .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
+    .cap{ fill:#a1a1aa; font-size:11.5px; } .lgd{ fill:#a1a1aa; font-size:10.5px; }
+  </style>
+
+  <line class="edge" x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+  <line class="edge" x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge" x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edge" x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edge" x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edge" x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge" x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+  <line class="edgenew" x1="135.9" y1="371.3" x2="111.4" y2="438.6"/>
+  <line class="edgenew" x1="144.1" y1="371.3" x2="168.6" y2="438.6"/>
+
+  <line class="edgeback" x1="135.5" y1="348.9" x2="105.9" y2="274.9" marker-end="url(#bak)"/>
+  <line class="edgeback" x1="110.0" y1="247.5" x2="168.8" y2="174.1" marker-end="url(#bak)"/>
+  <line class="edgeback" x1="195.3" y1="150.5" x2="321.3" y2="71.7"  marker-end="url(#bak)"/>
+
+  <circle class="ring" cx="340" cy="60"  r="26"/>
+  <circle class="ring" cx="180" cy="160" r="22"/>
+  <circle class="ring" cx="100" cy="260" r="20"/>
+  <circle class="ring" cx="140" cy="360" r="16"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="leaf"  cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+  <circle class="nodenew" cx="108" cy="448" r="10"/>
+  <circle class="nodenew" cx="172" cy="448" r="10"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="tag" x="112" y="402" text-anchor="end"   dominant-baseline="central">dxc6</text>
+  <text class="tag" x="166" y="402" text-anchor="start" dominant-baseline="central">bxc6</text>
+  <text class="tag" x="160" y="344" text-anchor="start" dominant-baseline="central">v</text>
+
+  <line class="edgeback" x1="30" y1="480" x2="58" y2="480" marker-end="url(#bak)"/>
+  <text class="lgd" x="66" y="480" dominant-baseline="central">value backed up</text>
+  <circle class="ring" cx="216" cy="480" r="8"/>
+  <text class="lgd" x="230" y="480" dominant-baseline="central">N, Q updated</text>
+</svg><figcaption>The backpropagation phase after 1. e4 e5 2. Nf3 Nc6</figcaption></figure>
+<p>Congrats! You've successfully completed one iteration of Monte Carlo tree search!</p>
+<h1 id="formalizing-the-algorithm">Formalizing the Algorithm</h1>
+<h2 id="setup-and-notation">Setup and Notation</h2>
+<p>When formalizing any bit of code, it's always good practice to give names to what we're working with. Given any node, call it $s$ (for <em>state</em>), and possible move, call it $a$ (for <em>action</em>), let's say that </p>
+<ul>
+<li>the initial estimate for how good $a$ is at $s$ is called $P(s,a)$,</li>
+<li>the number of times we've tried $a$ at $s$ is called $N(s,a)$,</li>
+<li>the running total of accumulated utilities is called $W(s,a)$, and</li>
+<li>the average utility, computed from the previous two quantities, is called $Q(s,a)$</li>
+</ul>
+<p>Notice how these values map cleanly onto the values I've introduced earlier: the node value <em>is</em> $Q(s,a)$, the visit count <em>is</em> $N(s,a)$, and the policy value <em>is</em> $P(s,a)$ <sup class="aside-ref">4</sup><span class="aside-note"><span class="aside-num">4</span> As I've indicated it, the value $Q(s,a)$ really should be called the <em>edge value</em>, but since each node only has one edge going into it, we can safely store edge values in the nodes </span></p>
+<h2 id="selection-with-puct">Selection with pUCT</h2>
+<p>All that's left is to describe the formula we use to actually select nodes to traverse. Properly, it's this behemoth<br />
+$$
+a^{*}=\arg\max_{a}\left[Q(s,a)+c_{\text{pUCT}}\cdot P(s,a)\cdot\frac{\sqrt{\sum_{b}{N(s,b)}}}{1+N(s,a)}\right]
+$$<br />
+so let's break it down step by step. The expression in the brackets consists of two terms: $Q(s,a)$, which corresponds to the expected utility of making this move, and the giant term involving $P(s,a)$, which corresponds to our initial assessment. Let's say (unrealistically) that $P$ is always zero, so we are just selecting the move with the highest $Q$. <sup class="aside-ref">5</sup><span class="aside-note"><span class="aside-num">5</span> Technically, this is impossible, as we require $P$ to be a probability distribution </span>. This corresponds to the reinforcement learning idea of <em>exploitation</em>: picking the best move of the ones we've already seen. Now let's suppose $Q$ was always zero, so that we're maximizing the term on the right. This is the prior assessment of a move, <em>weighted</em> by a factor inversely proportional to the fraction of visits spent on it (corresponding to the idea of <em>exploration</em>).</p>
+<p>But let's look at this factor in more detail, since it can seem rather arbitrary. Our visit fraction is simply $\frac{N(s,a)}{\sum_{b}N(s,b)}$, so inverting it gives $\frac{\sum_{b}N(s,b)}{N(s,a)}$. But there's a problem: what if we've never taken action $a$? This would lead to a division by zero, so it's common practice in machine learning to add a small constant $\epsilon$ to the denominator for numerical stability, say $1\cdot 10^{-8}$. However, dividing by this would still give an unreasonably large number, and we'd like our quantities to remain sensible! Instead, we can view the expansion <em>into</em> a node (from stage 2) as a visit, even as we've never actually walked down that path! <sup class="aside-ref">6</sup><span class="aside-note"><span class="aside-num">6</span> The astute reader might be wondering why we don't do this for the numerator. Truth is, this formula was largely arrived at empirically, and there isn't a simple first-principles explanation for it </span></p>
+<p>That leaves the puzzle of the square root. For that, let's suppose we didn't have a square root. In that case, as we kept searching, our inverse visit fraction would approach some constant, as the computer figures out the optimial visit fractions for each node. But if we search for longer (that is, both $N(s,a)$ and $\sum_{b}N(s,b)$ are higher), we can be more confident in our (empirical) values for $Q$, so it makes more sense to rely on them instead, and just pick the move that maximizes that. <sup class="aside-ref">7</sup><span class="aside-note"><span class="aside-num">7</span> This is an instance of the famous <em>exploration-exploitation tradeoff</em> in reinforcement learning </span>. By taking the square root, we cause this fraction to decay to zero, causing the greater emphasis on $Q$ just as we'd like. $c_{\text{pUCT}}$ is just a constant used to control the transition.</p>
+<h1 id="training-the-networks">Training the Networks</h1>
+<p>I mentioned that it's common to swap out the random simulation for a neural network, so all that's left is training it. Let's call our network $f_{\theta}$: it takes in a state $s$ and returns two things: a node value estimate $v$ and policy scores $\mathbf{p}$ (represented as a vector over all moves). Tuning the value estimate is easy: we simply regress it against the game result $z$ via mean squared error:<br />
+$$
+\mathcal{L}_{\text{value}}=(z-v)^{2}
+$$<br />
+where we set $z=1$ for a win, $-1$ for a loss, and $0$ for a draw. But what about the policy? For that, observe that the visit counts $N$ are a product of both the raw policy $P$ and the empirical values $Q$, and so give us a <em>better</em> picture of the moves that are actually worth looking at. After all, the most visited moves are the ones pUCT found most promising, and pUCT is inherently more than just $P$. Therefore, we can train the policy against the (normalized) visit counts $\boldsymbol{\pi}$ via the standard cross-entopy loss <sup class="aside-ref">8</sup><span class="aside-note"><span class="aside-num">8</span> Actions are discrete, so MSE is not appropriate here </span>:<br />
+$$
+\mathcal{L}_{\text{policy}}=-\boldsymbol{\pi}^{\top}\log\mathbf{p}
+$$<br />
+Lastly, we add a small weight decay penalty to prevent the network from overfitting, giving the final loss<br />
+$$
+\mathcal{L}=(z-v)^{2}-\boldsymbol{\pi}^{\top}\log\mathbf{p}+c\left\|\theta\right\|^{2}
+$$</p>
+<h1 id="looking-ahead-formalism-and-extensions">Looking Ahead: Formalism and Extensions</h1>
+<p>As it stands, our investigation is still a bit unsatisfying. I've explained the pUCT formula to you, but I haven't convincingly told you <em>why</em> we pick this formula over anything else. Sure, the discovery may have been empirical, but hasn't there been any theory that followed? In fact, there has! And while it's much more technical, it's deeply satisfying, and will be the subject of my sequel post. Thanks for reading!</p></div><nav class="post-nav"><a class="post-nav-item post-nav-older" href="../2025-07-14-dpbusd-explained/index.html"><span class="post-nav-label">← Previous</span><span class="post-nav-title">dpbusd, explained</span></a></nav></article><div class="post-asides"></div></div><button class="toc-toggle" id="toc-toggle" aria-label="Table of contents" aria-expanded="false">§</button>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; 2026 p > 0.05 &middot; aletheiaaaaa</span>
+      <nav class="footer-links"><a href="../../projects.html">projects</a><a href="../../blog.html">blog</a><a href="../../about.html">about</a></nav>
+    </div>
+  </footer>
+  <script src="../../main.js"></script>
+</body>
+</html>

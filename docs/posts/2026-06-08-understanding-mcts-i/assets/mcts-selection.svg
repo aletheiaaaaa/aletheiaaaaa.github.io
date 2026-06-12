@@ -1,0 +1,59 @@
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" role="img" data-themed="true">
+  <title>MCTS stage 1 — Selection</title>
+  <desc>Minimax-style Ruy Lopez tree (pruned branches removed). A purple PUCT path descends from the root through Bb5 and a6 to the leaf Bxc6, marked as the node to expand. Arrowheads show the downward direction of selection.</desc>
+  <defs>
+    <marker id="sel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#818cf8"/></marker>
+  </defs>
+  <style>
+    /* Dark-first palette; light-mode overrides live in style.css */
+    text { font-family:"Fira Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:400; }
+    .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
+    .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
+    .edgep{ stroke:#818cf8; stroke-width:2.5; fill:none; }
+    .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
+    .nodep{ fill:#1a1d33; stroke:#818cf8; stroke-width:2; }
+    .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
+    .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
+    .cap{ fill:#a1a1aa; font-size:11.5px; } .lgd{ fill:#a1a1aa; font-size:10.5px; }
+  </style>
+
+  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5" marker-end="url(#sel)"/>
+  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5" marker-end="url(#sel)"/>
+  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
+  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
+  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9" marker-end="url(#sel)"/>
+  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
+  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
+  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
+
+  <circle class="nodep" cx="340" cy="60"  r="22"/>
+  <circle class="nodep" cx="180" cy="160" r="18"/>
+  <circle class="node"  cx="500" cy="160" r="18"/>
+  <circle class="nodep" cx="100" cy="260" r="16"/>
+  <circle class="node"  cx="260" cy="260" r="16"/>
+  <circle class="node"  cx="420" cy="260" r="16"/>
+  <circle class="node"  cx="60"  cy="360" r="12"/>
+  <circle class="leaf"  cx="140" cy="360" r="12"/>
+  <circle class="node"  cx="220" cy="360" r="12"/>
+  <circle class="node"  cx="380" cy="360" r="12"/>
+  <circle class="node"  cx="460" cy="360" r="12"/>
+
+  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
+  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
+  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
+  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
+  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
+  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
+  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="tag" x="140" y="386" text-anchor="middle">leaf</text>
+
+  <line class="edgep" x1="230" y1="400" x2="258" y2="400" marker-end="url(#sel)"/>
+  <text class="lgd" x="266" y="400" dominant-baseline="central">selected path</text>
+  <circle class="leaf" cx="406" cy="400" r="7"/>
+  <text class="lgd" x="418" y="400" dominant-baseline="central">leaf to expand</text>
+</svg>

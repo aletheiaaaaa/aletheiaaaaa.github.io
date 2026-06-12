@@ -1,0 +1,101 @@
+---
+title: "Deconstructing AlphaGo: Exploring Monte Carlo Tree Search"
+description: |
+  What do you do when there are too many possibilities?
+author: "aletheiaaaaa"
+date: 2026-06-08
+---
+
+In what's since become a watershed moment in AI, DeepMind's AlphaGo [defeated 18-time Go champion Lee Sedol](http://theguardian.com/technology/2016/mar/15/googles-alphago-seals-4-1-victory-over-grandmaster-lee-sedol) in 2016, about a decade earlier than expected. DeepMind would then go on to produce a flurry of advancements: first [AlphaGo Zero](https://www.nature.com/articles/nature24270), which taught itself instead of learning from humans, and then [AlphaZero](https://www.science.org/doi/10.1126/science.aar6404), which extended the approach to other board games like chess and shogi. Throughout these advancements was an approach known as _Monte Carlo tree search_, or _MCTS_ for short, but when I first got into learning about it, I couldn't find any good resources. To fix this, I've written this blogpost, that hopefully demystifies some of the confusion for you too. I'll start by giving the basic idea, and then formalizing it as needed.
+
+# When the Action Space is Too Big
+
+Let's say you've just wrapped up a chess game, and you're using the state-of-the-art computer program [Stockfish](https://stockfishchess.org/) to get feedback. What Stockfish does under the hood is to list all possible responses to a move (in what's known as the _action space_), and then their responses, and so on until it's searched deep enough to provide a good answer. Since most continuations of a position are bad (for instance, if your queen is attacked, you probably won't move anything other than the queen), Stockfish uses a technique called _alpha-beta pruning_ to stop searching lines that it knows are suboptimal. This, combined with an extensive array of heuristics to eliminate moves that are likely to be poor, is what makes Stockfish the undisputed champion at computer chess.
+
+![Searching after 1. e4 e5 2. Nf3 Nc6 with alpha-beta](assets/ab-pruning.svg)
+
+Enter Go: unlike chess, which has about 30 or so moves each position, Go has about 250, so even a list of all the possible continuations becomes computationally infeasible to store. <aside> Formally, we'd say that the _branching factor_ is too high </aside> If you can't list the moves, you can't try them; and if you can't try them, alpha-beta can't be sure that they're suboptimal to prune. We need to do something different.
+
+# Building the Tree Step-by-Step
+
+You may have noticed a central tension in alpha-beta: we enumerate moves so that we can try them, and then immediately discard them when we find out that they're bad. What if we could somehow avoid considering those bad moves to begin with? The problem is that alpha-beta is "blind": it doesn't know that a move is bad until it's tried it, unlike a great human player, who can instinctively tell what moves are promising. What we need is some search strategy (in jargon, a _policy_) that assigns scores to moves _a priori_, and then tries out moves accordingly (neglecting moves that are too poor to even consider). Instead of pruning the giant tree of all possible continuations, we can _grow_ the tree by iteratively picking new moves, evaluating the resulting positions, and using those evaluations to update what the best moves are. This process is all there is to MCTS.
+
+## Stage 1: Selection
+
+Before we explore new moves, we need to pick some position along the game tree as our starting point. Aptly, selecting the right position (or _node_) in the tree is called _selection_, and is done using three quantities:
+
++ the _node value_, based on previous results from having walked along this position,
++ the _visit count_, or how many times we've walked this node before, and
++ the _policy value_, or the initial assessment of how good this node is
+
+Starting from the root node (that is, the node corresponding to no moves searched at the top of the tree), we combine these three quantities using a formula called PUCT (more on that below) to progressively walk the tree until we reach a leaf node, that is, a node that has no edges leading out of it.
+
+![The selection phase after 1. e4 e5 2. Nf3 Nc6](assets/mcts-selection.svg)
+
+Notice how the tree is _asymmetric_: since we choose the search the moves we want, some lines get searched deeper than others. In particular, we haven't searched the lines that were pruned!
+
+## Stage 2: Expansion
+
+Once we've picked a leaf node, the natural next step is to consider the moves we can play from it. This step is known as _expansion_: for the chosen leaf node, we expand the tree by adding nodes for all the continuations one move deeper. <aside> Older versions of MCTS, based on the algorithm UCB1, only expand one node at a time </aside>
+
+![The expansion phase after 1. e4 e5 2. Nf3 Nc6](assets/mcts-expansion.svg)
+
+Note that in some implementations, we might only expand after having visited the node enough times! In this case, we jump straight to the next step
+
+## Stage 3: Simulation
+
+From our newly expanded leaf node (not it's children!), we then _simulate_ the outcome of the game by playing random moves until the end (explaining the name Monte Carlo), or, as is more common these days, substitute the simulation with a neural network that approximates the end result directly. <aside> The original version of AlphaGo used a tunable mix of both these approaches, but this was later dropped in favor of deep learning </aside>. When we do this, our leaf node gets assigned a value (the node value from earlier) representing the expected utility from playing it, which is cached and stored.
+
+![The simulation phase after 1. e4 e5 2. Nf3 Nc6](assets/mcts-simulation.svg)
+
+## Stage 4: Backpropagation
+
+Once we have our node value, we then recursively use it to update the values of all the nodes in the path we took. Specifically, we add our node value to the node values of the previous nodes, and increment their visit counts by one (allowing us to compute the average value when needed). 
+
+![The backpropagation phase after 1. e4 e5 2. Nf3 Nc6](assets/mcts-backpropagation.svg)
+
+Congrats! You've successfully completed one iteration of Monte Carlo tree search!
+
+# Formalizing the Algorithm
+
+## Setup and Notation
+
+When formalizing any bit of code, it's always good practice to give names to what we're working with. Given any node, call it $s$ (for _state_), and possible move, call it $a$ (for _action_), let's say that 
+
++ the initial estimate for how good $a$ is at $s$ is called $P(s,a)$,
++ the number of times we've tried $a$ at $s$ is called $N(s,a)$,
++ the running total of accumulated utilities is called $W(s,a)$, and
++ the average utility, computed from the previous two quantities, is called $Q(s,a)$
+
+Notice how these values map cleanly onto the values I've introduced earlier: the node value _is_ $Q(s,a)$, the visit count _is_ $N(s,a)$, and the policy value _is_ $P(s,a)$ <aside> As I've indicated it, the value $Q(s,a)$ really should be called the _edge value_, but since each node only has one edge going into it, we can safely store edge values in the nodes </aside>
+
+## Selection with pUCT
+
+All that's left is to describe the formula we use to actually select nodes to traverse. Properly, it's this behemoth
+$$
+a^{*}=\arg\max_{a}\left[Q(s,a)+c_{\text{pUCT}}\cdot P(s,a)\cdot\frac{\sqrt{\sum_{b}{N(s,b)}}}{1+N(s,a)}\right]
+$$
+so let's break it down step by step. The expression in the brackets consists of two terms: $Q(s,a)$, which corresponds to the expected utility of making this move, and the giant term involving $P(s,a)$, which corresponds to our initial assessment. Let's say (unrealistically) that $P$ is always zero, so we are just selecting the move with the highest $Q$. <aside> Technically, this is impossible, as we require $P$ to be a probability distribution </aside>. This corresponds to the reinforcement learning idea of _exploitation_: picking the best move of the ones we've already seen. Now let's suppose $Q$ was always zero, so that we're maximizing the term on the right. This is the prior assessment of a move, _weighted_ by a factor inversely proportional to the fraction of visits spent on it (corresponding to the idea of _exploration_).
+
+But let's look at this factor in more detail, since it can seem rather arbitrary. Our visit fraction is simply $\frac{N(s,a)}{\sum_{b}N(s,b)}$, so inverting it gives $\frac{\sum_{b}N(s,b)}{N(s,a)}$. But there's a problem: what if we've never taken action $a$? This would lead to a division by zero, so it's common practice in machine learning to add a small constant $\epsilon$ to the denominator for numerical stability, say $1\cdot 10^{-8}$. However, dividing by this would still give an unreasonably large number, and we'd like our quantities to remain sensible! Instead, we can view the expansion _into_ a node (from stage 2) as a visit, even as we've never actually walked down that path! <aside> The astute reader might be wondering why we don't do this for the numerator. Truth is, this formula was largely arrived at empirically, and there isn't a simple first-principles explanation for it </aside>
+
+That leaves the puzzle of the square root. For that, let's suppose we didn't have a square root. In that case, as we kept searching, our inverse visit fraction would approach some constant, as the computer figures out the optimial visit fractions for each node. But if we search for longer (that is, both $N(s,a)$ and $\sum_{b}N(s,b)$ are higher), we can be more confident in our (empirical) values for $Q$, so it makes more sense to rely on them instead, and just pick the move that maximizes that. <aside> This is an instance of the famous _exploration-exploitation tradeoff_ in reinforcement learning </aside>. By taking the square root, we cause this fraction to decay to zero, causing the greater emphasis on $Q$ just as we'd like. $c_{\text{pUCT}}$ is just a constant used to control the transition.
+
+# Training the Networks
+
+I mentioned that it's common to swap out the random simulation for a neural network, so all that's left is training it. Let's call our network $f_{\theta}$: it takes in a state $s$ and returns two things: a node value estimate $v$ and policy scores $\mathbf{p}$ (represented as a vector over all moves). Tuning the value estimate is easy: we simply regress it against the game result $z$ via mean squared error:
+$$
+\mathcal{L}_{\text{value}}=(z-v)^{2}
+$$
+where we set $z=1$ for a win, $-1$ for a loss, and $0$ for a draw. But what about the policy? For that, observe that the visit counts $N$ are a product of both the raw policy $P$ and the empirical values $Q$, and so give us a _better_ picture of the moves that are actually worth looking at. After all, the most visited moves are the ones pUCT found most promising, and pUCT is inherently more than just $P$. Therefore, we can train the policy against the (normalized) visit counts $\boldsymbol{\pi}$ via the standard cross-entopy loss <aside> Actions are discrete, so MSE is not appropriate here </aside>:
+$$
+\mathcal{L}_{\text{policy}}=-\boldsymbol{\pi}^{\top}\log\mathbf{p}
+$$
+Lastly, we add a small weight decay penalty to prevent the network from overfitting, giving the final loss
+$$
+\mathcal{L}=(z-v)^{2}-\boldsymbol{\pi}^{\top}\log\mathbf{p}+c\left\|\theta\right\|^{2}
+$$
+
+# Looking Ahead: Formalism and Extensions
+
+As it stands, our investigation is still a bit unsatisfying. I've explained the pUCT formula to you, but I haven't convincingly told you _why_ we pick this formula over anything else. Sure, the discovery may have been empirical, but hasn't there been any theory that followed? In fact, there has! And while it's much more technical, it's deeply satisfying, and will be the subject of my sequel post. Thanks for reading!
