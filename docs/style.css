@@ -9,10 +9,10 @@
   --text-heading: #ffffff;
   --text-muted: #c0c0c0;
 
-  --accent: #818cf8;
+  --accent: #a5b4fc;
   --accent-light: #c7d2fe;
-  --accent-border: rgba(129, 140, 248, 0.35);
-  --accent-tag-bg: rgba(129, 140, 248, 0.08);
+  --accent-border: rgba(165, 180, 252, 0.35);
+  --accent-tag-bg: rgba(165, 180, 252, 0.08);
 
   --nav-blur-bg: rgba(10, 10, 11, 0.85);
   --font: 'Fira Sans', system-ui, sans-serif;
@@ -1751,10 +1751,10 @@ html[data-theme="dark"] {
   --text-primary: #f8f8f8;
   --text-heading: #ffffff;
   --text-muted: #c0c0c0;
-  --accent: #818cf8;
+  --accent: #a5b4fc;
   --accent-light: #c7d2fe;
-  --accent-border: rgba(129, 140, 248, 0.35);
-  --accent-tag-bg: rgba(129, 140, 248, 0.08);
+  --accent-border: rgba(165, 180, 252, 0.35);
+  --accent-tag-bg: rgba(165, 180, 252, 0.08);
   --nav-blur-bg: rgba(10, 10, 11, 0.85);
 }
 

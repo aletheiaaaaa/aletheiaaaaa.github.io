@@ -9,12 +9,12 @@
     .mvx { fill: #a5b4fc; }
     .pl  { fill: #a5b4fc; font-size: 10px; font-style: italic; }
     .edge { stroke: #52525b; stroke-width: 1.5; fill: none; }
-    .edgep{ stroke: #818cf8; stroke-width: 2.5; fill: none; }
+    .edgep{ stroke: #a5b4fc; stroke-width: 2.5; fill: none; }
     .edgex{ stroke: #6f7ad1; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
     .node { fill: #1a1a1d; stroke: #52525b; stroke-width: 1.5; }
-    .nodep{ fill: #1a1d33; stroke: #818cf8; stroke-width: 2; }
+    .nodep{ fill: #1a1d33; stroke: #a5b4fc; stroke-width: 2; }
     .nodex{ fill: #181a2b; stroke: #6f7ad1; stroke-width: 1.5; stroke-dasharray: 4 3; }
-    .cut  { stroke: #818cf8; stroke-width: 1.8; }
+    .cut  { stroke: #a5b4fc; stroke-width: 1.8; }
   </style>
 
   <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5"/>

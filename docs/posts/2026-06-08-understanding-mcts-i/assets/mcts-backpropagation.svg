@@ -10,10 +10,10 @@
     .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
     .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
     .edgeback{ stroke:#a5b4fc; stroke-width:2.5; fill:none; }
-    .edgenew{ stroke:#818cf8; stroke-width:2; stroke-dasharray:5 3; fill:none; }
+    .edgenew{ stroke:#a5b4fc; stroke-width:2; stroke-dasharray:5 3; fill:none; }
     .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
-    .nodep{ fill:#1a1d33; stroke:#818cf8; stroke-width:2; }
-    .nodenew{ fill:#1a1d33; stroke:#818cf8; stroke-width:1.8; stroke-dasharray:4 2.5; }
+    .nodep{ fill:#1a1d33; stroke:#a5b4fc; stroke-width:2; }
+    .nodenew{ fill:#1a1d33; stroke:#a5b4fc; stroke-width:1.8; stroke-dasharray:4 2.5; }
     .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
     .ring{ fill:none; stroke:#c7d2fe; stroke-width:1.2; opacity:0.75; }
     .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
