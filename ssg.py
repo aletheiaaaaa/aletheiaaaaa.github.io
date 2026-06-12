@@ -196,6 +196,69 @@ def extract_asides(html: str):
     return html, asides
 
 
+def wrap_details(html: str) -> str:
+    def _replace(m):
+        summary = m.group(1)
+        body = m.group(2)
+        return f'<details>{summary}<div class="details-body">{body}</div></details>'
+
+    return re.sub(
+        r"<details\b[^>]*>(.*?</summary>)(.*?)</details>",
+        _replace,
+        html,
+        flags=re.DOTALL,
+    )
+
+
+def number_asides(html: str) -> str:
+    counter = [0]
+
+    def _sub(m):
+        counter[0] += 1
+        n = counter[0]
+        return (
+            f'<sup class="aside-ref">{n}</sup>'
+            f'<span class="aside-note"><span class="aside-num">{n}</span>{m.group(1)}</span>'
+        )
+
+    return re.sub(r"<aside\b[^>]*>(.*?)</aside>", _sub, html, flags=re.DOTALL)
+
+
+_BLOCK_IMG_RE = re.compile(r"<p>\s*(<img\b[^>]*?>)\s*</p>")
+
+
+def inline_figures(html: str, base_dir: Path) -> str:
+    """Turn a standalone block image into a <figure> with a <figcaption> built
+    from its alt text, so the caption renders visibly.
+
+    A local .svg marked theme-aware (a `data-themed` attribute on its root) is
+    inlined — its markup spliced into the page — so it inherits the page theme
+    via style.css. Other images stay as <img> (grayscale diagrams rely on the
+    light-mode invert filter, which would be lost if inlined).
+    """
+
+    def _repl(m):
+        img = m.group(1)
+        alt_m = re.search(r'alt="([^"]*)"', img)
+        src_m = re.search(r'src="([^"]*)"', img)
+        alt = alt_m.group(1) if alt_m else ""
+        src = src_m.group(1) if src_m else ""
+        caption = f"<figcaption>{alt}</figcaption>" if alt else ""
+
+        if src.lower().endswith(".svg") and not src.startswith(("http://", "https://", "//")):
+            svg_path = base_dir / src
+            if svg_path.exists():
+                svg = svg_path.read_text().strip()
+                if "data-themed" in svg:
+                    # drop any XML prolog so the markup splices cleanly into HTML
+                    svg = re.sub(r"^<\?xml[^>]*\?>\s*", "", svg)
+                    return f'<figure class="figure--svg">{svg}{caption}</figure>'
+
+        return f"<figure>{img}{caption}</figure>"
+
+    return _BLOCK_IMG_RE.sub(_repl, html)
+
+
 def has_math(text):
     return bool(re.search(r"\$", text))
 
@@ -435,7 +498,9 @@ def build_post(post, cfg, older=None, newer=None):
     meta, body = parse_frontmatter(text)
 
     content_html, toc_html = render_markdown(body)
-    content_html, aside_blocks = extract_asides(content_html)
+    content_html = inline_figures(content_html, post["dir"])
+    content_html = number_asides(content_html)
+    content_html = wrap_details(content_html)
     math = has_math(body)
 
     title = meta.get("title", post["slug"])
@@ -495,11 +560,6 @@ def build_post(post, cfg, older=None, newer=None):
             )
         post_nav = f'<nav class="post-nav">{older_html}{newer_html}</nav>'
 
-    asides_col = ""
-    if aside_blocks:
-        asides_inner = "".join(aside_blocks)
-        asides_col = f'<div class="post-asides">{asides_inner}</div>'
-
     toc_toggle = ""
     if toc_sidebar:
         toc_toggle = '<button class="toc-toggle" id="toc-toggle" aria-label="Table of contents" aria-expanded="false">§</button>'
@@ -508,7 +568,7 @@ def build_post(post, cfg, older=None, newer=None):
         f'<div class="post-layout">'
         f"{toc_sidebar}"
         f'<article class="post-wrap">{header}<div class="post-body">{content_html}</div>{post_nav}</article>'
-        f"{asides_col}"
+        f'<div class="post-asides"></div>'
         f"</div>"
         f"{toc_toggle}"
     )
@@ -550,7 +610,7 @@ def build_index(posts, cfg):
         hero_html += "</section>"
 
     items = ""
-    for p in posts[:3]:
+    for p in posts[:4]:
         title = p["meta"].get("title", p["slug"])
         desc = p["meta"].get("description", p["meta"].get("subtitle", ""))
         date_str = p["date"].strftime("%b %-d, %Y") if p["date"].year > 1970 else ""
@@ -593,14 +653,14 @@ def build_index(posts, cfg):
     print(f"  index → index.html")
 
 
-def build_page(md_file, cfg, posts=None):
+def build_page(rmd_file, cfg, posts=None):
     """Build a static page from pages/name.md."""
-    text = md_file.read_text()
+    text = rmd_file.read_text()
     meta, body = parse_frontmatter(text)
 
     content_html, _ = render_markdown(body)
     math = has_math(body)
-    title = meta.get("title", md_file.stem.replace("-", " ").title())
+    title = meta.get("title", rmd_file.stem.replace("-", " ").title())
 
     if meta.get("layout") == "projects":
         intro = f'<div class="page-intro">{content_html}</div>' if body.strip() else ""
@@ -638,7 +698,7 @@ def build_page(md_file, cfg, posts=None):
 
     html = render_page(title, body_html, cfg, root_rel="", math=math)
 
-    out_name = md_file.stem + ".html"
+    out_name = rmd_file.stem + ".html"
     (OUT_DIR / out_name).write_text(html)
     print(f"  page  → {out_name}")
 
@@ -665,8 +725,8 @@ def cmd_build():
 
     # Build pages
     if PAGES_DIR.exists():
-        for md_file in sorted(PAGES_DIR.glob("*.md")):
-            build_page(md_file, cfg, posts=posts)
+        for rmd_file in sorted(PAGES_DIR.glob("*.md")):
+            build_page(rmd_file, cfg, posts=posts)
 
     # Build posts (sorted newest-first, so older = higher index, newer = lower index)
     for i, post in enumerate(posts):
@@ -747,7 +807,7 @@ State a theorem here. *Markdown* works inside.
 Proof follows.
 :::
 """)
-    print(f"Created: {md_file}")
+    print(f"Created: {rmd_file}")
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────

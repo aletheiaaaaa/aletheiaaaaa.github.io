@@ -3,16 +3,16 @@
 :root {
   --surface: #0a0a0b;
   --surface-raised: #141416;
-  --border: #262626;
+  --border: #3d3d3d;
 
   --text-primary: #f8f8f8;
   --text-heading: #ffffff;
   --text-muted: #c0c0c0;
 
-  --accent: #d946ef;
-  --accent-light: #f0abfc;
-  --accent-border: rgba(217, 70, 239, 0.35);
-  --accent-tag-bg: rgba(217, 70, 239, 0.08);
+  --accent: #818cf8;
+  --accent-light: #c7d2fe;
+  --accent-border: rgba(129, 140, 248, 0.35);
+  --accent-tag-bg: rgba(129, 140, 248, 0.08);
 
   --nav-blur-bg: rgba(10, 10, 11, 0.85);
   --font: 'Fira Sans', system-ui, sans-serif;
@@ -281,7 +281,7 @@ main {
 
 .project-card:hover {
   border-color: var(--accent-border);
-  box-shadow: 0 4px 16px rgba(217, 70, 239, 0.07);
+  box-shadow: 0 4px 16px rgba(129, 140, 248, 0.07);
 }
 
 .project-card h3 {
@@ -461,7 +461,7 @@ main {
   border-radius: 4px;
 }
 
-/* ── Post three-column layout (toc | body | asides) ── */
+/* ── Post three-column layout (toc | body | margin) ── */
 .post-layout {
   display: grid;
   grid-template-columns: 240px 1fr minmax(0, 200px);
@@ -502,10 +502,19 @@ main {
   border-color: var(--accent-border);
 }
 
-/* ── Post aside column ── */
+/* ── Post aside column (empty grid slot) ── */
 .post-asides {
-  padding-top: 4rem;
   min-width: 0;
+}
+
+/* ── Aside inline reference marker ── */
+.aside-ref {
+  font-size: 0.65em;
+  font-weight: 500;
+  color: var(--accent);
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 0.1em;
 }
 
 /* ── Sticky TOC sidebar ── */
@@ -582,7 +591,7 @@ main {
 .post-header {
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .post-header h1 {
@@ -633,6 +642,16 @@ main {
   border-radius: 4px;
 }
 
+code,
+pre,
+.codehilite {
+  border-color: #4a4a4a;
+}
+
+pre code {
+  border: none;
+}
+
 /* ── Post body ── */
 .post-body {
   font-size: 0.95rem;
@@ -643,38 +662,38 @@ main {
 }
 
 /* ── Aside / margin note ── */
-.post-asides aside,
-.post-asides .aside,
-.post-body aside,
-.post-body .aside {
-  font-size: 0.8rem;
+.post-body .aside-note {
+  float: right;
+  clear: right;
+  /* push aside past the body column into the third grid column.
+     negative margin-right cancels the width, so body text doesn't wrap around it. */
+  width: 200px;
+  margin-right: calc(-200px - 4rem);
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+  font-size: 0.72rem;
   font-weight: 300;
   color: var(--text-muted);
   border-left: 2px solid var(--border);
   padding: 0.35rem 0 0.35rem 0.75rem;
   line-height: 1.55;
-  margin-bottom: 1.5rem;
 }
 
-.post-asides aside p,
-.post-asides .aside p,
-.post-body aside p,
-.post-body .aside p {
+.aside-num {
+  font-size: 0.7em;
+  font-weight: 500;
+  color: var(--accent);
+  vertical-align: super;
+  line-height: 0;
+  margin-right: 0.25em;
+}
+
+.post-body .aside-note p {
   margin: 0 0 0.4rem;
 }
 
-.post-asides aside p:last-child,
-.post-asides .aside p:last-child,
-.post-body aside p:last-child,
-.post-body .aside p:last-child {
+.post-body .aside-note p:last-child {
   margin: 0;
-}
-
-/* when aside is in the right column, sit sticky near its anchor */
-.post-asides aside,
-.post-asides .aside {
-  position: sticky;
-  top: 5.5rem;
 }
 
 .post-body h2,
@@ -738,13 +757,13 @@ a:hover {
 
 .post-body a {
   color: var(--accent-light);
-  border-bottom: 1px solid rgba(217, 70, 239, 0.3);
+  border-bottom: 1px solid var(--border);
   transition: color 0.15s, border-color 0.15s;
 }
 
 .post-body a:hover {
   color: var(--text-heading);
-  border-bottom-color: var(--text-heading);
+  border-bottom-color: var(--border);
 }
 
 strong {
@@ -826,12 +845,12 @@ pre code {
 }
 
 .codehilite .hll {
-  background: rgba(217, 70, 239, 0.1);
+  background: rgba(129, 140, 248, 0.1);
 }
 
 .codehilite .k,
 .codehilite .kw {
-  color: #f0abfc;
+  color: #c7d2fe;
   font-weight: 500;
 }
 
@@ -839,20 +858,20 @@ pre code {
 .codehilite .kp,
 .codehilite .kr,
 .codehilite .kt {
-  color: #f0abfc;
+  color: #c7d2fe;
 }
 
 .codehilite .cf {
-  color: #f0abfc;
+  color: #c7d2fe;
   font-weight: 500;
 }
 
 .codehilite .pp {
-  color: #f0abfc;
+  color: #c7d2fe;
 }
 
 .codehilite .ot {
-  color: #f0abfc;
+  color: #c7d2fe;
 }
 
 .codehilite .dt {
@@ -963,7 +982,7 @@ table {
 }
 
 th {
-  background: rgba(217, 70, 239, 0.05);
+  background: rgba(129, 140, 248, 0.05);
   font-weight: 400;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
@@ -1002,6 +1021,24 @@ figcaption,
   margin-bottom: 2rem;
 }
 
+/* ── Figures (block images + inlined SVG diagrams) ── */
+.post-body figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.post-body figure img,
+.post-body figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.post-body figure figcaption {
+  margin: 0.85rem 0 0;
+}
+
 /* ── Callout blocks ── */
 .theorem,
 .proof,
@@ -1035,7 +1072,7 @@ figcaption,
 }
 
 .theorem {
-  background: rgba(217, 70, 239, 0.05);
+  background: rgba(129, 140, 248, 0.05);
   border-color: var(--accent);
 }
 
@@ -1045,23 +1082,23 @@ figcaption,
 }
 
 .lemma {
-  background: rgba(217, 70, 239, 0.05);
-  border-color: #7c3aed;
+  background: rgba(129, 140, 248, 0.05);
+  border-color: #6366f1;
 }
 
 .lemma::before {
   content: "lemma";
-  color: #7c3aed;
+  color: #6366f1;
 }
 
 .corollary {
-  background: rgba(217, 70, 239, 0.05);
-  border-color: #7c3aed;
+  background: rgba(129, 140, 248, 0.05);
+  border-color: #6366f1;
 }
 
 .corollary::before {
   content: "corollary";
-  color: #7c3aed;
+  color: #6366f1;
 }
 
 .proof {
@@ -1103,6 +1140,68 @@ figcaption,
 .example::before {
   content: "example";
   color: var(--text-muted);
+}
+
+/* ── Collapsible details ── */
+.post-body details {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  margin: 2rem 0;
+}
+
+.post-body details summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.15s;
+}
+
+.post-body details summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-body details summary::before {
+  content: '▸';
+  font-size: 0.75em;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.post-body details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.post-body details summary:hover {
+  opacity: 0.75;
+}
+
+.post-body details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.post-body .details-body {
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.post-body .details-body>*:first-child {
+  margin-top: 0;
+}
+
+.post-body .details-body>*:last-child {
+  margin-bottom: 0;
 }
 
 /* ── Post prev/next nav ── */
@@ -1208,12 +1307,12 @@ footer.site-footer {
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(217, 70, 239, 0.2);
+  background: rgba(129, 140, 248, 0.2);
   color: var(--text-heading);
 }
 
 ::-moz-selection {
-  background: rgba(217, 70, 239, 0.2);
+  background: rgba(129, 140, 248, 0.2);
   color: var(--text-heading);
 }
 
@@ -1304,8 +1403,11 @@ body[data-page="index"] main {
     display: block;
   }
 
-  .post-asides {
-    display: none;
+  .post-body .aside-note {
+    float: none;
+    width: auto;
+    margin: 1rem 0;
+    margin-right: 0;
   }
 
   .index-grid {
@@ -1394,32 +1496,33 @@ body[data-page="index"] main {
 /* ── Light mode (system preference) ── */
 @media (prefers-color-scheme: light) {
   html:not([data-theme="dark"]) {
-    --surface: #f5f0eb;
-    --surface-raised: #faf7f4;
-    --border: #e5e5e5;
-    --text-primary: #111111;
-    --text-heading: #000000;
-    --text-muted: #525252;
-    --accent: #c026d3;
-    --accent-light: #a21caf;
-    --accent-border: rgba(192, 38, 211, 0.3);
-    --accent-tag-bg: rgba(192, 38, 211, 0.06);
-    --nav-blur-bg: rgba(245, 240, 235, 0.90);
+    --surface: #f1f2f5;
+    --surface-raised: #fafbfd;
+    --border: #e0e2e7;
+    --text-primary: #0f172a;
+    --text-heading: #020617;
+    --text-muted: #475569;
+    --accent: #6366f1;
+    --accent-light: #4f46e5;
+    --accent-border: rgba(99, 102, 241, 0.3);
+    --accent-tag-bg: rgba(99, 102, 241, 0.06);
+    --nav-blur-bg: rgba(241, 242, 245, 0.90);
   }
 
   html:not([data-theme="dark"]) .project-card {
-    background: #ede8e2;
+    background: #e8eaef;
+    border-color: #c7cad3;
   }
 
   html:not([data-theme="dark"]) .post-header {
-    border-bottom-color: #a8a29e;
+    border-bottom-color: #b2b2b8;
   }
 
   html:not([data-theme="dark"]) code,
   html:not([data-theme="dark"]) pre,
   html:not([data-theme="dark"]) .codehilite {
-    background: #ede8e2;
-    border-color: #d4cfc8;
+    background: #e8eaef;
+    border-color: #d5d8df;
   }
 
   html:not([data-theme="dark"]) pre code {
@@ -1440,16 +1543,16 @@ body[data-page="index"] main {
   }
 
   html:not([data-theme="dark"]) ::-webkit-scrollbar-thumb {
-    background: #d4d4d4;
+    background: #d2d2d6;
   }
 
   html:not([data-theme="dark"]) ::selection {
-    background: rgba(192, 38, 211, 0.12);
+    background: rgba(99, 102, 241, 0.12);
     color: var(--text-heading);
   }
 
   html:not([data-theme="dark"]) ::-moz-selection {
-    background: rgba(192, 38, 211, 0.12);
+    background: rgba(99, 102, 241, 0.12);
     color: var(--text-heading);
   }
 
@@ -1462,7 +1565,7 @@ body[data-page="index"] main {
   html:not([data-theme="dark"]) .codehilite .cf,
   html:not([data-theme="dark"]) .codehilite .pp,
   html:not([data-theme="dark"]) .codehilite .ot {
-    color: #a21caf;
+    color: #4f46e5;
   }
 
   html:not([data-theme="dark"]) .codehilite .dv,
@@ -1484,7 +1587,7 @@ body[data-page="index"] main {
   html:not([data-theme="dark"]) .codehilite .sl,
   html:not([data-theme="dark"]) .codehilite .ss,
   html:not([data-theme="dark"]) .codehilite .sx {
-    color: #b45309;
+    color: #0f766e;
   }
 
   html:not([data-theme="dark"]) .codehilite .c,
@@ -1516,38 +1619,39 @@ body[data-page="index"] main {
   }
 
   html:not([data-theme="dark"]) .codehilite .hll {
-    background: rgba(192, 38, 211, 0.08);
+    background: rgba(99, 102, 241, 0.08);
   }
 }
 
 /* ── Explicit light mode (manual toggle) ── */
 html[data-theme="light"] {
-  --surface: #f5f0eb;
-  --surface-raised: #faf7f4;
-  --border: #e5e5e5;
-  --text-primary: #111111;
-  --text-heading: #000000;
-  --text-muted: #525252;
-  --accent: #c026d3;
-  --accent-light: #a21caf;
-  --accent-border: rgba(192, 38, 211, 0.3);
-  --accent-tag-bg: rgba(192, 38, 211, 0.06);
-  --nav-blur-bg: rgba(245, 240, 235, 0.90);
+  --surface: #f1f2f5;
+  --surface-raised: #fafbfd;
+  --border: #e0e2e7;
+  --text-primary: #0f172a;
+  --text-heading: #020617;
+  --text-muted: #475569;
+  --accent: #6366f1;
+  --accent-light: #4f46e5;
+  --accent-border: rgba(99, 102, 241, 0.3);
+  --accent-tag-bg: rgba(99, 102, 241, 0.06);
+  --nav-blur-bg: rgba(241, 242, 245, 0.90);
 }
 
 html[data-theme="light"] .project-card {
-  background: #ede8e2;
+  background: #e8eaef;
+  border-color: #c7cad3;
 }
 
 html[data-theme="light"] .post-header {
-  border-bottom-color: #a8a29e;
+  border-bottom-color: #b2b2b8;
 }
 
 html[data-theme="light"] code,
 html[data-theme="light"] pre,
 html[data-theme="light"] .codehilite {
-  background: #ede8e2;
-  border-color: #d4cfc8;
+  background: #e8eaef;
+  border-color: #d5d8df;
 }
 
 html[data-theme="light"] pre code {
@@ -1568,16 +1672,16 @@ html[data-theme="light"] header.site-header {
 }
 
 html[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #d4d4d4;
+  background: #d2d2d6;
 }
 
 html[data-theme="light"] ::selection {
-  background: rgba(192, 38, 211, 0.12);
+  background: rgba(99, 102, 241, 0.12);
   color: var(--text-heading);
 }
 
 html[data-theme="light"] ::-moz-selection {
-  background: rgba(192, 38, 211, 0.12);
+  background: rgba(99, 102, 241, 0.12);
   color: var(--text-heading);
 }
 
@@ -1590,7 +1694,7 @@ html[data-theme="light"] .codehilite .kt,
 html[data-theme="light"] .codehilite .cf,
 html[data-theme="light"] .codehilite .pp,
 html[data-theme="light"] .codehilite .ot {
-  color: #a21caf;
+  color: #4f46e5;
 }
 
 html[data-theme="light"] .codehilite .dv,
@@ -1612,7 +1716,7 @@ html[data-theme="light"] .codehilite .si,
 html[data-theme="light"] .codehilite .sl,
 html[data-theme="light"] .codehilite .ss,
 html[data-theme="light"] .codehilite .sx {
-  color: #b45309;
+  color: #0f766e;
 }
 
 html[data-theme="light"] .codehilite .c,
@@ -1644,22 +1748,36 @@ html[data-theme="light"] .codehilite .ow {
 }
 
 html[data-theme="light"] .codehilite .hll {
-  background: rgba(192, 38, 211, 0.08);
+  background: rgba(99, 102, 241, 0.08);
 }
 
 /* ── Explicit dark mode (manual toggle overrides system light preference) ── */
 html[data-theme="dark"] {
   --surface: #0a0a0b;
   --surface-raised: #141416;
-  --border: #262626;
+  --border: #3d3d3d;
   --text-primary: #f8f8f8;
   --text-heading: #ffffff;
   --text-muted: #c0c0c0;
-  --accent: #d946ef;
-  --accent-light: #f0abfc;
-  --accent-border: rgba(217, 70, 239, 0.35);
-  --accent-tag-bg: rgba(217, 70, 239, 0.08);
+  --accent: #818cf8;
+  --accent-light: #c7d2fe;
+  --accent-border: rgba(129, 140, 248, 0.35);
+  --accent-tag-bg: rgba(129, 140, 248, 0.08);
   --nav-blur-bg: rgba(10, 10, 11, 0.85);
+}
+
+html[data-theme="dark"] .post-header {
+  border-bottom-color: #606060;
+}
+
+html[data-theme="dark"] code,
+html[data-theme="dark"] pre,
+html[data-theme="dark"] .codehilite {
+  border-color: #4a4a4a;
+}
+
+html[data-theme="dark"] pre code {
+  border: none;
 }
 
 html[data-theme="dark"] ::-webkit-scrollbar-thumb {
@@ -1667,12 +1785,12 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb {
 }
 
 html[data-theme="dark"] ::selection {
-  background: rgba(217, 70, 239, 0.2);
+  background: rgba(129, 140, 248, 0.2);
   color: var(--text-heading);
 }
 
 html[data-theme="dark"] ::-moz-selection {
-  background: rgba(217, 70, 239, 0.2);
+  background: rgba(129, 140, 248, 0.2);
   color: var(--text-heading);
 }
 
@@ -1685,7 +1803,7 @@ html[data-theme="dark"] .codehilite .kt,
 html[data-theme="dark"] .codehilite .cf,
 html[data-theme="dark"] .codehilite .pp,
 html[data-theme="dark"] .codehilite .ot {
-  color: #f0abfc;
+  color: #c7d2fe;
   font-weight: 500;
 }
 
@@ -1741,7 +1859,7 @@ html[data-theme="dark"] .codehilite .ow {
 }
 
 html[data-theme="dark"] .codehilite .hll {
-  background: rgba(217, 70, 239, 0.1);
+  background: rgba(129, 140, 248, 0.1);
 }
 
 /* ── Post images: invert dark-mode diagrams for light mode ── */
@@ -1756,3 +1874,31 @@ html[data-theme="light"] .post-body img {
   filter: invert(1) hue-rotate(180deg);
   border-color: transparent;
 }
+
+/* ── Inlined SVG diagrams: dark-first palette lives in the SVG; recolour for
+   light mode here so they track the manual toggle (no invert filter). ── */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .post-body svg .mv { fill: #5f5e5a; }
+  html:not([data-theme="dark"]) .post-body svg .mvp { fill: #4f46e5; }
+  html:not([data-theme="dark"]) .post-body svg .mvx,
+  html:not([data-theme="dark"]) .post-body svg .pl { fill: #818cf8; }
+  html:not([data-theme="dark"]) .post-body svg .edge { stroke: #afb5bf; }
+  html:not([data-theme="dark"]) .post-body svg .edgep,
+  html:not([data-theme="dark"]) .post-body svg .cut { stroke: #4f46e5; }
+  html:not([data-theme="dark"]) .post-body svg .edgex { stroke: #818cf8; }
+  html:not([data-theme="dark"]) .post-body svg .node { fill: #edf1f6; stroke: #828a94; }
+  html:not([data-theme="dark"]) .post-body svg .nodep { fill: #eeedfe; stroke: #4f46e5; }
+  html:not([data-theme="dark"]) .post-body svg .nodex { fill: #f4f2fd; stroke: #818cf8; }
+}
+
+html[data-theme="light"] .post-body svg .mv { fill: #5f5e5a; }
+html[data-theme="light"] .post-body svg .mvp { fill: #4f46e5; }
+html[data-theme="light"] .post-body svg .mvx,
+html[data-theme="light"] .post-body svg .pl { fill: #818cf8; }
+html[data-theme="light"] .post-body svg .edge { stroke: #afb5bf; }
+html[data-theme="light"] .post-body svg .edgep,
+html[data-theme="light"] .post-body svg .cut { stroke: #4f46e5; }
+html[data-theme="light"] .post-body svg .edgex { stroke: #818cf8; }
+html[data-theme="light"] .post-body svg .node { fill: #edf1f6; stroke: #828a94; }
+html[data-theme="light"] .post-body svg .nodep { fill: #eeedfe; stroke: #4f46e5; }
+html[data-theme="light"] .post-body svg .nodex { fill: #f4f2fd; stroke: #818cf8; }
