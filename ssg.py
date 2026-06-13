@@ -612,7 +612,7 @@ def build_index(posts, cfg):
         hero_html += "</section>"
 
     items = ""
-    for p in posts[:2]:
+    for p in posts[:3]:
         title = p["meta"].get("title", p["slug"])
         desc = p["meta"].get("description", p["meta"].get("subtitle", ""))
         date_str = p["date"].strftime("%b %-d, %Y") if p["date"].year > 1970 else ""
@@ -637,7 +637,7 @@ def build_index(posts, cfg):
     projects = cfg.get("projects", [])
     projects_col = ""
     if projects:
-        grid_html = projects_grid_html(projects[:2], full=False)
+        grid_html = projects_grid_html(projects[:4], full=False)
         projects_col = (
             f'<div class="projects-col">'
             f'<div class="section-row">'
