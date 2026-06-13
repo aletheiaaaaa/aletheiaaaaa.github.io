@@ -32,7 +32,7 @@ Starting from the root node (that is, the node corresponding to no moves searche
 
 ![The selection phase after 1. e4 e5 2. Nf3 Nc6](assets/mcts-selection.svg)
 
-Notice how the tree is _asymmetric_: since we choose the search the moves we want, some lines get searched deeper than others. In particular, we haven't searched the lines that were pruned!
+Notice how the tree is _asymmetric_: since we choose the search the moves we want, some lines get searched deeper than others. In particular, we haven't searched the lines that were pruned! <aside> Technically, this assumes our policy tracks the alpha-beta search exactly, but it's a good intuition in practice </aside>
 
 ## Stage 2: Expansion
 
@@ -44,7 +44,7 @@ Note that in some implementations, we might only expand after having visited the
 
 ## Stage 3: Simulation
 
-From our newly expanded leaf node (not it's children!), we then _simulate_ the outcome of the game by playing random moves until the end (explaining the name Monte Carlo), or, as is more common these days, substitute the simulation with a neural network that approximates the end result directly. <aside> The original version of AlphaGo used a tunable mix of both these approaches, but this was later dropped in favor of deep learning </aside>. When we do this, our leaf node gets assigned a value (the node value from earlier) representing the expected utility from playing it, which is cached and stored.
+From our newly expanded leaf node (not it's children!), we then _simulate_ the outcome of the game by playing random moves until the end (explaining the name Monte Carlo), or, as is more common these days, substitute the simulation with a neural network that approximates the end result directly. <aside> The original version of AlphaGo used a tunable mix of both these approaches, but this was later dropped in favor of deep learning </aside>. When we do this, our leaf node gets assigned a value (the node value from earlier) representing the expected utility from playing it, which is then stored for future reuse.
 
 ![The simulation phase after 1. e4 e5 2. Nf3 Nc6](assets/mcts-simulation.svg)
 
