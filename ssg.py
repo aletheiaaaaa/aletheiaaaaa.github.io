@@ -245,7 +245,9 @@ def inline_figures(html: str, base_dir: Path) -> str:
         src = src_m.group(1) if src_m else ""
         caption = f"<figcaption>{alt}</figcaption>" if alt else ""
 
-        if src.lower().endswith(".svg") and not src.startswith(("http://", "https://", "//")):
+        if src.lower().endswith(".svg") and not src.startswith(
+            ("http://", "https://", "//")
+        ):
             svg_path = base_dir / src
             if svg_path.exists():
                 svg = svg_path.read_text().strip()
@@ -610,7 +612,7 @@ def build_index(posts, cfg):
         hero_html += "</section>"
 
     items = ""
-    for p in posts[:4]:
+    for p in posts[:2]:
         title = p["meta"].get("title", p["slug"])
         desc = p["meta"].get("description", p["meta"].get("subtitle", ""))
         date_str = p["date"].strftime("%b %-d, %Y") if p["date"].year > 1970 else ""
@@ -635,7 +637,7 @@ def build_index(posts, cfg):
     projects = cfg.get("projects", [])
     projects_col = ""
     if projects:
-        grid_html = projects_grid_html(projects[:4], full=False)
+        grid_html = projects_grid_html(projects[:2], full=False)
         projects_col = (
             f'<div class="projects-col">'
             f'<div class="section-row">'
