@@ -330,13 +330,13 @@ main {
 /* ── Full projects page ── */
 .projects-page-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.65rem;
   margin-top: 2rem;
 }
 
 .project-card--full {
-  aspect-ratio: 4/3;
+  aspect-ratio: 1;
   padding: 1.1rem;
 }
 
@@ -1415,7 +1415,7 @@ body[data-page="index"] main {
   }
 
   .projects-page-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCTS as Regularized Policy Optimization — p > 0.05</title>
+  <link rel="stylesheet" href="../../style.css">
+  <script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre"]}};</script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body data-page="">
+  <header class="site-header">
+    <nav class="site-nav">
+      <div class="nav-brand"><a href="../../index.html">p > 0.05</a></div>
+      <ul class="nav-links"><li><a href="../../projects.html">Projects</a></li><li><a href="../../blog.html">Blog</a></li><li><a href="../../about.html">About</a></li></ul>
+      <div class="nav-end">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">◑</button>
+        <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="post-layout"><aside class="post-toc"><div class="toc-inner"><p class="toc-label">Contents</p><div class="toc">
+<ul>
+<li><a href="#setup-and-notation">Setup and Notation</a></li>
+<li><a href="#a-slightly-different-optimization-problem">A Slightly Different Optimization Problem</a></li>
+<li><a href="#whats-next-extensions-to-mcts">What's Next: Extensions to MCTS</a></li>
+</ul>
+</div>
+</div></aside><article class="post-wrap"><header class="post-header"><h1>MCTS as Regularized Policy Optimization</h1><p class="subtitle">Deriving pUCT from first principles
+</p><p class="byline"><span>aletheiaaaaa</span><span class="sep">&middot;</span><span>Jun 13, 2026</span><span class="sep">&middot;</span><span>9 min read</span></p></header><div class="post-body"><p>Last time, I explained the core idea behind the machine learning algorithm known as Monte Carlo tree search, and mentioned that the core equation behind it (pUCT) was derived largely by experiment. However, there's since been progress in understanding it theoretically, and this sequel will focus on how one might derive it. I'll warn you though, there's a lot of computation ahead until the satisfying result. <sup class="aside-ref">1</sup><span class="aside-note"><span class="aside-num">1</span> I largely follow the approach in <a href="https://arxiv.org/abs/2007.12509">Grill et al. (2020)</a>, for a deeper view, including generalizations to a broad family of algorithms, please have a read! </span></p>
+<h1 id="setup-and-notation">Setup and Notation</h1>
+<p>In a slight change from last time (to something that's more in line with mainstream reinforcement learning literature), let's call each state (such as a board position) $x$, each action (such as a move) $a$, and the policy value (or just policy) of $a$ at $x$ $\pi_{\theta}(a|x)$, where I'm using $\theta$ to indicate that the policy is a function of some neural network's parameters. Now let's say $\hat{\pi}$ is the <em>empirical visit distribution</em>, that is, the normalized visit counts for each action from a given state <sup class="aside-ref">2</sup><span class="aside-note"><span class="aside-num">2</span> The use of the policy-style notation $\hat{\pi}$ is intentional, this will turn out to be the target to which we're optimizing our policy </span></p>
+<p>$$
+\hat{\pi}(a|x)=\frac{1+n(x,a)}{|\mathcal{A}|+\sum_{b}{n(x,b)}}
+$$</p>
+<p>Unlike last time, we add an extra factor of $|\mathcal{A}|$, or the total number of actions available. Moving forward, I'll adopt the shorthand $n_{a}$ when there's only one choice for $x$, and $N(x)$ for the number of times we took any action from $x$ (or $\sum_{b}n_{b}$). Additionally, let's define the special constant $\lambda_{N}$ by </p>
+<p>$$
+\lambda_{N}=c\cdot\frac{\sqrt{\sum_{b}n_{b}}}{|\mathcal{A}|+\sum_{b}n_{b}}
+$$</p>
+<p>Now let's recall the pUCT formula from last time, it was choosing the action $a^{\star}$ that maximized</p>
+<p>$$
+a^{\star}=\arg\max_{a}\left[Q(x,a)+c_{\text{pUCT}}\cdot\pi_{\theta}(a|x)\cdot\frac{\sqrt{\sum_{b}n_{b}}}{1+n_{a}}\right]
+$$</p>
+<p>If I force $c=c_{\text{pUCT}}$, I can use our two newly defined quantities to write <sup class="aside-ref">3</sup><span class="aside-note"><span class="aside-num">3</span> Specifically, $\lambda_{N}$ absorbs $c_{\text{pUCT}}$ and the square root and $\hat{\pi}$ absorbs our policy; what's left cancels </span></p>
+<p>$$
+a^{\star}=\arg\max_{a}\left[Q(x,a)+\lambda_{N}\cdot\frac{\pi_{\theta}(a|x)}{\hat{\pi}(a|x)}\right]
+$$</p>
+<p>If we use boldface notation to form vectors over all actions, so that say, $\mathbf{q}$ is now the vector of $Q(x,a)$'s for all possible actions $a$, we can compactly write</p>
+<p>$$
+a^{\star}=\arg\max\left[\mathbf{q}+\lambda_{N}\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right]
+$$</p>
+<p>Seems pointless, but this will save me from writing the same thing over and over later!</p>
+<p>Lastly, one useful quantity that will keep showing up is the <em>Kullback-Leibler divergence</em> between two distributions, which is defined as </p>
+<p>$$
+\mathrm{KL}[p,q]=\sum_{x}(p(x)\log p(x)-p(x)\log q(x))
+$$</p>
+<p>or the average difference between the log-probabilities of $P$ and $Q$ <em>with respect to</em> $P$. With a little algebra, we can simplify this to <sup class="aside-ref">4</sup><span class="aside-note"><span class="aside-num">4</span> This second expression is actually how KL-divergence is usually introduced, but it's less intuitive at a glance </span></p>
+<p>$$
+\mathrm{KL}[p,q]=\sum_{x}p(x)\log\left(\frac{p(x)}{q(x)}\right)
+$$</p>
+<h1 id="a-slightly-different-optimization-problem">A Slightly Different Optimization Problem</h1>
+<p>Let's say we're given a policy $\boldsymbol{\pi_{\theta}}$, some vector $\mathbf{q}$ of values, and an empirical visit distribution $\boldsymbol{\hat{\pi}}$. We can use our visit distribution to define a "quasi-policy" that just assesses moves based on how often we've seen them <sup class="aside-ref">5</sup><span class="aside-note"><span class="aside-num">5</span> Of course, we can't really know this policy before searching a bit, but once we have it can still function as a means to assess moves </span>, so suppose we'd like to choose the optimal action $\bar{a}$ <em>but that doesn't drift too far away from our initial policy's best</em>. <sup class="aside-ref">6</sup><span class="aside-note"><span class="aside-num">6</span> Since $\boldsymbol{\hat{\pi}}$ is ultimately constructed algorithmically from $\boldsymbol{\pi_{\theta}}$, they implicitly can't drift too far away from each other. This just makes that explicit. </span> Formally, this looks like optimizing the <em>regularized policy</em> </p>
+<p>$$
+\bar{a}=\arg\max_{a}\left[\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}},\boldsymbol{\hat{\pi}}]\right]
+$$</p>
+<p>where we're using the KL-divergence from earlier as a measure of difference between the two policies. <sup class="aside-ref">7</sup><span class="aside-note"><span class="aside-num">7</span> Policies are, by definition, defined as distributions over actions as to how likely an action is to be best, so we can do this </span>. Unlike our initial policy $\boldsymbol{\pi_{\theta}}$, $\boldsymbol{\hat{\pi}}$ keeps changing as we search more, so let's look at how the optimal action might change we're we to search a little bit more. <sup class="aside-ref">8</sup><span class="aside-note"><span class="aside-num">8</span> Technically, $n_{a}$ is discrete, but allowing it to take continuous values is what reveals the insight </span> We'll start by expanding the inner expressions to their full forms: </p>
+<p>$$
+\begin{aligned}
+\frac{\partial}{\partial n_{a}}\Big(\mathbf{q}^{\top}&\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}},\boldsymbol{\hat{\pi}}]\Big)= \\ 
+&\frac{\partial}{\partial n_{a}}\Bigg[\underbrace{\sum_{b}\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right)}_{A} \\
+&+\underbrace{\lambda\sum_{b}\pi_{\theta}(b)\log\left(\frac{n_{b}+1}{(|\mathcal{A}|+\sum_{c}n_{c})\cdot\pi_{\theta}(b)}\right)}_{B}\Bigg]
+\end{aligned}
+$$</p>
+<p>Let's tackle $A$ first. We can push the derivative inside the sum to get </p>
+<p>$$
+\frac{\partial A}{\partial n_{a}}=\sum_{b}\frac{\partial}{\partial n_{a}}\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right)
+$$</p>
+<p>Since $n_{b}$ only increments when $b=a$, we can define an increment function with $\delta_{ab}$ equalling $1$ if $b=a$ and $0$ if not. <sup class="aside-ref">9</sup><span class="aside-note"><span class="aside-num">9</span> Some may recognize this function as the <em>Kroenecker delta</em> </span> Using the quotient rule from calculus gives</p>
+<p>$$
+\begin{aligned}
+\frac{\partial A}{\partial n_{a}}&\left(\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
+&=\frac{\delta_{ab}(|\mathcal{A}|+\sum_{c}n_{c})-(n_{b}+1)\cdot 1}{(|\mathcal{A}|+\sum_{c}n_{c})^{2}} \\
+&=\frac{\delta_{ab}}{|\mathcal{A}|+\sum_{c}n_{c}}-\frac{n_{b}+1}{(|\mathcal{A}|+\sum_{c}n_{c})^{2}}
+\end{aligned}
+$$</p>
+<p>and if I sum against $q_{b}$, I get</p>
+<p>$$
+\begin{aligned}
+\frac{\partial A}{\partial n_{a}}&\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
+&=\frac{q_{a}}{|\mathcal{A}|+\sum_{c}n_{c}}+\underbrace{\left(-\frac{\sum_{b}q_{b}(n_{b}+1)}
+{(|\mathcal{A}|+\sum_{c}n_{c})^{2}}\right)}_{c_{A}}
+\end{aligned}
+$$</p>
+<p>where I've collected all the terms independent of $n_{a}$ into $c_{A}$. Now moving onto $B$, I'll first rewrite the logarithm using basic algebra to make it easier:</p>
+<p>$$
+B=\lambda\sum_{b}\pi_{\theta}(b)\left[\log(n_{b}+1)-\log\left(|\mathcal{A}|+\sum_{c}n_{c}\right)-\log\pi_{\theta}(b)\right].
+$$</p>
+<p>Let's take these three terms step by step. Working it through, we get that</p>
+<ul>
+<li>
+<p>the first term is just $\frac{\partial}{\partial n_{a}}\log(n_{b}+1)=\frac{\delta_{ab}}{n_{b}+1}$, where I've used the same special function as before since $n_{b}$ only changes when $b=a$,</p>
+</li>
+<li>
+<p>the second term is $\frac{\partial}{\partial n_{a}}\log\left(|\mathcal{A}|+\sum_{c}n_{c}\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since $n_{a}$ only appears once in $\sum_{c}n_{c}$, so it's derivative is just $1$, and</p>
+</li>
+<li>
+<p>the third term is $\frac{\partial}{\partial n_{a}}\log\pi_{\theta}(b)=0$, since our policy is fixed as we search.</p>
+</li>
+</ul>
+<p>Putting them all together, we get</p>
+<p>$$
+\frac{\partial B}{\partial n_{a}}=\lambda\sum_{b}\pi_{\theta}(b)\left[\frac{\delta_{ab}}{n_{b}+1}-\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}\right]
+$$</p>
+<p>The first term again collapses down to one, and the second term is just $\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since policies (like $\pi_{\theta}$) are always probability distributions. This leaves us with </p>
+<p>$$
+\frac{\partial B}{\partial n_{a}}=\frac{\lambda\pi_{\theta}(a)}{n_{a}+1}+\underbrace{\left(-\frac{\lambda}{|\mathcal{A}|+\sum_{c}n_{c}}\right)}_{c_{B}}
+$$</p>
+<p>where I've again collected all the terms independent of $n_{a}$ into $c_{B}$</p>
+<p>But now is when the magic happens. First, let's play the same trick I did in the setup to write the first term in terms of the visit distribution $\hat{\pi}$, giving</p>
+<p>$$
+\frac{\lambda\pi_{\theta}(a)}{n_{a}+1}=\frac{\lambda}{|\mathcal{A}|+\sum_{c}n_{c}}\cdot\frac{\pi_{\theta}(a)}{\hat{\pi}(a)}
+$$</p>
+<p>If we add the two halves $A$ and $B$ together, combinding $c_{A}$ and $c_{B}$ into just $C$ along the way, we get the final closed form for our policy optimization:</p>
+<p>$$
+\frac{\partial}{\partial n_{a}}\left(\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}}.\boldsymbol{\hat{\pi}}]\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}\left(\mathbf{q}+\lambda\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right)+\underbrace{(c_{A}+c_{B})}_{c}
+$$</p>
+<p>If we updated the visit distribution along this derivative, we would be incrementing the action that causes the objective to increase the most. <sup class="aside-ref">10</sup><span class="aside-note"><span class="aside-num">10</span> This is related to the idea of <em>stochastic gradient ascent</em> used in the family of reinforcement learning methods known as <em>policy gradients</em>. The related method of stochastic gradient <em>descent</em>, is the backbone of all deep learning </span> <sup class="aside-ref">11</sup><span class="aside-note"><span class="aside-num">11</span> Of course, $n_{a}$ is discrete, so the step in this direction is relatively large, and the derivative may change along that step </span> But look: the added constant $C$ is independent of $n_{a}$, so removing it doesn't change the optimal action, and the factor up front is always positive (since it's counting things), so removing it doesn't change things either. But then we get</p>
+<p>$$
+\arg\max_{a}\frac{\partial}{\partial n_{a}}\left(\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}},\boldsymbol{\hat{\pi}}]\right)=\arg\max_{a}\left[\mathbf{q}+\lambda\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right]
+$$</p>
+<p>and so, after making the final step of forcing $\lambda=\lambda_{N}$ from the start, <em>we've recovered pUCT</em>. Specifically, taking the action that maximizes pUCT is the same as taking an optimization step of this regularized policy optimization problem, explaining why pUCT performs so well in practice.</p>
+<h1 id="whats-next-extensions-to-mcts">What's Next: Extensions to MCTS</h1>
+<p>Having covered the core of how Monte Carlo tree search works, I'd next like to explore how it's been extended and improved over the years. Specifically, I plan to at least cover different regularizers for the optimization objective (going beyond KL-divergence), and planning in action spaces so large even MCTS ends up impractical. See you then!</p></div><nav class="post-nav"><a class="post-nav-item post-nav-older" href="../2026-06-08-understanding-mcts-i/index.html"><span class="post-nav-label">← Previous</span><span class="post-nav-title">Deconstructing AlphaGo: Exploring Monte Carlo Tree Search</span></a></nav></article><div class="post-asides"></div></div><button class="toc-toggle" id="toc-toggle" aria-label="Table of contents" aria-expanded="false">§</button>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; 2026 p > 0.05 &middot; aletheiaaaaa</span>
+      <nav class="footer-links"><a href="../../projects.html">projects</a><a href="../../blog.html">blog</a><a href="../../about.html">about</a></nav>
+    </div>
+  </footer>
+  <script src="../../main.js"></script>
+</body>
+</html>

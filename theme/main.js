@@ -84,7 +84,7 @@
 
 /* ── TOC scroll spy ── */
 (function () {
-  var headings = Array.from(document.querySelectorAll('.post-body h2, .post-body h3, .post-body h4'));
+  var headings = Array.from(document.querySelectorAll('.post-body h1, .post-body h2, .post-body h3, .post-body h4'));
   if (!headings.length) return;
   var links = {};
   document.querySelectorAll('.toc-inner a').forEach(function (a) {

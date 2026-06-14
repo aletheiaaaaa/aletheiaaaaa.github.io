@@ -102,12 +102,20 @@ def protect_math(text):
     """Replace LaTeX math with placeholders so markdown can't mangle it."""
     stash = []
 
-    def store(m):
+    def store_display(m):
+        stash.append(m.group(0))
+        # Surround display math with blank lines so it becomes its own block.
+        # Otherwise the nl2br extension turns the newlines flanking the
+        # collapsed placeholder into <br>, forcing a stray line break after
+        # every display equation.
+        return f"\n\n{_PLACEHOLDER.format(len(stash) - 1)}\n\n"
+
+    def store_inline(m):
         stash.append(m.group(0))
         return _PLACEHOLDER.format(len(stash) - 1)
 
-    text = re.sub(r"\$\$[\s\S]+?\$\$", store, text)
-    text = re.sub(r"\$[^\$\n]+?\$", store, text)
+    text = re.sub(r"\$\$[\s\S]+?\$\$", store_display, text)
+    text = re.sub(r"\$[^\$\n]+?\$", store_inline, text)
     return text, stash
 
 

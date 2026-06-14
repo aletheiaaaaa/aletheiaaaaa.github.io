@@ -11,13 +11,6 @@ hero:
 posts_label: "Latest Posts"
 
 projects:
-  - name: "Episteme"
-    description: "A high-performance alpha-beta UCI chess engine with neural network evaluation."
-    href: "https://github.com/aletheiaaaaa/Episteme"
-    lang: "C++"
-    links:
-      - text: "GitHub ↗"
-        href: "https://github.com/aletheiaaaaa/Episteme"
   - name: "Mirage"
     description: "Domain-specific zeroth-order optimization library with SIMD acceleration."
     href: "https://github.com/aletheiaaaaa/Mirage"
@@ -25,6 +18,13 @@ projects:
     links:
       - text: "GitHub ↗"
         href: "https://github.com/aletheiaaaaa/Mirage"
+  - name: "Episteme"
+    description: "A high-performance alpha-beta UCI chess engine with neural network evaluation."
+    href: "https://github.com/aletheiaaaaa/Episteme"
+    lang: "C++"
+    links:
+      - text: "GitHub ↗"
+        href: "https://github.com/aletheiaaaaa/Episteme"
 
 nav:
   - text: "Projects"
