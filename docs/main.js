@@ -12,6 +12,68 @@
   setTimeout(typeNext, 200);
 })();
 
+/* ── Index: whole-page letter descramble ── */
+(function () {
+  if (document.body.dataset.page !== 'index') return;
+  var main = document.querySelector('main');
+  if (!main) return;
+
+  /* Character set for scrambling. NOTE: '$' is intentionally excluded so it
+     never collides with MathJax's inline-math delimiters. */
+  var CHARS = '!<>-_\\/[]{}=+*^?#&@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  function rand() { return CHARS.charAt(Math.floor(Math.random() * CHARS.length)); }
+
+  var DURATION = 1500; // ms — the whole page descrambles within this window
+
+  /* Collect every visible text node in <main>, skipping the hero title
+     (which has its own typewriter effect) and whitespace-only nodes. */
+  var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (node) {
+      if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if (node.parentElement && node.parentElement.closest('.hero-type'))
+        return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  var nodes = [];
+  for (var n = walker.nextNode(); n; n = walker.nextNode()) {
+    var full = n.nodeValue;
+    // Per-character resolve time: random across the window so the page
+    // descrambles as a whole rather than left-to-right.
+    var resolveAt = new Array(full.length);
+    for (var c = 0; c < full.length; c++) resolveAt[c] = Math.random() * DURATION;
+    nodes.push({ node: n, full: full, resolveAt: resolveAt });
+  }
+  if (!nodes.length) return;
+
+  var start = null;
+  function tick(now) {
+    if (start === null) start = now;
+    var elapsed = now - start;
+    var done = elapsed >= DURATION;
+    for (var i = 0; i < nodes.length; i++) {
+      var item = nodes[i];
+      if (item.locked) continue;
+      var full = item.full, out = '', allDone = true;
+      for (var c = 0; c < full.length; c++) {
+        var ch = full[c];
+        if (ch === ' ' || ch === '\n' || ch === '\t' || elapsed >= item.resolveAt[c]) {
+          out += ch;
+        } else {
+          out += rand();
+          allDone = false;
+        }
+      }
+      item.node.nodeValue = out;
+      if (allDone) { item.node.nodeValue = full; item.locked = true; }
+    }
+    if (!done) requestAnimationFrame(tick);
+    else for (var j = 0; j < nodes.length; j++) nodes[j].node.nodeValue = nodes[j].full;
+  }
+  requestAnimationFrame(tick);
+})();
+
 
 /* ── TOC drawer (mobile) ── */
 (function () {
