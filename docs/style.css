@@ -825,13 +825,12 @@ pre code {
   border: none;
   font-size: 0.75rem;
   font-weight: 300;
-  line-height: 1.0;
+  line-height: 1.6;
   white-space: pre-wrap;
   word-break: normal;
   overflow-wrap: break-word;
   text-align: left;
-  text-indent: -1.5em;
-  padding-left: 1.5em;
+  text-indent: 1.5em hanging each-line;
   display: block;
 }
 
