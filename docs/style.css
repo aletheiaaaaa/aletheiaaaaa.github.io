@@ -1366,7 +1366,7 @@ body[data-page="index"] main {
 }
 
 /* ── Responsive ── */
-@media (max-width: 860px) {
+@media (max-width: 1100px) {
   .post-layout {
     grid-template-columns: 1fr;
     gap: 0;
@@ -1490,6 +1490,37 @@ body[data-page="index"] main {
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .hero-actions .btn {
+    justify-content: center;
+  }
+
+  .hero-actions .btn-inline {
+    margin-top: 0.2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .post-item {
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.6rem;
+  }
+
+  .post-num {
+    font-size: 0.7rem;
+  }
+
+  .page-kicker {
+    font-size: 0.75rem;
   }
 }
 
@@ -2179,7 +2210,7 @@ html[data-theme="light"] .btn--primary:hover { color: #ffffff; }
 
 /* — projects: scalable auto-fill grid + code-flavoured cards — */
 .index-grid { grid-template-columns: 1.5fr 1fr; }
-.projects-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+.projects-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
 .projects-page-grid {
   grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
   gap: 0.9rem;
@@ -2195,6 +2226,24 @@ html[data-theme="light"] .btn--primary:hover { color: #ffffff; }
 /* — footer $ prompt — */
 .footer-inner { letter-spacing: 0; }
 .footer-inner > span:first-child::before { content: "$ "; color: var(--code-green); }
+
+/* re-assert responsive stacking + left-aligned hero buttons — these must come
+   last in the file so they win over the base .index-grid / .projects-page-grid
+   / .hero-actions declarations above at the same specificity */
+@media (max-width: 1100px) {
+  .post-layout { grid-template-columns: 1fr; gap: 0; }
+  .index-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .projects-page-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .projects-page-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .hero-actions .btn { justify-content: center; }
+  .hero-actions .btn-inline { margin-top: 0.2rem; }
+}
 
 /* — dot-grid background (index only); canvas painted in main.js — */
 .dot-bg {
