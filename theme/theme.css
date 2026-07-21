@@ -827,8 +827,8 @@ pre code {
   font-weight: 300;
   line-height: 1.6;
   white-space: pre-wrap;
-  word-break: normal;
-  overflow-wrap: break-word;
+  word-break: keep-all;
+  overflow-wrap: normal;
   text-align: left;
   text-indent: 1.5em hanging each-line;
   display: block;
