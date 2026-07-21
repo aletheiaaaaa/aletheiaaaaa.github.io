@@ -813,6 +813,7 @@ pre {
   border: 1px solid var(--border);
   padding: 1.25rem 1.5rem;
   overflow-x: auto;
+  overflow-wrap: anywhere;
   margin: 2rem 0;
   border-radius: 8px;
 }
@@ -825,7 +826,9 @@ pre code {
   font-size: 0.75rem;
   font-weight: 300;
   line-height: 1.0;
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .codehilite {
