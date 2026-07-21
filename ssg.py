@@ -610,17 +610,30 @@ def build_index(posts, cfg):
     if hero:
         h_title = hero.get("title", cfg["title"])
         h_tagline = hero.get("tagline", hero.get("subtitle", ""))
-        h_body = hero.get("body", cfg.get("description", ""))
-        brand = f'<span class="hero-type">{h_title}</span>'
-        hero_html = f'<section class="content-width hero"><h1>{brand}</h1>'
+        kicker = hero.get("kicker", "whoami")
+        email = cfg.get("email", "")
+        # accent the comparison operator in a title like "p > 0.05"
+        title_html = h_title.replace(">", '<span class="hero-op">&gt;</span>')
+        hero_html = (
+            '<section class="content-width hero">'
+            f'<div class="hero-kicker"><span class="hero-prompt">$</span> {kicker}</div>'
+            f'<h1><span class="hero-type">{title_html}</span></h1>'
+        )
         if h_tagline:
             hero_html += f'<p class="hero-tagline">{h_tagline}</p>'
-        if h_body:
-            hero_html += f'<p class="hero-body">{h_body}</p>'
-        hero_html += "</section>"
+        hero_html += (
+            '<div class="hero-actions">'
+            '<a class="btn btn--primary" href="projects.html">ls ./projects <span class="btn-arrow">→</span></a>'
+            '<a class="btn btn--ghost" href="blog.html">read the blog →</a>'
+        )
+        if email:
+            hero_html += f'<a class="btn-inline" href="mailto:{email}">// or email me ↗</a>'
+        hero_html += "</div></section>"
 
     items = ""
-    for p in posts[:3]:
+    total = len(posts)
+    for i, p in enumerate(posts[:3]):
+        num = total - i
         title = p["meta"].get("title", p["slug"])
         desc = p["meta"].get("description", p["meta"].get("subtitle", ""))
         date_str = p["date"].strftime("%b %-d, %Y") if p["date"].year > 1970 else ""
@@ -632,10 +645,13 @@ def build_index(posts, cfg):
         meta_html = sep.join(f"<span>{x}</span>" for x in meta_parts)
         items += f'''
 <a class="post-item" href="{href}">
-  <div class="post-meta">{meta_html}</div>
-  <h3>{title}</h3>
-  {f'<p class="post-desc">{desc}</p>' if desc else ""}
-  {tags_html(post_tags)}
+  <span class="post-num">{num:02d}</span>
+  <div class="post-item-body">
+    <div class="post-meta">{meta_html}</div>
+    <h3>{title}</h3>
+    {f'<p class="post-desc">{desc}</p>' if desc else ""}
+    {tags_html(post_tags)}
+  </div>
 </a>'''
 
     section_label = cfg.get("posts_label", "Latest Posts")
@@ -675,10 +691,14 @@ def build_page(rmd_file, cfg, posts=None):
     if meta.get("layout") == "projects":
         intro = f'<div class="page-intro">{content_html}</div>' if body.strip() else ""
         grid = projects_grid_html(cfg.get("projects", []), full=True)
-        body_html = f'<div class="page-wrap"><h1 class="page-title">{title}</h1>{intro}{grid}</div>'
+        kicker = '<div class="page-kicker">// things I build</div>'
+        body_html = f'<div class="page-wrap page-wrap--wide">{kicker}<h1 class="page-title">{title}</h1>{intro}{grid}</div>'
     elif meta.get("layout") == "blog":
         items = ""
-        for p in posts or []:
+        _blog_posts = posts or []
+        _blog_total = len(_blog_posts)
+        for i, p in enumerate(_blog_posts):
+            num = _blog_total - i
             ptitle = p["meta"].get("title", p["slug"])
             desc = p["meta"].get("description", p["meta"].get("subtitle", ""))
             date_str = p["date"].strftime("%b %-d, %Y") if p["date"].year > 1970 else ""
@@ -690,21 +710,27 @@ def build_page(rmd_file, cfg, posts=None):
             meta_html = sep.join(f"<span>{x}</span>" for x in meta_parts)
             items += f'''
 <a class="post-item" href="{href}">
-  <div class="post-meta">{meta_html}</div>
-  <h3>{ptitle}</h3>
-  {f'<p class="post-desc">{desc}</p>' if desc else ""}
-  {tags_html(post_tags)}
+  <span class="post-num">{num:02d}</span>
+  <div class="post-item-body">
+    <div class="post-meta">{meta_html}</div>
+    <h3>{ptitle}</h3>
+    {f'<p class="post-desc">{desc}</p>' if desc else ""}
+    {tags_html(post_tags)}
+  </div>
 </a>'''
         intro = f'<div class="page-intro">{content_html}</div>' if body.strip() else ""
+        kicker = f'<div class="page-kicker">// {_blog_total} post{"" if _blog_total == 1 else "s"} · newest first</div>'
         body_html = (
             f'<div class="page-wrap">'
+            f"{kicker}"
             f'<h1 class="page-title">{title}</h1>'
             f"{intro}"
             f'<div class="posts-list">{items}</div>'
             f"</div>"
         )
     else:
-        body_html = f'<div class="page-wrap"><h1 class="page-title">{title}</h1>{content_html}</div>'
+        kicker = f'<div class="page-kicker">// {title.lower()}</div>'
+        body_html = f'<div class="page-wrap">{kicker}<h1 class="page-title">{title}</h1>{content_html}</div>'
 
     html = render_page(title, body_html, cfg, root_rel="", math=math)
 

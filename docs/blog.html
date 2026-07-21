@@ -9,6 +9,7 @@
   <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body data-page="">
+  <canvas id="dotfield" class="dot-bg" aria-hidden="true"></canvas>
   <header class="site-header">
     <nav class="site-nav">
       <div class="nav-brand"><a href="index.html">p > 0.05</a></div>
@@ -22,27 +23,36 @@
     </nav>
   </header>
   <main>
-    <div class="page-wrap"><h1 class="page-title">Blog</h1><div class="posts-list">
+    <div class="page-wrap"><div class="page-kicker">// 3 posts · newest first</div><h1 class="page-title">Blog</h1><div class="posts-list">
 <a class="post-item" href="posts/2026-06-13-understanding-mcts-ii/index.html">
-  <div class="post-meta"><span>Jun 13, 2026</span><span class="sep">&middot;</span><span>10 min read</span></div>
-  <h3>MCTS as Regularized Policy Optimization</h3>
-  <p class="post-desc">Deriving pUCT from first principles
+  <span class="post-num">03</span>
+  <div class="post-item-body">
+    <div class="post-meta"><span>Jun 13, 2026</span><span class="sep">&middot;</span><span>10 min read</span></div>
+    <h3>MCTS as Regularized Policy Optimization</h3>
+    <p class="post-desc">Deriving pUCT from first principles
 </p>
-  
+    
+  </div>
 </a>
 <a class="post-item" href="posts/2026-06-08-understanding-mcts-i/index.html">
-  <div class="post-meta"><span>Jun 8, 2026</span><span class="sep">&middot;</span><span>11 min read</span></div>
-  <h3>Deconstructing AlphaGo: Exploring Monte Carlo Tree Search</h3>
-  <p class="post-desc">What do you do when there are too many possibilities?
+  <span class="post-num">02</span>
+  <div class="post-item-body">
+    <div class="post-meta"><span>Jun 8, 2026</span><span class="sep">&middot;</span><span>11 min read</span></div>
+    <h3>Deconstructing AlphaGo: Exploring Monte Carlo Tree Search</h3>
+    <p class="post-desc">What do you do when there are too many possibilities?
 </p>
-  
+    
+  </div>
 </a>
 <a class="post-item" href="posts/2025-07-14-dpbusd-explained/index.html">
-  <div class="post-meta"><span>Jul 14, 2025</span><span class="sep">&middot;</span><span>7 min read</span></div>
-  <h3>dpbusd, explained</h3>
-  <p class="post-desc">Demystifying multi-layer inference.
+  <span class="post-num">01</span>
+  <div class="post-item-body">
+    <div class="post-meta"><span>Jul 14, 2025</span><span class="sep">&middot;</span><span>7 min read</span></div>
+    <h3>dpbusd, explained</h3>
+    <p class="post-desc">Demystifying multi-layer inference.
 </p>
-  
+    
+  </div>
 </a></div></div>
   </main>
   <footer class="site-footer">

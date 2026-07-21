@@ -2,83 +2,67 @@
   <title>MCTS stage 3 — Evaluation</title>
   <desc>Instead of a rollout, the network fθ scores the just-expanded leaf Bxc6 directly. A small network glyph emits an arrow to the leaf, and a symbolic value meter v sits beside it — no numbers, no simulation playout.</desc>
   <defs>
-    <marker id="ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c7d2fe"/></marker>
+    <marker id="ev" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c7d2fe"></path></marker>
   </defs>
-  <style>
-    /* Dark-first palette; light-mode overrides live in style.css */
-    text { font-family:"Fira Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:400; }
-    .mv{ fill:#c0c0c0; } .mvp{ fill:#c7d2fe; } .tag{ fill:#a5b4fc; font-size:10px; font-style:italic; }
-    .edge{ stroke:#52525b; stroke-width:1.5; fill:none; }
-    .edgep{ stroke:#a5b4fc; stroke-width:2.5; fill:none; }
-    .edgenew{ stroke:#a5b4fc; stroke-width:2; stroke-dasharray:5 3; fill:none; }
-    .node{ fill:#1a1a1d; stroke:#52525b; stroke-width:1.5; }
-    .nodep{ fill:#1a1d33; stroke:#a5b4fc; stroke-width:2; }
-    .nodenew{ fill:#1a1d33; stroke:#a5b4fc; stroke-width:1.8; stroke-dasharray:4 2.5; }
-    .leaf{ fill:#2a2d4d; stroke:#c7d2fe; stroke-width:2.5; }
-    .net{ fill:#1a1d33; stroke:#a5b4fc; stroke-width:1.5; }
-    .netl{ stroke:#6f7ad1; stroke-width:0.8; fill:none; } .netd{ fill:#c7d2fe; }
-    .meter{ fill:none; stroke:#a5b4fc; stroke-width:1; } .meterf{ fill:#a5b4fc; }
-    .title{ fill:#e4e4e7; font-size:15px; font-weight:600; }
-    .cap{ fill:#a1a1aa; font-size:11.5px; } .lgd{ fill:#a1a1aa; font-size:10.5px; }
-  </style>
+  
 
-  <line class="edgep" x1="321.3" y1="71.7"  x2="195.3" y2="150.5"/>
-  <line class="edge"  x1="358.7" y1="71.7"  x2="484.7" y2="150.5"/>
-  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5"/>
-  <line class="edge"  x1="191.2" y1="174.1" x2="250.0" y2="247.5"/>
-  <line class="edge"  x1="488.8" y1="174.1" x2="430.0" y2="247.5"/>
-  <line class="edge"  x1="94.1"  y1="274.9" x2="64.5"  y2="348.9"/>
-  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9"/>
-  <line class="edge"  x1="254.1" y1="274.9" x2="224.5" y2="348.9"/>
-  <line class="edge"  x1="414.1" y1="274.9" x2="384.5" y2="348.9"/>
-  <line class="edge"  x1="425.9" y1="274.9" x2="455.5" y2="348.9"/>
-  <line class="edgenew" x1="135.9" y1="371.3" x2="111.4" y2="438.6"/>
-  <line class="edgenew" x1="144.1" y1="371.3" x2="168.6" y2="438.6"/>
+  <line class="edgep" x1="321.3" y1="71.7" x2="195.3" y2="150.5"></line>
+  <line class="edge" x1="358.7" y1="71.7" x2="484.7" y2="150.5"></line>
+  <line class="edgep" x1="168.8" y1="174.1" x2="110.0" y2="247.5"></line>
+  <line class="edge" x1="191.2" y1="174.1" x2="250.0" y2="247.5"></line>
+  <line class="edge" x1="488.8" y1="174.1" x2="430.0" y2="247.5"></line>
+  <line class="edge" x1="94.1" y1="274.9" x2="64.5" y2="348.9"></line>
+  <line class="edgep" x1="105.9" y1="274.9" x2="135.5" y2="348.9"></line>
+  <line class="edge" x1="254.1" y1="274.9" x2="224.5" y2="348.9"></line>
+  <line class="edge" x1="414.1" y1="274.9" x2="384.5" y2="348.9"></line>
+  <line class="edge" x1="425.9" y1="274.9" x2="455.5" y2="348.9"></line>
+  <line class="edgenew" x1="135.9" y1="371.3" x2="111.4" y2="438.6"></line>
+  <line class="edgenew" x1="144.1" y1="371.3" x2="168.6" y2="438.6"></line>
 
-  <circle class="nodep" cx="340" cy="60"  r="22"/>
-  <circle class="nodep" cx="180" cy="160" r="18"/>
-  <circle class="node"  cx="500" cy="160" r="18"/>
-  <circle class="nodep" cx="100" cy="260" r="16"/>
-  <circle class="node"  cx="260" cy="260" r="16"/>
-  <circle class="node"  cx="420" cy="260" r="16"/>
-  <circle class="node"  cx="60"  cy="360" r="12"/>
-  <circle class="leaf"  cx="140" cy="360" r="12"/>
-  <circle class="node"  cx="220" cy="360" r="12"/>
-  <circle class="node"  cx="380" cy="360" r="12"/>
-  <circle class="node"  cx="460" cy="360" r="12"/>
-  <circle class="nodenew" cx="108" cy="448" r="10"/>
-  <circle class="nodenew" cx="172" cy="448" r="10"/>
+  <circle class="nodep" cx="340" cy="60" r="22"></circle>
+  <circle class="nodep" cx="180" cy="160" r="18"></circle>
+  <circle class="node" cx="500" cy="160" r="18"></circle>
+  <circle class="nodep" cx="100" cy="260" r="16"></circle>
+  <circle class="node" cx="260" cy="260" r="16"></circle>
+  <circle class="node" cx="420" cy="260" r="16"></circle>
+  <circle class="node" cx="60" cy="360" r="12"></circle>
+  <circle class="leaf" cx="140" cy="360" r="12"></circle>
+  <circle class="node" cx="220" cy="360" r="12"></circle>
+  <circle class="node" cx="380" cy="360" r="12"></circle>
+  <circle class="node" cx="460" cy="360" r="12"></circle>
+  <circle class="nodenew" cx="108" cy="448" r="10"></circle>
+  <circle class="nodenew" cx="172" cy="448" r="10"></circle>
 
-  <text class="mvp" x="248" y="104" text-anchor="end"   dominant-baseline="central">Bb5</text>
-  <text class="mv"  x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
-  <text class="mvp" x="128" y="208" text-anchor="end"   dominant-baseline="central">a6</text>
-  <text class="mv"  x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
-  <text class="mv"  x="455" y="208" text-anchor="end"   dominant-baseline="central">Bc5</text>
-  <text class="mv"  x="72"  y="306" text-anchor="end"   dominant-baseline="central">Ba4</text>
+  <text class="mvp" x="248" y="104" text-anchor="end" dominant-baseline="central">Bb5</text>
+  <text class="mv" x="432" y="104" text-anchor="start" dominant-baseline="central">Bc4</text>
+  <text class="mvp" x="128" y="208" text-anchor="end" dominant-baseline="central">a6</text>
+  <text class="mv" x="224" y="208" text-anchor="start" dominant-baseline="central">Nf6</text>
+  <text class="mv" x="455" y="208" text-anchor="end" dominant-baseline="central">Bc5</text>
+  <text class="mv" x="72" y="306" text-anchor="end" dominant-baseline="central">Ba4</text>
   <text class="mvp" x="128" y="306" text-anchor="start" dominant-baseline="central">Bxc6</text>
-  <text class="mv"  x="232" y="306" text-anchor="end"   dominant-baseline="central">O-O</text>
-  <text class="mv"  x="392" y="306" text-anchor="end"   dominant-baseline="central">c3</text>
-  <text class="mv"  x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
-  <text class="tag" x="112" y="402" text-anchor="end"   dominant-baseline="central">dxc6</text>
+  <text class="mv" x="232" y="306" text-anchor="end" dominant-baseline="central">O-O</text>
+  <text class="mv" x="392" y="306" text-anchor="end" dominant-baseline="central">c3</text>
+  <text class="mv" x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
+  <text class="tag" x="112" y="402" text-anchor="end" dominant-baseline="central">dxc6</text>
   <text class="tag" x="166" y="402" text-anchor="start" dominant-baseline="central">bxc6</text>
 
-  <rect class="net" x="216" y="400" width="110" height="58" rx="8"/>
-  <text x="271" y="416" text-anchor="middle" fill="#c7d2fe" font-size="12" font-style="italic">f&#952;</text>
-  <line class="netl" x1="236" y1="432" x2="261" y2="439"/>
-  <line class="netl" x1="236" y1="446" x2="261" y2="439"/>
-  <line class="netl" x1="261" y1="439" x2="291" y2="439"/>
-  <circle class="netd" cx="236" cy="432" r="2.5"/>
-  <circle class="netd" cx="236" cy="446" r="2.5"/>
-  <circle class="netd" cx="261" cy="439" r="2.5"/>
-  <circle class="netd" cx="291" cy="439" r="2.5"/>
-  <line stroke="#a5b4fc" stroke-width="1.5" x1="216" y1="420" x2="149.4" y2="367.4" marker-end="url(#ev)"/>
-  <rect class="meter"  x="158" y="336" width="34" height="7" rx="2"/>
-  <rect class="meterf" x="158" y="336" width="20" height="7" rx="2"/>
+  <rect class="net" x="216" y="400" width="110" height="58" rx="8"></rect>
+  <text x="271" y="416" text-anchor="middle" fill="#c7d2fe" font-size="12" font-style="italic">fθ</text>
+  <line class="netl" x1="236" y1="432" x2="261" y2="439"></line>
+  <line class="netl" x1="236" y1="446" x2="261" y2="439"></line>
+  <line class="netl" x1="261" y1="439" x2="291" y2="439"></line>
+  <circle class="netd" cx="236" cy="432" r="2.5"></circle>
+  <circle class="netd" cx="236" cy="446" r="2.5"></circle>
+  <circle class="netd" cx="261" cy="439" r="2.5"></circle>
+  <circle class="netd" cx="291" cy="439" r="2.5"></circle>
+  <line stroke="#a5b4fc" stroke-width="1.5" x1="216" y1="420" x2="149.4" y2="367.4" marker-end="url(#ev)"></line>
+  <rect class="meter" x="158" y="336" width="34" height="7" rx="2"></rect>
+  <rect class="meterf" x="158" y="336" width="20" height="7" rx="2"></rect>
   <text class="tag" x="196" y="339" text-anchor="start" dominant-baseline="central">v</text>
 
-  <rect class="net" x="28" y="471" width="18" height="14" rx="3"/>
-  <text class="lgd" x="54" y="480" dominant-baseline="central" fill="#c7d2fe">value net f&#952;</text>
-  <rect class="meter"  x="210" y="476" width="30" height="7"/>
-  <rect class="meterf" x="210" y="476" width="18" height="7"/>
+  <rect class="net" x="28" y="471" width="18" height="14" rx="3"></rect>
+  <text class="lgd" x="54" y="480" dominant-baseline="central" fill="#c7d2fe">value net fθ</text>
+  <rect class="meter" x="210" y="476" width="30" height="7"></rect>
+  <rect class="meterf" x="210" y="476" width="18" height="7"></rect>
   <text class="lgd" x="248" y="480" dominant-baseline="central">leaf value v (no simulation)</text>
 </svg>

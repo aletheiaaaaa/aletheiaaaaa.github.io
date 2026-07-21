@@ -1,77 +1,69 @@
-/* ── Index: hero title typewriter ── */
+/* ── Index: animated dot-grid background ──
+   Flat full-viewport heightfield of dots, gently domed outward, rippling as two
+   slow sine waves. The cursor locally disrupts the waves and they ease back. */
 (function () {
   if (document.body.dataset.page !== 'index') return;
-  var heroType = document.querySelector('.hero-type');
-  if (!heroType) return;
-  var full = heroType.textContent;
-  heroType.textContent = '';
-  var i = 0;
-  function typeNext() {
-    if (i < full.length) { heroType.textContent = full.slice(0, ++i); setTimeout(typeNext, 80); }
+  var cv = document.getElementById('dotfield');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t = 0, raf = 0, inside = false, hover = 0, px = -9999, py = -9999;
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = window.innerWidth * dpr;
+    cv.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cv._w = window.innerWidth; cv._h = window.innerHeight;
   }
-  setTimeout(typeNext, 200);
-})();
+  resize();
+  window.addEventListener('resize', resize);
+  window.addEventListener('pointermove', function (e) { px = e.clientX; py = e.clientY; inside = true; });
+  window.addEventListener('pointerleave', function () { inside = false; });
 
-/* ── Index: whole-page letter descramble ── */
-(function () {
-  if (document.body.dataset.page !== 'index') return;
-  var main = document.querySelector('main');
-  if (!main) return;
-
-  /* Character set for scrambling. NOTE: '$' is intentionally excluded so it
-     never collides with MathJax's inline-math delimiters. */
-  var CHARS = '!<>-_\\/[]{}=+*^?#&@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  function rand() { return CHARS.charAt(Math.floor(Math.random() * CHARS.length)); }
-
-  var DURATION = 1500; // ms — the whole page descrambles within this window
-
-  /* Collect every visible text node in <main>, skipping the hero title
-     (which has its own typewriter effect) and whitespace-only nodes. */
-  var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
-    acceptNode: function (node) {
-      if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-      if (node.parentElement && node.parentElement.closest('.hero-type'))
-        return NodeFilter.FILTER_REJECT;
-      return NodeFilter.FILTER_ACCEPT;
-    }
-  });
-
-  var nodes = [];
-  for (var n = walker.nextNode(); n; n = walker.nextNode()) {
-    var full = n.nodeValue;
-    // Per-character resolve time: random across the window so the page
-    // descrambles as a whole rather than left-to-right.
-    var resolveAt = new Array(full.length);
-    for (var c = 0; c < full.length; c++) resolveAt[c] = Math.random() * DURATION;
-    nodes.push({ node: n, full: full, resolveAt: resolveAt });
-  }
-  if (!nodes.length) return;
-
-  var start = null;
-  function tick(now) {
-    if (start === null) start = now;
-    var elapsed = now - start;
-    var done = elapsed >= DURATION;
-    for (var i = 0; i < nodes.length; i++) {
-      var item = nodes[i];
-      if (item.locked) continue;
-      var full = item.full, out = '', allDone = true;
-      for (var c = 0; c < full.length; c++) {
-        var ch = full[c];
-        if (ch === ' ' || ch === '\n' || ch === '\t' || elapsed >= item.resolveAt[c]) {
-          out += ch;
-        } else {
-          out += rand();
-          allDone = false;
+  var gap = 30;
+  function draw() {
+    var W = cv._w, H = cv._h;
+    ctx.clearRect(0, 0, W, H);
+    hover += ((inside ? 1 : 0) - hover) * 0.07;
+    var light = document.documentElement.getAttribute('data-theme') === 'light' ||
+      (!document.documentElement.getAttribute('data-theme') &&
+        window.matchMedia('(prefers-color-scheme: light)').matches);
+    var col = light ? '99,102,241' : '171,184,252';
+    var cx = W / 2, cy = H / 2;
+    var cols = Math.ceil(W / gap) + 4, rows = Math.ceil(H / gap) + 4;
+    var ox = (W - (cols - 1) * gap) / 2, oy = (H - (rows - 1) * gap) / 2;
+    var R2 = 2 * 72 * 72;
+    for (var j = 0; j < rows; j++) {
+      for (var i = 0; i < cols; i++) {
+        var gx = ox + i * gap, gy = oy + j * gap;
+        var nx = (gx - cx) / cx, ny = (gy - cy) / cy, r2 = nx * nx + ny * ny;
+        var curve = 1 - 0.11 * r2;
+        var x = cx + (gx - cx) * curve, y = cy + (gy - cy) * curve;
+        y += Math.sin(gx * 0.017 + gy * 0.011 + t * 0.9) * 4.4 +
+             Math.sin(gx * 0.009 - gy * 0.02 + t * 0.6) * 3.0;
+        if (hover > 0.004) {
+          var dx = x - px, dy = y - py, d2 = dx * dx + dy * dy, infl = Math.exp(-d2 / R2);
+          if (infl > 0.006) {
+            var dist = Math.sqrt(d2) + 0.001;
+            var ripple = Math.sin(dist * 0.12 - t * 3.4);
+            var push = hover * infl * (7 + 4 * ripple);
+            x += dx / dist * push; y += dy / dist * push;
+          }
         }
+        var a = (light ? 0.6 : 0.5) * (1 - 0.72 * r2);
+        if (a <= 0.02) continue;
+        var rad = Math.max(0.5, 1.8 * curve);
+        ctx.beginPath();
+        ctx.arc(x, y, rad, 0, 6.2832);
+        ctx.fillStyle = 'rgba(' + col + ',' + a.toFixed(3) + ')';
+        ctx.fill();
       }
-      item.node.nodeValue = out;
-      if (allDone) { item.node.nodeValue = full; item.locked = true; }
     }
-    if (!done) requestAnimationFrame(tick);
-    else for (var j = 0; j < nodes.length; j++) nodes[j].node.nodeValue = nodes[j].full;
+    t += 0.012;
+    if (!reduce) raf = requestAnimationFrame(draw);
   }
-  requestAnimationFrame(tick);
+  if (reduce) { t = 3.2; draw(); } else { draw(); }
 })();
 
 

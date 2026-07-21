@@ -2072,3 +2072,199 @@ html[data-theme="light"] .post-body svg [fill="#2b2f5e"] {
 .post-body svg .fo .MathJax {
   margin: 0 !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Redesign 1c — monospace-forward UI, code motifs, dot-grid hero background
+   (layered on top of the base theme above)
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+  --code-green: #9ece8a;
+  --dim: #5f6672;
+}
+html[data-theme="light"] { --code-green: #15803d; --dim: #6b7280; }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) { --code-green: #15803d; --dim: #6b7280; }
+}
+
+/* — monospace chrome (headings + UI); body copy stays Fira Sans — */
+nav.site-nav .nav-brand a,
+nav.site-nav .nav-links a,
+.section-label, .section-link,
+.hero-kicker, .hero h1, .hero-actions .btn, .hero-actions .btn-inline,
+.page-title, .post-header h1, .post-item h3, .project-card h3,
+.post-num, .toc-label, .toc-inner .toc a, .post-nav-label, .footer-inner {
+  font-family: var(--font-mono);
+}
+
+/* — nav — */
+header.site-header { border-bottom: 1px solid var(--border); }
+nav.site-nav .nav-links { margin-left: auto; }
+nav.site-nav .nav-end { margin-left: 1.5rem; }
+nav.site-nav .nav-links a { text-transform: lowercase; letter-spacing: 0; }
+/* home: projects + blog live in the hero, so trim them from the header */
+body[data-page="index"] .nav-links li:nth-child(1),
+body[data-page="index"] .nav-links li:nth-child(2) { display: none; }
+
+/* — section labels rendered as // comments — */
+.section-label {
+  text-transform: lowercase;
+  letter-spacing: 0;
+  color: var(--dim);
+}
+.section-label::before { content: "// "; }
+
+/* — hero — */
+.hero { padding-top: 7rem; }
+.hero-kicker {
+  font-size: 0.85rem;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.15rem;
+}
+.hero-prompt { color: var(--code-green); }
+.hero h1 {
+  color: var(--text-heading);
+  font-size: clamp(2.5rem, 6vw, 3.4rem);
+}
+.hero .hero-op { color: var(--accent); }
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.15s, border-color 0.15s, color 0.15s;
+}
+.btn--primary { background: var(--accent); color: #08080a; font-weight: 500; }
+.btn--primary:hover { opacity: 0.88; color: #08080a; }
+.btn--primary .btn-arrow { opacity: 0.55; }
+/* light mode: darker indigo accent needs light button text for contrast */
+html[data-theme="light"] .btn--primary,
+html[data-theme="light"] .btn--primary:hover { color: #ffffff; }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .btn--primary,
+  html:not([data-theme="dark"]) .btn--primary:hover { color: #ffffff; }
+}
+.btn--ghost { border: 1px solid var(--border); color: var(--accent-light); }
+.btn--ghost:hover { border-color: var(--accent-border); color: var(--accent-light); }
+.btn-inline { font-size: 0.8rem; color: var(--dim); }
+.btn-inline:hover { color: var(--accent-light); }
+
+/* — numbered post list (top number = total; counts down) — */
+.post-item {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.post-num { color: #3f3f46; font-size: 0.8rem; padding-top: 0.5rem; }
+.post-item h3 { font-weight: 500; }
+
+/* — post reading view: # headings, $ byline, // contents — */
+.post-body h1, .post-body h2 { font-family: var(--font-mono); font-weight: 500; }
+.post-body h1::before, .post-body h2::before { content: "# "; color: var(--dim); }
+.post-header .byline::before { content: "$ "; color: var(--code-green); }
+.toc-label { text-transform: lowercase; letter-spacing: 0; }
+.toc-label::before { content: "// "; }
+
+/* — projects: scalable auto-fill grid + code-flavoured cards — */
+.index-grid { grid-template-columns: 1.5fr 1fr; }
+.projects-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+.projects-page-grid {
+  grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+  gap: 0.9rem;
+}
+.project-card { aspect-ratio: auto; min-height: 170px; }
+.project-card h3::after { content: " { }"; color: #3f3f46; font-weight: 400; }
+.project-card .card-tag {
+  font-family: var(--font-mono);
+  color: var(--code-green);
+  background: none;
+}
+
+/* — footer $ prompt — */
+.footer-inner { letter-spacing: 0; }
+.footer-inner > span:first-child::before { content: "$ "; color: var(--code-green); }
+
+/* — dot-grid background (index only); canvas painted in main.js — */
+.dot-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  display: none;
+  pointer-events: none;
+}
+html { background: var(--surface); }
+body[data-page="index"] { background: transparent; }
+body[data-page="index"] .dot-bg { display: block; }
+body[data-page="index"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(125% 85% at 46% 32%,
+    transparent 0%, rgba(10, 10, 11, 0.30) 55%, rgba(10, 10, 11, 0.72) 100%);
+}
+html[data-theme="light"] body[data-page="index"]::before {
+  background: radial-gradient(125% 85% at 46% 32%,
+    transparent 0%, rgba(241, 242, 245, 0.35) 55%, rgba(241, 242, 245, 0.82) 100%);
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) body[data-page="index"]::before {
+    background: radial-gradient(125% 85% at 46% 32%,
+      transparent 0%, rgba(241, 242, 245, 0.35) 55%, rgba(241, 242, 245, 0.82) 100%);
+  }
+}
+
+/* — fenced code blocks as terminal windows (dots bar) — */
+.codehilite::before {
+  content: "";
+  display: block;
+  height: 38px;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 20px 19px, #34343a 4.5px, transparent 5px),
+    radial-gradient(circle at 38px 19px, #34343a 4.5px, transparent 5px),
+    radial-gradient(circle at 56px 19px, #34343a 4.5px, transparent 5px),
+    #111113;
+}
+html[data-theme="light"] .codehilite::before {
+  background:
+    radial-gradient(circle at 20px 19px, #c7cad3 4.5px, transparent 5px),
+    radial-gradient(circle at 38px 19px, #c7cad3 4.5px, transparent 5px),
+    radial-gradient(circle at 56px 19px, #c7cad3 4.5px, transparent 5px),
+    #e8eaef;
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .codehilite::before {
+    background:
+      radial-gradient(circle at 20px 19px, #c7cad3 4.5px, transparent 5px),
+      radial-gradient(circle at 38px 19px, #c7cad3 4.5px, transparent 5px),
+      radial-gradient(circle at 56px 19px, #c7cad3 4.5px, transparent 5px),
+      #e8eaef;
+  }
+}
+
+/* — inner pages: kicker, monospace # headings, mono tag chips — */
+.page-kicker {
+  font-family: var(--font-mono);
+  color: var(--dim);
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+.page-wrap h2, .page-wrap h3 { font-family: var(--font-mono); font-weight: 500; }
+.page-wrap h2::before { content: "# "; color: var(--dim); }
+.tag { font-family: var(--font-mono); }

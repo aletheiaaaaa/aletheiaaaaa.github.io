@@ -9,6 +9,7 @@
   <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body data-page="">
+  <canvas id="dotfield" class="dot-bg" aria-hidden="true"></canvas>
   <header class="site-header">
     <nav class="site-nav">
       <div class="nav-brand"><a href="index.html">p > 0.05</a></div>
@@ -22,7 +23,7 @@
     </nav>
   </header>
   <main>
-    <div class="page-wrap"><h1 class="page-title">About</h1><p>I'm Aletheia (pseudonymous), a CS undergrad that really finds anything interesting, but is currently obsessed with machine learning and high-performance computing! When I'm not failing to understand a machine learning paper or "accidentally" pessimizing a scalar implementation, you can find me listening to classical music, or more likely just hanging out on online forums. I hope you enjoy!</p>
+    <div class="page-wrap"><div class="page-kicker">// about</div><h1 class="page-title">About</h1><p>I'm Aletheia (pseudonymous), a CS undergrad that really finds anything interesting, but is currently obsessed with machine learning and high-performance computing! When I'm not failing to understand a machine learning paper or "accidentally" pessimizing a scalar implementation, you can find me listening to classical music, or more likely just hanging out on online forums. I hope you enjoy!</p>
 <h2 id="right-now">Right now</h2>
 <p>I'm building <strong><a href="https://github.com/aletheiaaaaa/Mirage">Mirage</a></strong>, a custom zeroth-order optimization library for <strong><a href="https://github.com/aletheiaaaaa/Episteme">Episteme</a></strong>, a superhuman UCI chess engine. Currently, Episteme (like other modern engines) uses a neural net trained to regress the scores of labelled positions, but I'd like to explore training the net directly on games themselves. This requires estimating gradients through a nondifferentiable win-draw-loss score, and existing frameworks (under the name "SPSA") don't allow for that sort of work at this scale. This library is an experiment in changing that, I don't know if it will work!</p>
 <h2 id="stack">Stack</h2>

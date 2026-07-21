@@ -1,68 +1,68 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="373.27361pt" height="128.35601pt" viewBox="-70.007905 -70.007905 373.27361 128.35601" role="img" data-themed="true">
 <g>
-<path d="M-36.445311 -69.6094H-10.9336V-44.0968H-36.445311Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-10.9336 -69.6094H14.5781V-44.0968H-10.9336Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M14.582 -69.6094H40.0937V-44.0968H14.582Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M40.0938 -69.6094H65.6055V-44.0968H40.0938Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M167.6522 -69.6094H193.1639V-44.0968H167.6522Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M193.1642 -69.6094H218.6759V-44.0968H193.1642Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M218.6762 -69.6094H244.1879V-44.0968H218.6762Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M244.1872 -69.6094H269.6989V-44.0968H244.1872Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-36.445311 -18.5859H-10.9336V6.9267H-36.445311Z" fill="#222540"/>
-<path d="M-36.445311 -18.5859H-10.9336V6.9267H-36.445311Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-10.9336 -18.5859H14.5781V6.9267H-10.9336Z" fill="#222540"/>
-<path d="M-10.9336 -18.5859H14.5781V6.9267H-10.9336Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M14.582 -18.5859H40.0937V6.9267H14.582Z" fill="#222540"/>
-<path d="M14.582 -18.5859H40.0937V6.9267H14.582Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M40.0938 -18.5859H65.6055V6.9267H40.0938Z" fill="#222540"/>
-<path d="M40.0938 -18.5859H65.6055V6.9267H40.0938Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M167.6522 -18.5859H193.1639V6.9267H167.6522Z" fill="#222540"/>
-<path d="M167.6522 -18.5859H193.1639V6.9267H167.6522Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M193.1642 -18.5859H218.6759V6.9267H193.1642Z" fill="#222540"/>
-<path d="M193.1642 -18.5859H218.6759V6.9267H193.1642Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M218.6762 -18.5859H244.1879V6.9267H218.6762Z" fill="#222540"/>
-<path d="M218.6762 -18.5859H244.1879V6.9267H218.6762Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M244.1872 -18.5859H269.6989V6.9267H244.1872Z" fill="#222540"/>
-<path d="M244.1872 -18.5859H269.6989V6.9267H244.1872Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-23.6875-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M1.8242-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M27.3359-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M52.8477-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M180.4062-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M205.9182-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M231.4332-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M256.9452-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-23.6875 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M1.8242 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M27.3359 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M52.8477 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M180.4062 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M205.9182 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M231.4332 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M256.9452 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-69.6094 32.4375H98.7692V57.9496H-69.6094Z" fill="#2b2f5e"/>
-<path d="M-69.6094 32.4375H98.7692V57.9496H-69.6094Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M134.4842 32.4375H302.8672V57.9496H134.4842Z" fill="#2b2f5e"/>
-<path d="M134.4842 32.4375H302.8672V57.9496H134.4842Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<foreignObject x="-36.445311" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{00}\)</div></foreignObject>
-<foreignObject x="-10.9336" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{01}\)</div></foreignObject>
-<foreignObject x="14.582" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{02}\)</div></foreignObject>
-<foreignObject x="40.0938" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{03}\)</div></foreignObject>
-<foreignObject x="167.6522" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{30}\)</div></foreignObject>
-<foreignObject x="193.1642" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{31}\)</div></foreignObject>
-<foreignObject x="218.6762" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{32}\)</div></foreignObject>
-<foreignObject x="244.1872" y="-69.6094" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(W_{33}\)</div></foreignObject>
-<foreignObject x="-36.445311" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_0\)</div></foreignObject>
-<foreignObject x="-10.9336" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_1\)</div></foreignObject>
-<foreignObject x="14.582" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_2\)</div></foreignObject>
-<foreignObject x="40.0938" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_3\)</div></foreignObject>
-<foreignObject x="167.6522" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_0\)</div></foreignObject>
-<foreignObject x="193.1642" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_1\)</div></foreignObject>
-<foreignObject x="218.6762" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_2\)</div></foreignObject>
-<foreignObject x="244.1872" y="-18.5859" width="25.5117" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(x_3\)</div></foreignObject>
-<foreignObject x="-69.6094" y="32.4375" width="168.3786" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{0,0}x_0+W_{0,1}x_1+W_{0,2}x_2+W_{0,3}x_3\)</div></foreignObject>
-<foreignObject x="134.4842" y="32.4375" width="168.383" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">\(W_{3,0}x_0+W_{3,1}x_1+W_{3,2}x_2+W_{3,3}x_3\)</div></foreignObject>
-<foreignObject x="65.6052" y="-69.6094" width="102.047" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
-<foreignObject x="65.6052" y="-18.5859" width="102.047" height="25.5126"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
-<foreignObject x="98.7692" y="32.4375" width="35.715" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
+<path d="M-36.445311 -69.6094H-10.9336V-44.0968H-36.445311Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-10.9336 -69.6094H14.5781V-44.0968H-10.9336Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M14.582 -69.6094H40.0937V-44.0968H14.582Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M40.0938 -69.6094H65.6055V-44.0968H40.0938Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M167.6522 -69.6094H193.1639V-44.0968H167.6522Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M193.1642 -69.6094H218.6759V-44.0968H193.1642Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M218.6762 -69.6094H244.1879V-44.0968H218.6762Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M244.1872 -69.6094H269.6989V-44.0968H244.1872Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-36.445311 -18.5859H-10.9336V6.9267H-36.445311Z" fill="#222540"></path>
+<path d="M-36.445311 -18.5859H-10.9336V6.9267H-36.445311Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-10.9336 -18.5859H14.5781V6.9267H-10.9336Z" fill="#222540"></path>
+<path d="M-10.9336 -18.5859H14.5781V6.9267H-10.9336Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M14.582 -18.5859H40.0937V6.9267H14.582Z" fill="#222540"></path>
+<path d="M14.582 -18.5859H40.0937V6.9267H14.582Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M40.0938 -18.5859H65.6055V6.9267H40.0938Z" fill="#222540"></path>
+<path d="M40.0938 -18.5859H65.6055V6.9267H40.0938Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M167.6522 -18.5859H193.1639V6.9267H167.6522Z" fill="#222540"></path>
+<path d="M167.6522 -18.5859H193.1639V6.9267H167.6522Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M193.1642 -18.5859H218.6759V6.9267H193.1642Z" fill="#222540"></path>
+<path d="M193.1642 -18.5859H218.6759V6.9267H193.1642Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M218.6762 -18.5859H244.1879V6.9267H218.6762Z" fill="#222540"></path>
+<path d="M218.6762 -18.5859H244.1879V6.9267H218.6762Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M244.1872 -18.5859H269.6989V6.9267H244.1872Z" fill="#222540"></path>
+<path d="M244.1872 -18.5859H269.6989V6.9267H244.1872Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-23.6875-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M1.8242-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M27.3359-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M52.8477-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M180.4062-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M205.9182-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M231.4332-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M256.9452-44.097656V-18.5859" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-23.6875 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M1.8242 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M27.3359 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M52.8477 6.9258L14.582 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M180.4062 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M205.9182 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M231.4332 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M256.9452 6.9258L218.6762 32.4375" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-69.6094 32.4375H98.7692V57.9496H-69.6094Z" fill="#2b2f5e"></path>
+<path d="M-69.6094 32.4375H98.7692V57.9496H-69.6094Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M134.4842 32.4375H302.8672V57.9496H134.4842Z" fill="#2b2f5e"></path>
+<path d="M134.4842 32.4375H302.8672V57.9496H134.4842Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </g></svg>

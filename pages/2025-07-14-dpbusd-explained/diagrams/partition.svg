@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="339.078291pt" height="140.254521pt" viewBox="-66.687486 -66.687166 339.078291 140.254521" role="img" data-themed="true">
 <g>
-<path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" fill="#2b2f5e"/>
-<path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M22.5391-47.585937V54.4647H67.8945V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M67.8945-47.585937V54.4647H113.2503V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M181.2813-47.585937V54.4647H226.6363V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M226.6363-47.585937V54.4647H271.9923V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-22.816406-52.12109C-21.917968-53.91406-19.82812-55.10937-16.83984-55.10937H-6.1172C-3.1289-55.10937-1.0352-56.30469-.1367-58.0977C.7578-56.30469 2.8516-55.10937 5.8398-55.10937H16.5625C19.5508-55.10937 21.6445-53.91406 22.5391-52.12109" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-22.816406 58.9997C-21.917968 60.7927-19.82812 61.9887-16.83984 61.9887H118.6093C121.5973 61.9887 123.6913 63.1837 124.5903 64.9767C125.4843 63.1837 127.5783 61.9887 130.5663 61.9887H266.0153C269.0043 61.9887 271.0933 60.7927 271.9923 58.9997" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<path d="M-27.35156-47.585937C-29.14453-46.687499-30.33984-44.59375-30.33984-41.60547V-2.5391C-30.33984 .4531-31.53516 2.543-33.3281 3.4414C-31.53516 4.3359-30.33984 6.4297-30.33984 9.418V48.4883C-30.33984 51.4766-29.14453 53.5667-27.35156 54.4647" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"/>
-<foreignObject x="-22.816406" y="-66.687" width="45.3555" height="14"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(4\ \text{cols}\)</div></foreignObject>
-<foreignObject x="-22.816406" y="59.5" width="294.8087" height="14"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(1024\ \text{cols}\)</div></foreignObject>
-<foreignObject x="-66.687" y="-4.56" width="38" height="16"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">\(16\ \text{rows}\)</div></foreignObject>
-<foreignObject x="113.2503" y="-4.56" width="68.031" height="16"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">\(\cdots\)</div></foreignObject>
+<path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" fill="#2b2f5e"></path>
+<path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M22.5391-47.585937V54.4647H67.8945V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M67.8945-47.585937V54.4647H113.2503V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M181.2813-47.585937V54.4647H226.6363V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M226.6363-47.585937V54.4647H271.9923V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-22.816406-52.12109C-21.917968-53.91406-19.82812-55.10937-16.83984-55.10937H-6.1172C-3.1289-55.10937-1.0352-56.30469-.1367-58.0977C.7578-56.30469 2.8516-55.10937 5.8398-55.10937H16.5625C19.5508-55.10937 21.6445-53.91406 22.5391-52.12109" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-22.816406 58.9997C-21.917968 60.7927-19.82812 61.9887-16.83984 61.9887H118.6093C121.5973 61.9887 123.6913 63.1837 124.5903 64.9767C125.4843 63.1837 127.5783 61.9887 130.5663 61.9887H266.0153C269.0043 61.9887 271.0933 60.7927 271.9923 58.9997" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+<path d="M-27.35156-47.585937C-29.14453-46.687499-30.33984-44.59375-30.33984-41.60547V-2.5391C-30.33984 .4531-31.53516 2.543-33.3281 3.4414C-31.53516 4.3359-30.33984 6.4297-30.33984 9.418V48.4883C-30.33984 51.4766-29.14453 53.5667-27.35156 54.4647" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
+
+
+
+
 </g></svg>
