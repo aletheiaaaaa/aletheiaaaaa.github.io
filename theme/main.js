@@ -136,6 +136,110 @@
   }
 })();
 
+/* ── Reading progress bar (post pages) ── */
+(function () {
+  var bar = document.getElementById('reading-progress');
+  var body = document.querySelector('.post-body');
+  if (!bar || !body) return;
+  function onScroll() {
+    var start = body.offsetTop;
+    var total = body.offsetHeight - window.innerHeight + start;
+    var pct = total > 0 ? Math.min(100, Math.max(0, ((window.scrollY - start) / total) * 100)) : 0;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+
+/* ── Back to top ── */
+(function () {
+  var btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  function onScroll() { btn.classList.toggle('visible', window.scrollY > 400); }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  onScroll();
+})();
+
+/* ── Code block copy buttons ── */
+(function () {
+  document.querySelectorAll('.codehilite').forEach(function (block) {
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.type = 'button';
+    btn.textContent = 'copy';
+    block.appendChild(btn);
+    btn.addEventListener('click', function () {
+      var code = block.querySelector('code') || block.querySelector('pre');
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).catch(function () {});
+      btn.textContent = 'copied ✓';
+      setTimeout(function () { btn.textContent = 'copy'; }, 1400);
+    });
+  });
+})();
+
+/* ── Cmd+K search ── */
+(function () {
+  var overlay = document.getElementById('search-overlay');
+  var input = document.getElementById('search-input');
+  var results = document.getElementById('search-results');
+  var btn = document.getElementById('search-btn');
+  if (!overlay || !input || !results) return;
+  var index = window.__SEARCH_INDEX__ || [];
+
+  var activeIndex = -1;
+
+  function render(items) {
+    activeIndex = -1;
+    var prefix = window.__ROOT_REL__ || '';
+    results.innerHTML = items.map(function (it) {
+      var url = /^https?:\/\//.test(it.url) ? it.url : prefix + it.url;
+      return '<a class="search-result" href="' + url + '"><span>' + it.title +
+        '</span><span class="search-result-kind">' + it.kind + '</span></a>';
+    }).join('') || '<div class="search-empty">no matches</div>';
+  }
+  function setActive(i) {
+    var items = results.querySelectorAll('.search-result');
+    if (!items.length) return;
+    activeIndex = (i + items.length) % items.length;
+    items.forEach(function (el, idx) { el.classList.toggle('active', idx === activeIndex); });
+    items[activeIndex].scrollIntoView({ block: 'nearest' });
+  }
+  function open() {
+    overlay.classList.add('open');
+    render(index.slice(0, 6));
+    input.value = '';
+    setTimeout(function () { input.focus(); }, 10);
+  }
+  function close() { overlay.classList.remove('open'); }
+
+  if (btn) btn.addEventListener('click', open);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+    render(!q ? index.slice(0, 6) : index.filter(function (it) {
+      return it.title.toLowerCase().indexOf(q) !== -1;
+    }));
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); open(); }
+    else if (e.key === 'Escape') close();
+  });
+  input.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIndex + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIndex - 1); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      var items = results.querySelectorAll('.search-result');
+      var target = activeIndex >= 0 ? items[activeIndex] : items[0];
+      if (target) target.click();
+    }
+  });
+})();
+
 /* ── TOC scroll spy ── */
 (function () {
   var headings = Array.from(document.querySelectorAll('.post-body h1, .post-body h2, .post-body h3, .post-body h4'));

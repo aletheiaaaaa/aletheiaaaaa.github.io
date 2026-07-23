@@ -39,7 +39,7 @@
   <text class="mv" x="232" y="306" text-anchor="end" dominant-baseline="central">O-O</text>
   <text class="mv" x="392" y="306" text-anchor="end" dominant-baseline="central">c3</text>
   <text class="mv" x="448" y="306" text-anchor="start" dominant-baseline="central">O-O</text>
-  <text class="tag" x="140" y="386" text-anchor="middle">leaf</text>
+  <text class="tag" x="140" y="386" text-anchor="middle" dominant-baseline="central">leaf</text>
 
   <line class="edgep" x1="230" y1="400" x2="258" y2="400" marker-end="url(#sel)"></line>
   <text class="lgd" x="266" y="400" dominant-baseline="central">selected path</text>

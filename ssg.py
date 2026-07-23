@@ -599,7 +599,7 @@ def build_post(post, cfg, older=None, newer=None):
         else:
             shutil.copy2(asset, dst)
 
-    html = render_page(title, body_html, cfg, root_rel=root_rel, math=math)
+    html = render_page(title, body_html, cfg, root_rel=root_rel, math=math, page_id="post")
     (out_dir / "index.html").write_text(html)
     print(f"  post  → posts/{post['slug']}/index.html")
 
@@ -758,6 +758,25 @@ def cmd_build():
 
     # Find posts first so blog page can reference them
     posts = find_posts()
+
+    # Write search index (posts + projects) for cmd+k search
+    search_items = []
+    for p in posts:
+        search_items.append({
+            "title": p["meta"].get("title", p["slug"]),
+            "url": f"posts/{p['slug']}/index.html",
+            "kind": "post",
+        })
+    for proj in cfg.get("projects", []):
+        search_items.append({
+            "title": proj.get("name", ""),
+            "url": proj.get("href", proj.get("url", "#")),
+            "kind": "project",
+        })
+    (OUT_DIR / "search-index.js").write_text(
+        "window.__SEARCH_INDEX__ = " + json.dumps(search_items) + ";"
+    )
+    print(f"  index → search-index.js")
 
     # Build pages
     if PAGES_DIR.exists():

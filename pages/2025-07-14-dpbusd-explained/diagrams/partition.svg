@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="339.078291pt" height="140.254521pt" viewBox="-66.687486 -66.687166 339.078291 140.254521" role="img" data-themed="true">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="339.078291pt" height="180.254521pt" viewBox="-66.687486 -86.687166 339.078291 180.254521" role="img" data-themed="true">
 <g>
 <path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" fill="#2b2f5e"></path>
 <path d="M-22.816406-47.585937V54.4647H22.5391V-47.585937Z" stroke="#c4c4c4" fill="none" stroke-width=".79701" stroke-miterlimit="10"></path>
@@ -13,4 +13,8 @@
 
 
 
+<foreignObject x="-22.816406" y="-84" width="45.355" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">4</div></foreignObject>
+<foreignObject x="-64" y="-6.56" width="28" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">16</div></foreignObject>
+<foreignObject x="113.2503" y="-6.56" width="68.031" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">...</div></foreignObject>
+<foreignObject x="-22.816406" y="67" width="294.8087" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">1024</div></foreignObject>
 </g></svg>

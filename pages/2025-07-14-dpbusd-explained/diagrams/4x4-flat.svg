@@ -65,4 +65,27 @@
 
 
 
+<foreignObject x="-70.007905" y="-66.85" width="30" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">$x$</div></foreignObject>
+<foreignObject x="-70.007905" y="-15.83" width="30" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo lbl">$w$</div></foreignObject>
+<foreignObject x="65.6055" y="-66.85" width="102.0467" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">...</div></foreignObject>
+<foreignObject x="65.6055" y="-15.83" width="102.0467" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">...</div></foreignObject>
+<foreignObject x="98.7692" y="35.19" width="35.715" height="20"><div xmlns="http://www.w3.org/1999/xhtml" class="fo dots">...</div></foreignObject>
+<foreignObject x="-36.445311" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_0$</div></foreignObject>
+<foreignObject x="-10.9336" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_1$</div></foreignObject>
+<foreignObject x="14.582" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_2$</div></foreignObject>
+<foreignObject x="40.0938" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_3$</div></foreignObject>
+<foreignObject x="167.6522" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_0$</div></foreignObject>
+<foreignObject x="193.1642" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_1$</div></foreignObject>
+<foreignObject x="218.6762" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_2$</div></foreignObject>
+<foreignObject x="244.1872" y="-69.6094" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$x_3$</div></foreignObject>
+<foreignObject x="-36.445311" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{00}$</div></foreignObject>
+<foreignObject x="-10.9336" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{01}$</div></foreignObject>
+<foreignObject x="14.582" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{02}$</div></foreignObject>
+<foreignObject x="40.0938" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{03}$</div></foreignObject>
+<foreignObject x="167.6522" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{30}$</div></foreignObject>
+<foreignObject x="193.1642" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{31}$</div></foreignObject>
+<foreignObject x="218.6762" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{32}$</div></foreignObject>
+<foreignObject x="244.1872" y="-18.5859" width="25.5117" height="25.5117"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{33}$</div></foreignObject>
+<foreignObject x="-69.6094" y="32.4375" width="168.3786" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{00}x_0+w_{01}x_1+w_{02}x_2+w_{03}x_3$</div></foreignObject>
+<foreignObject x="134.4842" y="32.4375" width="168.383" height="25.5121"><div xmlns="http://www.w3.org/1999/xhtml" class="fo res">$w_{30}x_0+w_{31}x_1+w_{32}x_2+w_{33}x_3$</div></foreignObject>
 </g></svg>

@@ -7,14 +7,17 @@
   <link rel="stylesheet" href="style.css">
   
   <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+  <script>window.__ROOT_REL__ = "";</script>
 </head>
 <body data-page="">
   <canvas id="dotfield" class="dot-bg" aria-hidden="true"></canvas>
+  <div id="reading-progress" class="reading-progress"></div>
   <header class="site-header">
     <nav class="site-nav">
       <div class="nav-brand"><a href="index.html">p > 0.05</a></div>
       <ul class="nav-links"><li><a href="projects.html">Projects</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li></ul>
       <div class="nav-end">
+        <button class="search-btn" id="search-btn" aria-label="Search">search <kbd>&#8984;K</kbd></button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">◑</button>
         <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -40,6 +43,18 @@
       <nav class="footer-links"><a href="projects.html">projects</a><a href="blog.html">blog</a><a href="about.html">about</a></nav>
     </div>
   </footer>
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">&uarr; top</button>
+  <div id="search-overlay" class="search-overlay">
+    <div class="search-panel">
+      <div class="search-input-row">
+        <span class="search-prompt">$</span>
+        <input id="search-input" type="text" placeholder="search posts, projects&hellip;" autocomplete="off">
+        <kbd>esc</kbd>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </div>
+  <script src="search-index.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
