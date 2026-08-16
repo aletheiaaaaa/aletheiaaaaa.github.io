@@ -1,12 +1,12 @@
-title: "p > 0.05"
-description: "A blog about programming, technology, and other musings."
+title: "gradient flows"
+description: "A blog about programming, machine learning, and whatever else I find interesting."
 author: "aletheiaaaaa"
 email: "carbon674@gmail.com"
 base_url: ""
 
 hero:
-  title: "p > 0.05"
-  tagline: "Programming, math, and ML — by Aletheia."
+  title: "gradient flows"
+  tagline: "a diary of my adventures and misadventures through the world of code"
   body: ""
 
 posts_label: "Latest Posts"
