@@ -180,6 +180,20 @@
   });
 })();
 
+/* ── Citation block copy button ── */
+(function () {
+  var block = document.querySelector('.cite-block');
+  if (!block) return;
+  var btn = block.querySelector('.cite-copy');
+  var pre = block.querySelector('pre');
+  if (!btn || !pre) return;
+  btn.addEventListener('click', function () {
+    navigator.clipboard.writeText(pre.innerText).catch(function () {});
+    btn.textContent = 'copied ✓';
+    setTimeout(function () { btn.textContent = 'copy'; }, 1400);
+  });
+})();
+
 /* ── Cmd+K search ── */
 (function () {
   var overlay = document.getElementById('search-overlay');
