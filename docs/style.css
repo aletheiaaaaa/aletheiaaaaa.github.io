@@ -34,7 +34,7 @@ html.theme-transitioning *::after {
 
 html {
   font-family: var(--font);
-  font-size: 17px;
+  font-size: 15px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -66,7 +66,7 @@ nav.site-nav {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 4rem;
+  height: 3.3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -179,12 +179,12 @@ main {
 
 /* ── Hero ── */
 .hero {
-  padding-top: 6rem;
-  padding-bottom: 4rem;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
 }
 
 .hero h1 {
-  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-size: clamp(1.9rem, 4.4vw, 2.5rem);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.1;
@@ -193,7 +193,7 @@ main {
 }
 
 .hero .hero-tagline {
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 300;
   color: var(--text-muted);
   line-height: 1.55;
@@ -243,9 +243,9 @@ main {
 .index-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 3rem;
   align-items: start;
-  padding-bottom: 6rem;
+  padding-bottom: 4.5rem;
 }
 
 /* ── Post list ── */
@@ -262,7 +262,7 @@ main {
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.65rem;
+  gap: 0.5rem;
 }
 
 .project-card {
@@ -374,7 +374,7 @@ main {
 
 .post-item {
   display: block;
-  padding: 1.5rem 0;
+  padding: 1.1rem 0;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
@@ -404,7 +404,7 @@ main {
 }
 
 .post-item h3 {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-heading);
   margin: 0 0 0.4rem;
@@ -474,7 +474,7 @@ main {
 
 .post-wrap {
   min-width: 0;
-  padding: 4rem 0 7rem;
+  padding: 3rem 0 5rem;
   align-self: start;
 }
 
@@ -589,13 +589,13 @@ main {
 
 /* ── Post header ── */
 .post-header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 2rem;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
 }
 
 .post-header h1 {
-  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.12;
@@ -654,7 +654,7 @@ pre code {
 
 /* ── Post body ── */
 .post-body {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 300;
   line-height: 1.75;
   text-align: justify;
@@ -704,7 +704,7 @@ pre code {
 
 
 .post-body p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .post-body h1 {
@@ -1344,7 +1344,7 @@ figcaption,
 .page-wrap {
   max-width: 680px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 7rem;
+  padding: 3rem 1.5rem 5rem;
   font-weight: 300;
 }
 
@@ -1353,10 +1353,10 @@ figcaption,
 }
 
 .page-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: -0.03em;
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
   color: var(--text-heading);
 }
 
@@ -1644,7 +1644,7 @@ body[data-page="index"] main {
   html:not([data-theme="dark"]) code,
   html:not([data-theme="dark"]) pre,
   html:not([data-theme="dark"]) .codehilite {
-    background: #e8eaef;
+    background-color: #e8eaef;
     border-color: #b7bcc6;
   }
 
@@ -1769,7 +1769,7 @@ html[data-theme="light"] .post-header {
 html[data-theme="light"] code,
 html[data-theme="light"] pre,
 html[data-theme="light"] .codehilite {
-  background: #e8eaef;
+  background-color: #e8eaef;
   border-color: #b7bcc6;
 }
 
@@ -1994,7 +1994,6 @@ html[data-theme="light"] .post-body img {
    recolour for light mode here so they track the manual toggle (no invert
    filter). ── */
 @media (prefers-color-scheme: light) {
-
   html:not([data-theme="dark"]) .post-body svg .mv,
   html:not([data-theme="dark"]) .post-body svg .lgd {
     fill: #5f5e5a;
@@ -2235,63 +2234,29 @@ html[data-theme="light"] .post-body svg [fill="#2b2f5e"] {
   --code-green: #9ece8a;
   --dim: #5f6672;
 }
-
-html[data-theme="light"] {
-  --code-green: #15803d;
-  --dim: #6b7280;
-}
-
+html[data-theme="light"] { --code-green: #15803d; --dim: #6b7280; }
 @media (prefers-color-scheme: light) {
-  html:not([data-theme="dark"]) {
-    --code-green: #15803d;
-    --dim: #6b7280;
-  }
+  html:not([data-theme="dark"]) { --code-green: #15803d; --dim: #6b7280; }
 }
 
 /* — monospace chrome (headings + UI); body copy stays Fira Sans — */
 nav.site-nav .nav-brand a,
 nav.site-nav .nav-links a,
-.section-label,
-.section-link,
-.hero-kicker,
-.hero h1,
-.hero-actions .btn,
-.hero-actions .btn-inline,
-.page-title,
-.post-header h1,
-.post-item h3,
-.project-card h3,
-.post-num,
-.toc-label,
-.toc-inner .toc a,
-.post-nav-label,
-.footer-inner {
+.section-label, .section-link,
+.hero-kicker, .hero h1, .hero-actions .btn, .hero-actions .btn-inline,
+.page-title, .post-header h1, .post-item h3, .project-card h3,
+.post-num, .toc-label, .toc-inner .toc a, .post-nav-label, .footer-inner {
   font-family: var(--font-mono);
 }
 
 /* — nav — */
-header.site-header {
-  border-bottom: 1px solid var(--border);
-}
-
-nav.site-nav .nav-links {
-  margin-left: auto;
-}
-
-nav.site-nav .nav-end {
-  margin-left: 1.5rem;
-}
-
-nav.site-nav .nav-links a {
-  text-transform: lowercase;
-  letter-spacing: 0;
-}
-
+header.site-header { border-bottom: 1px solid var(--border); }
+nav.site-nav .nav-links { margin-left: auto; }
+nav.site-nav .nav-end { margin-left: 1.5rem; }
+nav.site-nav .nav-links a { text-transform: lowercase; letter-spacing: 0; }
 /* home: projects + blog live in the hero, so trim them from the header */
 body[data-page="index"] .nav-links li:nth-child(1),
-body[data-page="index"] .nav-links li:nth-child(2) {
-  display: none;
-}
+body[data-page="index"] .nav-links li:nth-child(2) { display: none; }
 
 /* — section labels rendered as // comments — */
 .section-label {
@@ -2299,36 +2264,22 @@ body[data-page="index"] .nav-links li:nth-child(2) {
   letter-spacing: 0;
   color: var(--dim);
 }
-
-.section-label::before {
-  content: "// ";
-}
+.section-label::before { content: "// "; }
 
 /* — hero — */
-.hero {
-  padding-top: 7rem;
-}
-
+.hero { padding-top: 7rem; }
 .hero-kicker {
   font-size: 0.85rem;
   color: var(--dim);
   letter-spacing: 0.02em;
   margin-bottom: 1.15rem;
 }
-
-.hero-prompt {
-  color: var(--code-green);
-}
-
+.hero-prompt { color: var(--code-green); }
 .hero h1 {
   color: var(--text-heading);
   font-size: clamp(2.5rem, 6vw, 3.4rem);
 }
-
-.hero .hero-op {
-  color: var(--accent);
-}
-
+.hero .hero-op { color: var(--accent); }
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -2336,65 +2287,9 @@ body[data-page="index"] .nav-links li:nth-child(2) {
   gap: 0.9rem;
   margin-top: 2rem;
 }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.85rem;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: opacity 0.15s, border-color 0.15s, color 0.15s;
-}
-
-.btn--primary {
-  background: var(--accent);
-  color: #08080a;
-  font-weight: 500;
-}
-
-.btn--primary:hover {
-  opacity: 0.88;
-  color: #08080a;
-}
-
-.btn--primary .btn-arrow {
-  opacity: 0.55;
-}
-
-/* light mode: darker indigo accent needs light button text for contrast */
-html[data-theme="light"] .btn--primary,
-html[data-theme="light"] .btn--primary:hover {
-  color: #ffffff;
-}
-
-@media (prefers-color-scheme: light) {
-
-  html:not([data-theme="dark"]) .btn--primary,
-  html:not([data-theme="dark"]) .btn--primary:hover {
-    color: #ffffff;
-  }
-}
-
-.btn--ghost {
-  border: 1px solid var(--border);
-  color: var(--accent-light);
-}
-
-.btn--ghost:hover {
-  border-color: var(--accent-border);
-  color: var(--accent-light);
-}
-
-.btn-inline {
-  font-size: 0.8rem;
-  color: var(--dim);
-}
-
-.btn-inline:hover {
-  color: var(--accent-light);
-}
+/* the hero buttons are defined with the terminal states at the end — */
+.btn-inline { font-size: 0.8rem; color: var(--dim); }
+.btn-inline:hover { color: var(--accent-light); }
 
 /* — numbered post list (top number = total; counts down) — */
 .post-item {
@@ -2403,70 +2298,25 @@ html[data-theme="light"] .btn--primary:hover {
   gap: 1rem;
   align-items: start;
 }
-
-.post-num {
-  color: #3f3f46;
-  font-size: 0.8rem;
-  padding-top: 0.5rem;
-}
-
-.post-item h3 {
-  font-weight: 500;
-}
+.post-num { color: #3f3f46; font-size: 0.8rem; padding-top: 0.5rem; }
+.post-item h3 { font-weight: 500; }
 
 /* — post reading view: # headings, $ byline, // contents — */
-.post-body h1,
-.post-body h2 {
-  font-family: var(--font-mono);
-  font-weight: 500;
-}
-
-.post-body h1::before,
-.post-body h2::before {
-  content: "# ";
-  color: var(--dim);
-}
-
-.post-header .byline::before {
-  content: "$ ";
-  color: var(--code-green);
-}
-
-.toc-label {
-  text-transform: lowercase;
-  letter-spacing: 0;
-}
-
-.toc-label::before {
-  content: "// ";
-}
+.post-body h1, .post-body h2 { font-family: var(--font-mono); font-weight: 500; }
+.post-body h1::before, .post-body h2::before { content: "# "; color: var(--dim); }
+.post-header .byline::before { content: "$ "; color: var(--code-green); }
+.toc-label { text-transform: lowercase; letter-spacing: 0; }
+.toc-label::before { content: "// "; }
 
 /* — projects: scalable auto-fill grid + code-flavoured cards — */
-.index-grid {
-  grid-template-columns: 1.5fr 1fr;
-}
-
-.projects-grid {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
+.index-grid { grid-template-columns: 1.5fr 1fr; }
+.projects-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
 .projects-page-grid {
   grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
   gap: 0.9rem;
 }
-
-.project-card {
-  aspect-ratio: auto;
-  min-height: 170px;
-}
-
-.project-card h3::after {
-  content: " { }";
-  color: #3f3f46;
-  font-weight: 400;
-}
-
+.project-card { aspect-ratio: auto; min-height: 170px; }
+.project-card h3::after { content: " { }"; color: #3f3f46; font-weight: 400; }
 .project-card .card-tag {
   font-family: var(--font-mono);
   color: var(--code-green);
@@ -2474,57 +2324,25 @@ html[data-theme="light"] .btn--primary:hover {
 }
 
 /* — footer $ prompt — */
-.footer-inner {
-  letter-spacing: 0;
-}
-
-.footer-inner>span:first-child::before {
-  content: "$ ";
-  color: var(--code-green);
-}
+.footer-inner { letter-spacing: 0; }
+.footer-inner > span:first-child::before { content: "$ "; color: var(--code-green); }
 
 /* re-assert responsive stacking + left-aligned hero buttons — these must come
    last in the file so they win over the base .index-grid / .projects-page-grid
    / .hero-actions declarations above at the same specificity */
 @media (max-width: 1100px) {
-  .post-layout {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .index-grid {
-    grid-template-columns: 1fr;
-  }
+  .post-layout { grid-template-columns: 1fr; gap: 0; }
+  .index-grid { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 700px) {
-  .projects-page-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .projects-page-grid { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 560px) {
-  .projects-page-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-
-  .hero-actions .btn {
-    justify-content: center;
-  }
-
-  .hero-actions .btn-inline {
-    margin-top: 0.2rem;
-  }
+  .projects-page-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .hero-actions .btn { justify-content: center; }
+  .hero-actions .btn-inline { margin-top: 0.2rem; }
 }
 
 /* — dot-grid background (index only); canvas painted in main.js — */
@@ -2537,19 +2355,9 @@ html[data-theme="light"] .btn--primary:hover {
   display: none;
   pointer-events: none;
 }
-
-html {
-  background: var(--surface);
-}
-
-body[data-page="index"] {
-  background: transparent;
-}
-
-body[data-page="index"] .dot-bg {
-  display: block;
-}
-
+html { background: var(--surface); }
+body[data-page="index"] { background: transparent; }
+body[data-page="index"] .dot-bg { display: block; }
 body[data-page="index"]::before {
   content: "";
   position: fixed;
@@ -2557,18 +2365,16 @@ body[data-page="index"]::before {
   z-index: -1;
   pointer-events: none;
   background: radial-gradient(125% 85% at 46% 32%,
-      transparent 0%, rgba(10, 10, 11, 0.30) 55%, rgba(10, 10, 11, 0.72) 100%);
+    transparent 0%, rgba(10, 10, 11, 0.30) 55%, rgba(10, 10, 11, 0.72) 100%);
 }
-
 html[data-theme="light"] body[data-page="index"]::before {
   background: radial-gradient(125% 85% at 46% 32%,
-      transparent 0%, rgba(241, 242, 245, 0.35) 55%, rgba(241, 242, 245, 0.82) 100%);
+    transparent 0%, rgba(241, 242, 245, 0.35) 55%, rgba(241, 242, 245, 0.82) 100%);
 }
-
 @media (prefers-color-scheme: light) {
   html:not([data-theme="dark"]) body[data-page="index"]::before {
     background: radial-gradient(125% 85% at 46% 32%,
-        transparent 0%, rgba(241, 242, 245, 0.35) 55%, rgba(241, 242, 245, 0.82) 100%);
+      transparent 0%, rgba(241, 242, 245, 0.35) 55%, rgba(241, 242, 245, 0.82) 100%);
   }
 }
 
@@ -2584,7 +2390,6 @@ html[data-theme="light"] body[data-page="index"]::before {
     radial-gradient(circle at 56px 19px, #34343a 4.5px, transparent 5px),
     #111113;
 }
-
 html[data-theme="light"] .codehilite::before {
   background:
     radial-gradient(circle at 20px 19px, #c7cad3 4.5px, transparent 5px),
@@ -2593,21 +2398,17 @@ html[data-theme="light"] .codehilite::before {
     #e8eaef;
   border-bottom-color: #b7bcc6;
 }
-
 html[data-theme="light"] .copy-btn {
   border-color: #b7bcc6;
 }
-
 html[data-theme="light"] .search-btn {
   background: #e8eaef;
   border-color: #b7bcc6;
 }
-
 html[data-theme="light"] .search-panel {
   background: #e8eaef;
   border-color: #b7bcc6;
 }
-
 @media (prefers-color-scheme: light) {
   html:not([data-theme="dark"]) .codehilite::before {
     background:
@@ -2633,10 +2434,7 @@ html[data-theme="light"] .search-panel {
   }
 }
 
-.codehilite {
-  position: relative;
-}
-
+.codehilite { position: relative; }
 .copy-btn {
   position: absolute;
   top: 7px;
@@ -2651,11 +2449,7 @@ html[data-theme="light"] .search-panel {
   cursor: pointer;
   z-index: 1;
 }
-
-.copy-btn:hover {
-  color: var(--accent-light);
-  border-color: var(--accent-border);
-}
+.copy-btn:hover { color: var(--accent-light); border-color: var(--accent-border); }
 
 /* — reading progress bar — */
 .reading-progress {
@@ -2668,15 +2462,9 @@ html[data-theme="light"] .search-panel {
   z-index: 55;
   transition: width 0.1s linear;
 }
-
 body[data-page="post"] .reading-progress,
-body[data-page="page"] .reading-progress {
-  display: block;
-}
-
-body:not([data-page="post"]) .reading-progress {
-  display: none;
-}
+body[data-page="page"] .reading-progress { display: block; }
+body:not([data-page="post"]) .reading-progress { display: none; }
 
 /* — back to top — */
 .back-to-top {
@@ -2701,12 +2489,7 @@ body:not([data-page="post"]) .reading-progress {
   transition: opacity 0.2s, transform 0.2s;
   z-index: 40;
 }
-
-.back-to-top.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
+.back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
 /* — search button + cmd+k overlay — */
 .search-btn {
@@ -2722,16 +2505,13 @@ body:not([data-page="post"]) .reading-progress {
   padding: 6px 10px;
   cursor: pointer;
 }
-
-.search-btn kbd,
-.search-input-row kbd {
+.search-btn kbd, .search-input-row kbd {
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 10.5px;
   color: var(--dim);
 }
-
 .search-overlay {
   position: fixed;
   inset: 0;
@@ -2742,11 +2522,7 @@ body:not([data-page="post"]) .reading-progress {
   justify-content: center;
   padding-top: 12vh;
 }
-
-.search-overlay.open {
-  display: flex;
-}
-
+.search-overlay.open { display: flex; }
 .search-panel {
   width: min(480px, 90vw);
   background: var(--surface-raised);
@@ -2755,7 +2531,6 @@ body:not([data-page="post"]) .reading-progress {
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
-
 .search-input-row {
   display: flex;
   align-items: center;
@@ -2763,13 +2538,7 @@ body:not([data-page="post"]) .reading-progress {
   padding: 12px 16px;
   border-bottom: 1px solid var(--border);
 }
-
-.search-prompt {
-  color: var(--code-green);
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
+.search-prompt { color: var(--code-green); font-family: var(--font-mono); font-size: 13px; }
 .search-input-row input {
   flex: 1;
   background: transparent;
@@ -2779,13 +2548,7 @@ body:not([data-page="post"]) .reading-progress {
   font-family: var(--font-mono);
   font-size: 13px;
 }
-
-.search-results {
-  padding: 6px 0;
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
+.search-results { padding: 6px 0; max-height: 50vh; overflow-y: auto; }
 .search-result {
   display: flex;
   justify-content: space-between;
@@ -2794,29 +2557,10 @@ body:not([data-page="post"]) .reading-progress {
   color: var(--text-primary);
   text-decoration: none;
 }
-
-.search-result:hover {
-  background: rgba(165, 180, 252, 0.06);
-  color: var(--accent-light);
-}
-
-.search-result.active {
-  background: rgba(165, 180, 252, 0.1);
-  color: var(--accent-light);
-}
-
-.search-result-kind {
-  color: var(--dim);
-  font-size: 11px;
-  font-family: var(--font-mono);
-}
-
-.search-empty {
-  padding: 16px;
-  color: var(--dim);
-  font-size: 13px;
-  text-align: center;
-}
+.search-result:hover { background: rgba(165, 180, 252, 0.06); color: var(--accent-light); }
+.search-result.active { background: rgba(165, 180, 252, 0.1); color: var(--accent-light); }
+.search-result-kind { color: var(--dim); font-size: 11px; font-family: var(--font-mono); }
+.search-empty { padding: 16px; color: var(--dim); font-size: 13px; text-align: center; }
 
 /* — inner pages: kicker, monospace # headings, mono tag chips — */
 .page-kicker {
@@ -2825,21 +2569,9 @@ body:not([data-page="post"]) .reading-progress {
   font-size: 0.85rem;
   margin-bottom: 0.9rem;
 }
-
-.page-wrap h2,
-.page-wrap h3 {
-  font-family: var(--font-mono);
-  font-weight: 500;
-}
-
-.page-wrap h2::before {
-  content: "# ";
-  color: var(--dim);
-}
-
-.tag {
-  font-family: var(--font-mono);
-}
+.page-wrap h2, .page-wrap h3 { font-family: var(--font-mono); font-weight: 500; }
+.page-wrap h2::before { content: "# "; color: var(--dim); }
+.tag { font-family: var(--font-mono); }
 
 
 /* ── Citation block ── */
@@ -2912,4 +2644,509 @@ body:not([data-page="post"]) .reading-progress {
   font-size: 0.75rem;
   line-height: 1.75;
   white-space: pre-wrap;
+}
+
+/* — wider containers, more-indented hero, larger body copy — */
+nav.site-nav, .content-width, .footer-inner, .page-wrap--wide {
+  max-width: 1440px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.page-wrap { max-width: 900px; }
+.post-layout {
+  max-width: 1360px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.hero { padding-left: 2rem; }
+.hero h1 { font-size: clamp(2.9rem, 6.5vw, 3.9rem); }
+.hero .hero-body { font-size: 1.05rem; }
+.hero-actions .btn, .hero-actions .btn-inline { font-size: 0.9rem; }
+.post-item h3 { font-size: 1.02rem; }
+.page-title, .post-header h1 { font-size: clamp(1.75rem, 3.4vw, 2.05rem); }
+.post-body { font-size: 1.05rem; }
+.post-body h2 { font-size: 1.25rem; }
+.post-body h3 { font-size: 1.05rem; }
+
+/* — blog listing: header row, featured post — */
+.page-header-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 2rem; }
+.page-header-row .page-title { margin: 0; }
+.post-featured {
+  display: block;
+  padding-bottom: 2rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  text-decoration: none; color: inherit;
+}
+.post-featured-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 0.9rem; }
+.post-featured-kicker .section-label { color: var(--accent-light); }
+.post-featured-meta { color: var(--dim); font-size: 0.8rem; }
+.post-featured h2 { font-size: 1.75rem; font-weight: 600; color: var(--text-heading); line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
+.post-featured-desc { font-family: 'Fira Sans', system-ui, sans-serif; font-size: 0.98rem; color: var(--text-muted); line-height: 1.55; margin: 0 0 1rem; max-width: 640px; }
+.post-featured-cta { color: var(--accent-light); font-size: 0.85rem; }
+
+/* — reading view: post title block — */
+
+/* — project cards: no fill, no box. corner brackets (below) mark the bounds
+   instead, and they extend + brighten on hover — */
+.project-card,
+.project-card--full,
+html[data-theme="light"] .project-card,
+html:not([data-theme="dark"]) .project-card {
+  position: relative;
+  /* background-color, not the shorthand: these theme selectors outrank the
+     motif rule below, and `background:` would reset its bracket gradients */
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.25rem 1.35rem;
+}
+
+.project-card:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.project-card:hover h3::after {
+  color: var(--accent);
+}
+
+/* — layout pass: tighter side gutters on inner pages, bigger project-card copy,
+   bigger site header. must stay last in the file so it wins at equal
+   specificity — */
+
+/* narrower side padding on every page except the index (which keeps
+   .content-width); nav + footer are shared chrome, so they're left alone */
+.page-wrap,
+.page-wrap--wide,
+.post-layout {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+@media (max-width: 560px) {
+  .page-wrap,
+  .page-wrap--wide,
+  .post-layout {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* the about page sits flush against the left of the viewport instead of being
+   centred; its prose stays justified */
+body[data-page="about"] .page-wrap {
+  max-width: 1440px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* the container spans the site's full column so the block sits hard left,
+   flush under the nav brand; the copy itself keeps a readable measure */
+body[data-page="about"] .page-wrap > * {
+  max-width: 900px;
+}
+
+body[data-page="about"] .page-wrap p,
+body[data-page="about"] .page-wrap li {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* — site header: larger — */
+nav.site-nav { height: 4rem; }
+nav.site-nav .nav-brand a { font-size: 1.25rem; }
+nav.site-nav .nav-links { gap: 1.75rem; }
+nav.site-nav .nav-links a { font-size: 0.92rem; }
+.theme-toggle { font-size: 1.15rem; }
+.search-btn { font-size: 13px; padding: 7px 11px; }
+
+/* — project cards: larger text — */
+.project-card h3 { font-size: 0.98rem; }
+.project-card .card-desc { font-size: 0.85rem; line-height: 1.45; }
+.project-card .card-tag { font-size: 0.7rem; }
+.card-gh-link { font-size: 0.74rem; }
+.project-card--full h3 { font-size: 1.02rem; }
+.project-card--full .card-desc { font-size: 0.85rem; }
+
+
+/* drawer sits flush under the taller header */
+@media (max-width: 1100px) {
+  .post-toc { top: calc(4rem + 1px); }
+}
+
+
+/* ── corner-bracket motif ────────────────────────────────────────────────────
+   the 3px vertical accent bar is gone everywhere; framed blocks are marked by
+   four corner ticks instead. drawn with background gradients rather than
+   pseudo-elements because ::before is already spoken for on blockquotes (quote
+   glyph) and callouts (labels) — one mechanism for every block. each corner is
+   an arm pair, so eight gradients in all. — */
+
+.project-card,
+.post-header,
+.post-featured,
+blockquote,
+.post-body details,
+.post-body .aside-note,
+pre,
+.codehilite,
+.search-panel,
+.hero-actions .btn,
+.theorem, .lemma, .corollary,
+.proof, .definition, .remark, .example {
+  /* dimmed: four corners on every block is a lot of accent ink at full
+     strength. first declaration is the fallback where color-mix is missing */
+  --bracket: var(--accent-border);
+  --bracket: color-mix(in srgb, var(--accent) 55%, transparent);
+  --bracket-len: 22px;
+  position: relative;
+  border-radius: 0;
+  background-image:
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket));
+  background-repeat: no-repeat;
+  background-size:
+    var(--bracket-len) 1px, 1px var(--bracket-len),
+    var(--bracket-len) 1px, 1px var(--bracket-len),
+    var(--bracket-len) 1px, 1px var(--bracket-len),
+    var(--bracket-len) 1px, 1px var(--bracket-len);
+  background-position:
+    left top, left top,
+    right top, right top,
+    left bottom, left bottom,
+    right bottom, right bottom;
+  transition: background-size 0.2s ease;
+}
+
+/* only the ex-bar blocks lose their left edge — bordered boxes keep theirs */
+blockquote,
+.post-body .aside-note,
+.theorem, .lemma, .corollary,
+.proof, .definition, .remark, .example {
+  border-left: none;
+}
+
+/* muted blocks keep their muted marking, as the old bars did */
+.proof, .definition, .remark, .example {
+  --bracket: var(--border);
+}
+
+.lemma, .corollary {
+  --bracket: rgba(99, 102, 241, 0.55);
+}
+
+blockquote {
+  padding: 1.25rem 1.5rem;
+}
+
+/* the quote glyph moves clear of the top-left tick */
+blockquote::before {
+  top: 0.4rem;
+  left: 1.6rem;
+}
+
+.post-body details {
+  border: 1px solid var(--border);
+}
+
+.post-body .aside-note {
+  --bracket: var(--border);
+  --bracket-len: 12px;
+  padding: 0.5rem 0.75rem;
+}
+
+/* — cards: longer ticks that extend and brighten on hover — */
+.project-card {
+  --bracket-len: 24px;
+}
+
+.project-card:hover {
+  --bracket-len: 38px;
+  --bracket: var(--accent);
+}
+
+/* — header blocks: the divider is gone, the frame separates them instead — */
+.post-header,
+.post-featured {
+  /* the ticks sit on the block's edges, so the text needs clearance on both
+     axes — without padding-top the heading collides with the top arm */
+  padding: 1rem 1.6rem 0.7rem;
+  border-bottom: none;
+}
+
+.post-header {
+  margin-bottom: 2.6rem;
+}
+
+.post-featured {
+  margin-bottom: 2rem;
+}
+
+.post-featured:hover {
+  --bracket-len: 34px;
+}
+
+
+/* ── square edges ────────────────────────────────────────────────────────────
+   no pills, no rounded boxes anywhere — the corner-bracket motif above only
+   reads as deliberate if the rest of the chrome shares its geometry. — */
+
+.theme-toggle,
+.nav-menu-btn,
+.nav-menu-btn span,
+.toc-toggle,
+.btn,
+.copy-btn,
+.back-to-top,
+.search-btn,
+.search-btn kbd,
+.search-input-row kbd,
+.search-panel,
+.cite-block,
+.cite-block .cite-copy,
+.cite-block .cite-dot,
+code,
+pre,
+.codehilite,
+table,
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+}
+
+/* — tags: the pill is gone. mono text in brackets instead, in the same family
+   as the // kickers, the $ prompts and the { } after card titles — */
+.tag,
+.post-item .tag,
+.post-header .tag,
+.project-card .card-tag {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+}
+
+.tag::before,
+.post-item .tag::before,
+.post-header .tag::before,
+.project-card .card-tag::before {
+  content: "[";
+  opacity: 0.5;
+}
+
+.tag::after,
+.post-item .tag::after,
+.post-header .tag::after,
+.project-card .card-tag::after {
+  content: "]";
+  opacity: 0.5;
+}
+
+/* chips carried their own padding; the list needs the spacing back */
+.tag-list,
+.post-item .tag-list,
+.post-header .tag-list {
+  gap: 0.75rem;
+}
+
+
+/* ── terminal states ─────────────────────────────────────────────────────────
+   no shadows and nothing lifts off the page. code blocks, the search panel and
+   the buttons take the corner-tick motif above; interactive things invert on
+   hover the way a selected line does in a terminal. — */
+
+/* .codehilite::before is an opaque terminal titlebar painted over the top of
+   the box, which buried the two top ticks. so the ticks move off the element's
+   own background onto an overlay layer that sits above the titlebar. the
+   element is already position: relative and overflow: hidden. */
+.codehilite {
+  background-image: none;
+}
+
+.codehilite::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket)),
+    linear-gradient(var(--bracket), var(--bracket));
+  background-repeat: no-repeat;
+  background-size:
+    var(--bracket-len) 1px, 1px var(--bracket-len),
+    var(--bracket-len) 1px, 1px var(--bracket-len),
+    var(--bracket-len) 1px, 1px var(--bracket-len),
+    var(--bracket-len) 1px, 1px var(--bracket-len);
+  background-position:
+    left top, left top,
+    right top, right top,
+    left bottom, left bottom,
+    right bottom, right bottom;
+}
+
+/* the inner pre must not repeat what the wrapper draws */
+.codehilite pre {
+  background-image: none;
+}
+
+/* the titlebar's dots were the last round things on the site */
+.codehilite::before {
+  background:
+    linear-gradient(#34343a, #34343a) 15px 14px / 9px 9px no-repeat,
+    linear-gradient(#34343a, #34343a) 33px 14px / 9px 9px no-repeat,
+    linear-gradient(#34343a, #34343a) 51px 14px / 9px 9px no-repeat,
+    #111113;
+}
+
+/* the :not([data-theme="dark"]) half only applies under a light system
+   preference — unguarded it would light up the default dark theme too */
+html[data-theme="light"] .codehilite::before {
+  background:
+    linear-gradient(#c7cad3, #c7cad3) 15px 14px / 9px 9px no-repeat,
+    linear-gradient(#c7cad3, #c7cad3) 33px 14px / 9px 9px no-repeat,
+    linear-gradient(#c7cad3, #c7cad3) 51px 14px / 9px 9px no-repeat,
+    #e8eaef;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .codehilite::before {
+    background:
+      linear-gradient(#c7cad3, #c7cad3) 15px 14px / 9px 9px no-repeat,
+      linear-gradient(#c7cad3, #c7cad3) 33px 14px / 9px 9px no-repeat,
+      linear-gradient(#c7cad3, #c7cad3) 51px 14px / 9px 9px no-repeat,
+      #e8eaef;
+  }
+}
+
+/* — hero actions: not buttons at all. each one is a prompt line — a green $,
+     a mono command, and a rule underneath that types itself in left-to-right
+     on hover. the primary keeps its rule drawn at rest, which is the whole of
+     the hierarchy between the two. — */
+.hero-actions {
+  gap: 2rem;
+}
+
+.hero-actions .btn {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  border: none;
+  /* background-color, not the shorthand — `background: none` would wipe the
+     bracket gradients this rule inherits from the motif */
+  background-color: transparent;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.15s ease, background-size 0.2s ease;
+}
+
+.hero-actions .btn::before {
+  content: "$";
+  color: var(--code-green);
+}
+
+/* the primary is bracketed at rest; the ghost's ticks grow out of nothing on
+   hover, which is the whole of the hierarchy between the two */
+.hero-actions .btn--primary {
+  --bracket-len: 12px;
+  color: var(--accent-light);
+}
+
+.hero-actions .btn--ghost {
+  --bracket-len: 0px;
+}
+
+.hero-actions .btn--ghost:hover {
+  --bracket-len: 12px;
+}
+
+.hero-actions .btn--ghost {
+  color: var(--text-muted);
+}
+
+.hero-actions .btn:hover {
+  color: var(--accent-light);
+}
+
+.hero-actions .btn .btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.hero-actions .btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-actions .btn::after,
+  .hero-actions .btn .btn-arrow {
+    transition: none;
+  }
+}
+
+/* — small actions read as bracketed commands, like the tags — */
+.copy-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  top: 10px;
+}
+
+.copy-btn::before { content: "["; opacity: 0.5; }
+.copy-btn::after { content: "]"; opacity: 0.5; }
+.copy-btn:hover { color: var(--accent-light); }
+
+.search-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  color: var(--dim);
+  transition: color 0.15s;
+}
+
+.search-btn::before {
+  content: "$";
+  color: var(--code-green);
+}
+
+.search-btn:hover {
+  color: var(--accent-light);
+}
+
+.search-btn kbd,
+.search-input-row kbd {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.search-btn kbd::before,
+.search-input-row kbd::before { content: "["; opacity: 0.5; }
+.search-btn kbd::after,
+.search-input-row kbd::after { content: "]"; opacity: 0.5; }
+
+/* — search results invert on hover/keyboard focus, same as the buttons — */
+.search-result:hover,
+.search-result.active {
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.search-result:hover .search-result-kind,
+.search-result.active .search-result-kind {
+  color: var(--surface);
+  opacity: 0.7;
 }

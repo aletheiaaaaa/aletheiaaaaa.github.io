@@ -528,13 +528,14 @@ def build_post(post, cfg, older=None, newer=None):
         byline_html = f"<span>{author}</span>{sep}" + byline_html
 
     header = '<header class="post-header">'
+    header += '<div class="post-header-body">'
     header += f"<h1>{title}</h1>"
     if subtitle:
         header += f'<p class="subtitle">{subtitle}</p>'
     if byline_html:
         header += f'<p class="byline">{byline_html}</p>'
     header += tags_html(meta.get("tags", []))
-    header += "</header>"
+    header += "</div></header>"
 
     toc_sidebar = ""
     if toc_html and toc_html.strip():
@@ -697,6 +698,7 @@ def build_page(rmd_file, cfg, posts=None):
         items = ""
         _blog_posts = posts or []
         _blog_total = len(_blog_posts)
+        featured_html = ""
         for i, p in enumerate(_blog_posts):
             num = _blog_total - i
             ptitle = p["meta"].get("title", p["slug"])
@@ -708,6 +710,17 @@ def build_page(rmd_file, cfg, posts=None):
             sep = '<span class="sep">&middot;</span>'
             meta_parts = [x for x in [date_str, rtime] if x]
             meta_html = sep.join(f"<span>{x}</span>" for x in meta_parts)
+            if i == 0:
+                featured_html = f'''
+<a class="post-featured" href="{href}">
+  <div>
+    <div class="post-featured-kicker"><span class="section-label">latest</span><span class="post-featured-meta">{meta_html}</span></div>
+    <h2>{ptitle}</h2>
+    {f'<p class="post-featured-desc">{desc}</p>' if desc else ""}
+    <span class="post-featured-cta">read the post &rarr;</span>
+  </div>
+</a>'''
+                continue
             items += f'''
 <a class="post-item" href="{href}">
   <span class="post-num">{num:02d}</span>
@@ -720,11 +733,16 @@ def build_page(rmd_file, cfg, posts=None):
 </a>'''
         intro = f'<div class="page-intro">{content_html}</div>' if body.strip() else ""
         kicker = f'<div class="page-kicker">// {_blog_total} post{"" if _blog_total == 1 else "s"} · newest first</div>'
+        header_row = (
+            f'<div class="page-header-row">'
+            f'<div>{kicker}<h1 class="page-title">{title}</h1></div>'
+            f"</div>"
+        )
         body_html = (
             f'<div class="page-wrap">'
-            f"{kicker}"
-            f'<h1 class="page-title">{title}</h1>'
+            f"{header_row}"
             f"{intro}"
+            f"{featured_html}"
             f'<div class="posts-list">{items}</div>'
             f"</div>"
         )
@@ -732,7 +750,9 @@ def build_page(rmd_file, cfg, posts=None):
         kicker = f'<div class="page-kicker">// {title.lower()}</div>'
         body_html = f'<div class="page-wrap">{kicker}<h1 class="page-title">{title}</h1>{content_html}</div>'
 
-    html = render_page(title, body_html, cfg, root_rel="", math=math)
+    html = render_page(
+        title, body_html, cfg, root_rel="", math=math, page_id=rmd_file.stem
+    )
 
     out_name = rmd_file.stem + ".html"
     (OUT_DIR / out_name).write_text(html)
