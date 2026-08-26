@@ -61,18 +61,18 @@ Let's tackle $A$ first. We can push the derivative inside the sum to get
 $$
 \frac{\partial A}{\partial n_{a}}=\sum_{b}\frac{\partial}{\partial n_{a}}\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right)
 $$
-Since $n_{b}$ only increments when $b=a$, we can define an increment function with $\delta_{ab}$ equalling $1$ if $b=a$ and $0$ if not. <aside> Some may recognize this function as the _Kroenecker delta_ </aside> Using the quotient rule from calculus gives
+Since $n_{b}$ only increments when $b=a$, we can define an increment function with $\delta_{ab}$ equalling $1$ if $b=a$ and $0$ if not. <aside> Some may recognize this function as the _Kroenecker delta_ </aside> Ignoring $q_{b}$ for the time being, we can use the quotient rule from calculus to get
 $$
 \begin{aligned}
-\frac{\partial A}{\partial n_{a}}&\left(\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
+\frac{\partial}{\partial n_{a}}&\left(\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
 &=\frac{\delta_{ab}(|\mathcal{A}|+\sum_{c}n_{c})-(n_{b}+1)\cdot 1}{(|\mathcal{A}|+\sum_{c}n_{c})^{2}} \\
 &=\frac{\delta_{ab}}{|\mathcal{A}|+\sum_{c}n_{c}}-\frac{n_{b}+1}{(|\mathcal{A}|+\sum_{c}n_{c})^{2}}
 \end{aligned}
 $$
-and if I sum against $q_{b}$, I get
+and if I now reintroduce the sum against $q_{b}$, we get
 $$
 \begin{aligned}
-\frac{\partial A}{\partial n_{a}}&\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
+sum_{b}\frac{\partial}{\partial n_{a}}&\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
 &=\frac{q_{a}}{|\mathcal{A}|+\sum_{c}n_{c}}+\underbrace{\left(-\frac{\sum_{b}q_{b}(n_{b}+1)}
 {(|\mathcal{A}|+\sum_{c}n_{c})^{2}}\right)}_{c_{A}}
 \end{aligned}
@@ -83,9 +83,9 @@ B=\lambda\sum_{b}\pi_{\theta}(b)\left[\log(n_{b}+1)-\log\left(|\mathcal{A}|+\sum
 $$
 Let's take these three terms step by step. Working it through, we get that
 
-+ the first term is just $\frac{\partial}{\partial n_{a}}\log(n_{b}+1)=\frac{\delta_{ab}}{n_{b}+1}$, where I've used the same special function as before since $n_{b}$ only changes when $b=a$,
++ the first term is just $\frac{\partial}{\partial n_{a}}\log(n_{b}+1)=\frac{\delta_{ab}}{n_{b}+1}$, where I've used the same increment function as before since $n_{b}$ only changes when $b=a$,
 
-+ the second term is $\frac{\partial}{\partial n_{a}}\log\left(|\mathcal{A}|+\sum_{c}n_{c}\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since $n_{a}$ only appears once in $\sum_{c}n_{c}$, so it's derivative is just $1$, and
++ the second term is $\frac{\partial}{\partial n_{a}}\log\left(|\mathcal{A}|+\sum_{c}n_{c}\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ after the chain rule ($n_{a}$ only appears once in $\sum_{c}n_{c}$, so the numerator is just $1$), and
 
 + the third term is $\frac{\partial}{\partial n_{a}}\log\pi_{\theta}(b)=0$, since our policy is fixed as we search.
 
@@ -93,7 +93,7 @@ Putting them all together, we get
 $$
 \frac{\partial B}{\partial n_{a}}=\lambda\sum_{b}\pi_{\theta}(b)\left[\frac{\delta_{ab}}{n_{b}+1}-\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}\right]
 $$
-The first term again collapses down to one, and the second term is just $\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since policies (like $\pi_{\theta}$) are always probability distributions. This leaves us with 
+The first term again collapses to the case where $b=a$, and the second term is just $\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since policies (like $\pi_{\theta}$) are always probability distributions. This leaves us with 
 $$
 \frac{\partial B}{\partial n_{a}}=\frac{\lambda\pi_{\theta}(a)}{n_{a}+1}+\underbrace{\left(-\frac{\lambda}{|\mathcal{A}|+\sum_{c}n_{c}}\right)}_{c_{B}}
 $$
@@ -103,15 +103,15 @@ But now is when the magic happens. First, let's play the same trick I did in the
 $$
 \frac{\lambda\pi_{\theta}(a)}{n_{a}+1}=\frac{\lambda}{|\mathcal{A}|+\sum_{c}n_{c}}\cdot\frac{\pi_{\theta}(a)}{\hat{\pi}(a)}
 $$
-If we add the two halves $A$ and $B$ together, combinding $c_{A}$ and $c_{B}$ into just $C$ along the way, we get the final closed form for our policy optimization:
+If we add the two halves $A$ and $B$ together, combinding $c_{A}$ and $c_{B}$ into just $c$ along the way, we get the final closed form for our policy optimization:
 $$
 \frac{\partial}{\partial n_{a}}\left(\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}}.\boldsymbol{\hat{\pi}}]\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}\left(\mathbf{q}+\lambda\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right)+\underbrace{(c_{A}+c_{B})}_{c}
 $$
-If we updated the visit distribution along this derivative, we would be incrementing the action that causes the objective to increase the most. <aside> This is related to the idea of _stochastic gradient ascent_ used in the family of reinforcement learning methods known as _policy gradients_. The related method of stochastic gradient _descent_, is the backbone of all deep learning </aside> <aside> Of course, $n_{a}$ is discrete, so the step in this direction is relatively large, and the derivative may change along that step </aside> But look: the added constant $C$ is independent of $n_{a}$, so removing it doesn't change the optimal action, and the factor up front is always positive (since it's counting things), so removing it doesn't change things either. But then we get
+Now if we were to pick the action $a$ that maximizes this derivative, we are effectively picking the action that causes the objective inside to increase the most. <aside> This is related to the idea of _stochastic gradient ascent_ used in the family of reinforcement learning methods known as _policy gradients_. The related method of stochastic gradient _descent_, is the backbone of all deep learning </aside> <aside> Of course, $n_{a}$ is discrete, so the step in this direction is relatively large, and the derivative may change along that step </aside> But look: the added constant $c$ is independent of $n_{a}$, so removing it doesn't change the optimal action, and the factor up front is always positive (since it's counting things), so removing it doesn't change things either. But then we get
 $$
 \arg\max_{a}\frac{\partial}{\partial n_{a}}\left(\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}},\boldsymbol{\hat{\pi}}]\right)=\arg\max_{a}\left[\mathbf{q}+\lambda\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right]
 $$
-and so, after making the final step of forcing $\lambda=\lambda_{N}$ from the start, _we've recovered pUCT_. Specifically, taking the action that maximizes pUCT is the same as taking an optimization step of this regularized policy optimization problem, explaining why pUCT performs so well in practice.
+and so, after making the final step of forcing $\lambda=\lambda_{N}$ from the start, _we've recovered pUCT_. Specifically, taking the action that maximizes pUCT is the same as taking an optimization step of this regularized policy optimization problem, explaining why pUCT performs so well in practice. <aside> Surprisingly, the KL-regularization is backwards: this optimization uses the _reversed_ divergence </aside>
 
 # What's Next: Extensions to MCTS
 

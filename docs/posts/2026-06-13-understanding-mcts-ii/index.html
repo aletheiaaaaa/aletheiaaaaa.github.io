@@ -34,7 +34,7 @@
 </ul>
 </div>
 </div></aside><article class="post-wrap"><header class="post-header"><div class="post-header-body"><h1>MCTS as Regularized Policy Optimization</h1><p class="subtitle">Deriving pUCT from first principles
-</p><p class="byline"><span>aletheiaaaaa</span><span class="sep">&middot;</span><span>Jun 13, 2026</span><span class="sep">&middot;</span><span>9 min read</span></p></div></header><div class="post-body"><p>Last time, I explained the core idea behind the machine learning algorithm known as Monte Carlo tree search, and mentioned that the core equation behind it (pUCT) was derived largely by experiment. However, there's since been progress in understanding it theoretically, and this sequel will focus on how one might derive it. I'll warn you though, there's a lot of computation ahead until the satisfying result. <sup class="aside-ref">1</sup><span class="aside-note"><span class="aside-num">1</span> I largely follow the approach in <a href="https://arxiv.org/abs/2007.12509">Grill et al. (2020)</a>, for a deeper view, including generalizations to a broad family of algorithms, please have a read! </span></p>
+</p><p class="byline"><span>aletheiaaaaa</span><span class="sep">&middot;</span><span>Jun 13, 2026</span><span class="sep">&middot;</span><span>10 min read</span></p></div></header><div class="post-body"><p>Last time, I explained the core idea behind the machine learning algorithm known as Monte Carlo tree search, and mentioned that the core equation behind it (pUCT) was derived largely by experiment. However, there's since been progress in understanding it theoretically, and this sequel will focus on how one might derive it. I'll warn you though, there's a lot of computation ahead until the satisfying result. <sup class="aside-ref">1</sup><span class="aside-note"><span class="aside-num">1</span> I largely follow the approach in <a href="https://arxiv.org/abs/2007.12509">Grill et al. (2020)</a>, for a deeper view, including generalizations to a broad family of algorithms, please have a read! </span></p>
 <h1 id="setup-and-notation">Setup and Notation</h1>
 <p>In a slight change from last time (to something that's more in line with mainstream reinforcement learning literature), let's call each state (such as a board position) $x$, each action (such as a move) $a$, and the policy value (or just policy) of $a$ at $x$ $\pi_{\theta}(a|x)$, where I'm using $\theta$ to indicate that the policy is a function of some neural network's parameters. Now let's say $\hat{\pi}$ is the <em>empirical visit distribution</em>, that is, the normalized visit counts for each action from a given state <sup class="aside-ref">2</sup><span class="aside-note"><span class="aside-num">2</span> The use of the policy-style notation $\hat{\pi}$ is intentional, this will turn out to be the target to which we're optimizing our policy </span></p>
 <p>$$
@@ -82,18 +82,18 @@ $$</p>
 <p>$$
 \frac{\partial A}{\partial n_{a}}=\sum_{b}\frac{\partial}{\partial n_{a}}\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right)
 $$</p>
-<p>Since $n_{b}$ only increments when $b=a$, we can define an increment function with $\delta_{ab}$ equalling $1$ if $b=a$ and $0$ if not. <sup class="aside-ref">9</sup><span class="aside-note"><span class="aside-num">9</span> Some may recognize this function as the <em>Kroenecker delta</em> </span> Using the quotient rule from calculus gives</p>
+<p>Since $n_{b}$ only increments when $b=a$, we can define an increment function with $\delta_{ab}$ equalling $1$ if $b=a$ and $0$ if not. <sup class="aside-ref">9</sup><span class="aside-note"><span class="aside-num">9</span> Some may recognize this function as the <em>Kroenecker delta</em> </span> Ignoring $q_{b}$ for the time being, we can use the quotient rule from calculus to get</p>
 <p>$$
 \begin{aligned}
-\frac{\partial A}{\partial n_{a}}&\left(\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
+\frac{\partial}{\partial n_{a}}&\left(\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
 &=\frac{\delta_{ab}(|\mathcal{A}|+\sum_{c}n_{c})-(n_{b}+1)\cdot 1}{(|\mathcal{A}|+\sum_{c}n_{c})^{2}} \\
 &=\frac{\delta_{ab}}{|\mathcal{A}|+\sum_{c}n_{c}}-\frac{n_{b}+1}{(|\mathcal{A}|+\sum_{c}n_{c})^{2}}
 \end{aligned}
 $$</p>
-<p>and if I sum against $q_{b}$, I get</p>
+<p>and if I now reintroduce the sum against $q_{b}$, we get</p>
 <p>$$
 \begin{aligned}
-\frac{\partial A}{\partial n_{a}}&\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
+sum_{b}\frac{\partial}{\partial n_{a}}&\left(q_{b}\cdot\frac{n_{b}+1}{|\mathcal{A}|+\sum_{c}n_{c}}\right) \\
 &=\frac{q_{a}}{|\mathcal{A}|+\sum_{c}n_{c}}+\underbrace{\left(-\frac{\sum_{b}q_{b}(n_{b}+1)}
 {(|\mathcal{A}|+\sum_{c}n_{c})^{2}}\right)}_{c_{A}}
 \end{aligned}
@@ -105,10 +105,10 @@ $$</p>
 <p>Let's take these three terms step by step. Working it through, we get that</p>
 <ul>
 <li>
-<p>the first term is just $\frac{\partial}{\partial n_{a}}\log(n_{b}+1)=\frac{\delta_{ab}}{n_{b}+1}$, where I've used the same special function as before since $n_{b}$ only changes when $b=a$,</p>
+<p>the first term is just $\frac{\partial}{\partial n_{a}}\log(n_{b}+1)=\frac{\delta_{ab}}{n_{b}+1}$, where I've used the same increment function as before since $n_{b}$ only changes when $b=a$,</p>
 </li>
 <li>
-<p>the second term is $\frac{\partial}{\partial n_{a}}\log\left(|\mathcal{A}|+\sum_{c}n_{c}\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since $n_{a}$ only appears once in $\sum_{c}n_{c}$, so it's derivative is just $1$, and</p>
+<p>the second term is $\frac{\partial}{\partial n_{a}}\log\left(|\mathcal{A}|+\sum_{c}n_{c}\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ after the chain rule ($n_{a}$ only appears once in $\sum_{c}n_{c}$, so the numerator is just $1$), and</p>
 </li>
 <li>
 <p>the third term is $\frac{\partial}{\partial n_{a}}\log\pi_{\theta}(b)=0$, since our policy is fixed as we search.</p>
@@ -118,7 +118,7 @@ $$</p>
 <p>$$
 \frac{\partial B}{\partial n_{a}}=\lambda\sum_{b}\pi_{\theta}(b)\left[\frac{\delta_{ab}}{n_{b}+1}-\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}\right]
 $$</p>
-<p>The first term again collapses down to one, and the second term is just $\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since policies (like $\pi_{\theta}$) are always probability distributions. This leaves us with </p>
+<p>The first term again collapses to the case where $b=a$, and the second term is just $\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}$ since policies (like $\pi_{\theta}$) are always probability distributions. This leaves us with </p>
 <p>$$
 \frac{\partial B}{\partial n_{a}}=\frac{\lambda\pi_{\theta}(a)}{n_{a}+1}+\underbrace{\left(-\frac{\lambda}{|\mathcal{A}|+\sum_{c}n_{c}}\right)}_{c_{B}}
 $$</p>
@@ -127,15 +127,15 @@ $$</p>
 <p>$$
 \frac{\lambda\pi_{\theta}(a)}{n_{a}+1}=\frac{\lambda}{|\mathcal{A}|+\sum_{c}n_{c}}\cdot\frac{\pi_{\theta}(a)}{\hat{\pi}(a)}
 $$</p>
-<p>If we add the two halves $A$ and $B$ together, combinding $c_{A}$ and $c_{B}$ into just $C$ along the way, we get the final closed form for our policy optimization:</p>
+<p>If we add the two halves $A$ and $B$ together, combinding $c_{A}$ and $c_{B}$ into just $c$ along the way, we get the final closed form for our policy optimization:</p>
 <p>$$
 \frac{\partial}{\partial n_{a}}\left(\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}}.\boldsymbol{\hat{\pi}}]\right)=\frac{1}{|\mathcal{A}|+\sum_{c}n_{c}}\left(\mathbf{q}+\lambda\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right)+\underbrace{(c_{A}+c_{B})}_{c}
 $$</p>
-<p>If we updated the visit distribution along this derivative, we would be incrementing the action that causes the objective to increase the most. <sup class="aside-ref">10</sup><span class="aside-note"><span class="aside-num">10</span> This is related to the idea of <em>stochastic gradient ascent</em> used in the family of reinforcement learning methods known as <em>policy gradients</em>. The related method of stochastic gradient <em>descent</em>, is the backbone of all deep learning </span> <sup class="aside-ref">11</sup><span class="aside-note"><span class="aside-num">11</span> Of course, $n_{a}$ is discrete, so the step in this direction is relatively large, and the derivative may change along that step </span> But look: the added constant $C$ is independent of $n_{a}$, so removing it doesn't change the optimal action, and the factor up front is always positive (since it's counting things), so removing it doesn't change things either. But then we get</p>
+<p>Now if we were to pick the action $a$ that maximizes this derivative, we are effectively picking the action that causes the objective inside to increase the most. <sup class="aside-ref">10</sup><span class="aside-note"><span class="aside-num">10</span> This is related to the idea of <em>stochastic gradient ascent</em> used in the family of reinforcement learning methods known as <em>policy gradients</em>. The related method of stochastic gradient <em>descent</em>, is the backbone of all deep learning </span> <sup class="aside-ref">11</sup><span class="aside-note"><span class="aside-num">11</span> Of course, $n_{a}$ is discrete, so the step in this direction is relatively large, and the derivative may change along that step </span> But look: the added constant $c$ is independent of $n_{a}$, so removing it doesn't change the optimal action, and the factor up front is always positive (since it's counting things), so removing it doesn't change things either. But then we get</p>
 <p>$$
 \arg\max_{a}\frac{\partial}{\partial n_{a}}\left(\mathbf{q}^{\top}\boldsymbol{\hat{\pi}}-\lambda\mathrm{KL}[\boldsymbol{\pi_{\theta}},\boldsymbol{\hat{\pi}}]\right)=\arg\max_{a}\left[\mathbf{q}+\lambda\frac{\boldsymbol{\pi_{\theta}}}{\boldsymbol{\hat{\pi}}}\right]
 $$</p>
-<p>and so, after making the final step of forcing $\lambda=\lambda_{N}$ from the start, <em>we've recovered pUCT</em>. Specifically, taking the action that maximizes pUCT is the same as taking an optimization step of this regularized policy optimization problem, explaining why pUCT performs so well in practice.</p>
+<p>and so, after making the final step of forcing $\lambda=\lambda_{N}$ from the start, <em>we've recovered pUCT</em>. Specifically, taking the action that maximizes pUCT is the same as taking an optimization step of this regularized policy optimization problem, explaining why pUCT performs so well in practice. <sup class="aside-ref">12</sup><span class="aside-note"><span class="aside-num">12</span> Surprisingly, the KL-regularization is backwards: this optimization uses the <em>reversed</em> divergence </span></p>
 <h1 id="whats-next-extensions-to-mcts">What's Next: Extensions to MCTS</h1>
 <p>Having covered the core of how Monte Carlo tree search works, I'd next like to explore how it's been extended and improved over the years. Specifically, I plan to at least cover different regularizers for the optimization objective (going beyond KL-divergence), and planning in action spaces so large even MCTS ends up impractical. See you then!</p></div><nav class="post-nav"><a class="post-nav-item post-nav-older" href="../2026-06-08-understanding-mcts-i/index.html"><span class="post-nav-label">← Previous</span><span class="post-nav-title">Deconstructing AlphaGo: Exploring Monte Carlo Tree Search</span></a></nav></article><div class="post-asides"></div></div><button class="toc-toggle" id="toc-toggle" aria-label="Table of contents" aria-expanded="false">§</button>
   </main>
