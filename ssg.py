@@ -22,18 +22,27 @@ Markdown extras:
   ```lang  fenced code         → syntax-highlighted via Pygments
 """
 
-import os, sys, re, json, shutil, datetime, http.server, socketserver, subprocess
+import datetime
+import http.server
+import json
+import os
+import re
+import shutil
+import socketserver
+import subprocess
+import sys
 from pathlib import Path
-import yaml
+
 import markdown
-from markdown.preprocessors import Preprocessor
+import yaml
 from markdown.extensions import Extension
+from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
+from markdown.extensions.footnotes import FootnoteExtension
+from markdown.extensions.md_in_html import MarkdownInHtmlExtension
 from markdown.extensions.tables import TableExtension
 from markdown.extensions.toc import TocExtension
-from markdown.extensions.footnotes import FootnoteExtension
-from markdown.extensions.codehilite import CodeHiliteExtension
-from markdown.extensions.md_in_html import MarkdownInHtmlExtension
+from markdown.preprocessors import Preprocessor
 
 ROOT = Path(__file__).parent
 PAGES_DIR = ROOT / "pages"
@@ -47,7 +56,7 @@ def load_css():
     path = THEME_DIR / "theme.css"
     if path.exists():
         return path.read_text()
-    raise FileNotFoundError(f"theme/theme.css not found")
+    raise FileNotFoundError("theme/theme.css not found")
 
 
 # ── Markdown extension: fenced divs (:::class ... :::) ────────────────────────
@@ -600,7 +609,9 @@ def build_post(post, cfg, older=None, newer=None):
         else:
             shutil.copy2(asset, dst)
 
-    html = render_page(title, body_html, cfg, root_rel=root_rel, math=math, page_id="post")
+    html = render_page(
+        title, body_html, cfg, root_rel=root_rel, math=math, page_id="post"
+    )
     (out_dir / "index.html").write_text(html)
     print(f"  post  → posts/{post['slug']}/index.html")
 
@@ -624,11 +635,13 @@ def build_index(posts, cfg):
             hero_html += f'<p class="hero-tagline">{h_tagline}</p>'
         hero_html += (
             '<div class="hero-actions">'
-            '<a class="btn btn--primary" href="projects.html">ls ./projects <span class="btn-arrow">→</span></a>'
+            '<a class="btn btn--primary" href="projects.html">projects <span class="btn-arrow">→</span></a>'
             '<a class="btn btn--ghost" href="blog.html">read the blog →</a>'
         )
         if email:
-            hero_html += f'<a class="btn-inline" href="mailto:{email}">// or email me ↗</a>'
+            hero_html += (
+                f'<a class="btn-inline" href="mailto:{email}">or email me ↗</a>'
+            )
         hero_html += "</div></section>"
 
     items = ""
@@ -677,7 +690,7 @@ def build_index(posts, cfg):
     body = hero_html + index_grid
     html = render_page(cfg["title"], body, cfg, root_rel="", page_id="index")
     (OUT_DIR / "index.html").write_text(html)
-    print(f"  index → index.html")
+    print("  index → index.html")
 
 
 def build_page(rmd_file, cfg, posts=None):
@@ -768,13 +781,13 @@ def cmd_build():
 
     # Write CSS
     (OUT_DIR / "style.css").write_text(load_css())
-    print(f"  css   → style.css")
+    print("  css   → style.css")
 
     # Copy theme assets (js, etc.) to output root
     for item in THEME_DIR.iterdir():
         if item.suffix in (".js",):
             shutil.copy2(item, OUT_DIR / item.name)
-    print(f"  theme → copied")
+    print("  theme → copied")
 
     # Find posts first so blog page can reference them
     posts = find_posts()
@@ -782,21 +795,25 @@ def cmd_build():
     # Write search index (posts + projects) for cmd+k search
     search_items = []
     for p in posts:
-        search_items.append({
-            "title": p["meta"].get("title", p["slug"]),
-            "url": f"posts/{p['slug']}/index.html",
-            "kind": "post",
-        })
+        search_items.append(
+            {
+                "title": p["meta"].get("title", p["slug"]),
+                "url": f"posts/{p['slug']}/index.html",
+                "kind": "post",
+            }
+        )
     for proj in cfg.get("projects", []):
-        search_items.append({
-            "title": proj.get("name", ""),
-            "url": proj.get("href", proj.get("url", "#")),
-            "kind": "project",
-        })
+        search_items.append(
+            {
+                "title": proj.get("name", ""),
+                "url": proj.get("href", proj.get("url", "#")),
+                "kind": "project",
+            }
+        )
     (OUT_DIR / "search-index.js").write_text(
         "window.__SEARCH_INDEX__ = " + json.dumps(search_items) + ";"
     )
-    print(f"  index → search-index.js")
+    print("  index → search-index.js")
 
     # Build pages
     if PAGES_DIR.exists():
